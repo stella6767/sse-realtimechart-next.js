@@ -23,7 +23,7 @@ const PatientManager = () => {
               style={{
                 display: "flex",
                 justifyContent: "space-around",
-                marginTop: "6rem",
+                marginTop: "5rem",
               }}
             >
               <h1 style={{ color: "white" }}>Patient Manager</h1>
@@ -47,12 +47,12 @@ const PatientManager = () => {
                 style={{
                   width: "85%",
                   backgroundColor: "rgb(48, 48, 52)",
-                  borderRadius: "5%",
+                  borderRadius: "10%",
                 }}
               >
                 <div className="tableWrapper">
                   <table
-                    width="95%"
+                    width="90%"
                     style={{
                       color: "white",
                       textAlign: "center",

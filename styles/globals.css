@@ -101,7 +101,6 @@ td:last-child {
   left: 0;
   position: fixed;
   bottom: 0;
-
   animation: fadein 0.5s ease-in-out;
 }
 .modal__background {
@@ -125,7 +124,7 @@ td:last-child {
 }
 .tableWrapper {
   width: 100%;
-  height: 70%;
+  height: 80%;
   background-color: rgb(16, 16, 20);
   border-radius: 10px;
   display: flex;
