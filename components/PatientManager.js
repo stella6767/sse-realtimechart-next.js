@@ -15,8 +15,7 @@ const PatientManager = () => {
           <div
             style={{
               width: "100%",
-              backgroundColor: "rgb(96,96,96)",
-              height: "50rem",
+              backgroundColor: "rgb(48, 48, 52)",
             }}
           >
             <div
@@ -41,26 +40,17 @@ const PatientManager = () => {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "70px",
+                marginTop: "3rem",
               }}
             >
               <div
                 style={{
-                  width: "90%",
-                  backgroundColor: "rgb(96,96,96)",
+                  width: "85%",
+                  backgroundColor: "rgb(48, 48, 52)",
+                  borderRadius: "5%",
                 }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "28rem",
-                    backgroundColor: "rgb(64, 64, 64)",
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "space-around",
-                    overflow: "auto",
-                  }}
-                >
+                <div className="tableWrapper">
                   <table
                     width="95%"
                     style={{
@@ -68,22 +58,18 @@ const PatientManager = () => {
                       textAlign: "center",
                     }}
                   >
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Last Session</th>
-                      <th>Gender</th>
-                      <th>Age</th>
-                      <th>Height(cm)</th>
-                      <th>Weight(kg)</th>
-                    </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Last Session</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Height(cm)</th>
+                        <th>Weight(kg)</th>
+                      </tr>
+                    </thead>
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -92,11 +78,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -105,11 +87,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -118,11 +96,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -131,11 +105,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -144,11 +114,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -157,11 +123,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -170,11 +132,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>
@@ -183,11 +141,7 @@ const PatientManager = () => {
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                     </tr>
-                    <tr
-                      style={{
-                        backgroundColor: " rgb(96,96,96)",
-                      }}
-                    >
+                    <tr className="Patient_list">
                       <td>asdfasd</td>
                       <td>asdfasd</td>
                       <td>asdfasd</td>

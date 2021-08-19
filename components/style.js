@@ -1,7 +1,5 @@
-import { Line } from 'react-chartjs-2';
-import styled, {
-  createGlobalStyle,
-} from 'styled-components';
+import { Line } from "react-chartjs-2";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const Global = createGlobalStyle`
 
@@ -92,26 +90,28 @@ export const SelectBox = styled.select`
   width: 10rem;
   height: 3rem;
   border-radius: 10px;
-  background-color: rgb(64, 64, 64);
+  background-color: rgb(27, 27, 32);
   border: 0;
   outline: 0;
+  color: white;
 `;
 
 export const InputBox = styled.input`
-  width: 20rem;
+  width: 25rem;
   height: 3rem;
   border-radius: 10px;
-  background-color: rgb(64, 64, 64);
+  background-color: rgb(27, 27, 32);
   box-shadow: none;
   border: 0;
   outline: 0;
+  color: white;
 `;
 
 export const Button = styled.button`
-  width: 10rem;
+  width: 15rem;
   height: 3rem;
   border-radius: 10px;
-  background-color: rgb(192, 192, 192);
+  background-color: rgb(71, 71, 76);
   font-size: 20px;
   color: white;
   border: 0;

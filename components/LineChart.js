@@ -13,18 +13,16 @@ const data = {
   labels: ["10", "20", "30", "40", "50", "60"],
   datasets: [
     {
-      data: [0, 60, 20, 60, 30, 60],
+      data: [60, 100, 80, 120, 100, 120],
       fill: false,
-      backgroundColor: "rgb(50,197,255)",
+      backgroundColor: "rgb(27, 27, 32)",
       borderColor: "rgb(50,197,255)",
     },
   ],
 };
 
 const options = {
-  legend: {
-    display: false,
-  },
+  legend: false,
   tooltips: {
     callbacks: {
       label: function (tooltipItem) {
@@ -52,9 +50,10 @@ const options = {
 const LineChart = () => (
   <>
     <div
+      className="LineChartWrapper"
       style={{
         display: "flex",
-        height: "15.5rem",
+        height: "9rem",
       }}
     >
       <div className="LineClass">
@@ -62,9 +61,8 @@ const LineChart = () => (
           style={{
             color: "white",
             display: "flex",
-            width: "30rem",
             justifyContent: "space-between",
-            border: "solid rgb(50,197,255)",
+            border: "solid rgb(16, 16, 20)",
           }}
         >
           <p style={{ fontWeight: "bold" }}>bed1</p>
@@ -77,18 +75,17 @@ const LineChart = () => (
             <StyledCharjsLine
               data={data}
               options={options}
-              height={80}
+              height={65}
             ></StyledCharjsLine>
             {/* <Line></Line> */}
           </StyledLineCss>
         </div>
       </div>
-      <div className="LineData" style={{ width: "30rem" }}>
+      <div className="LineData" style={{ width: "100%" }}>
         <div
           style={{
             backgroundColor: "red",
-            width: "100%",
-            fontSize: "19px",
+            fontSize: "1rem",
             fontWeight: "bold",
             marginBottom: "0px",
             textAlign: "center",
@@ -187,14 +184,17 @@ const LineChart = () => (
             justifyContent: "space-between",
           }}
         >
-          <p
-            style={{
-              fontSize: "30px",
-              fontWeight: "bold",
-            }}
-          >
-            SPO2
-          </p>
+          <div style={{ display: "flex" }}>
+            <p
+              style={{
+                fontSize: "30px",
+                fontWeight: "bold",
+              }}
+            >
+              SPO
+            </p>
+            <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span>
+          </div>
           <div style={{ display: "flex" }}>
             <p
               style={{

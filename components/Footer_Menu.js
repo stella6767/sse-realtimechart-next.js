@@ -16,7 +16,7 @@ const Footer_Menu = () => {
       ) : (
         <div></div>
       )}
-      <div style={{ display: "flex" }}>
+      <div className="FooterMenuWrapper">
         <div className="FooterMenu">
           <div className="FooterMenuImg">
             <Image
