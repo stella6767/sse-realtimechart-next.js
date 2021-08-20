@@ -108,21 +108,9 @@ const LineChart = () => (
             >
               TV
             </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <StyledFont style={{ fontSize: "40px" }}>
-                <p
-                  style={{
-                    color: "rgb(183, 183, 183)",
-                    fontWeight: "bold",
-                  }}
-                >
-                  198
-                </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <StyledFont>
+                <p>198</p>
               </StyledFont>
               <UnitP>ml</UnitP>
             </div>
@@ -136,13 +124,8 @@ const LineChart = () => (
             >
               MV
             </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <StyledFont style={{ fontSize: "40px", fontWeight: "bold" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <StyledFont>
                 <p>21</p>
               </StyledFont>
               <UnitP>L/min</UnitP>
@@ -157,13 +140,8 @@ const LineChart = () => (
             >
               RR
             </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <StyledFont style={{ fontSize: "40px" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <StyledFont>
                 <p
                   style={{
                     color: "rgb(50, 197, 255)",
@@ -195,7 +173,7 @@ const LineChart = () => (
             </p>
             <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginRight: "12%" }}>
             <p
               style={{
                 fontSize: "30px",
@@ -205,7 +183,7 @@ const LineChart = () => (
             >
               98
             </p>
-            <UnitP>%</UnitP>
+            <UnitP style={{ marginTop: "40%" }}>%</UnitP>
           </div>
         </div>
       </div>

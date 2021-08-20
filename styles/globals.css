@@ -45,6 +45,9 @@ p {
   height: 3rem;
   color: white;
 }
+.LineClass {
+  background-color: rgb(27, 27, 32);
+}
 /* Footer_Menu.js */
 .FooterMenu {
   width: 80%;

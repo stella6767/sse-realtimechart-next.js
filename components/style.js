@@ -45,7 +45,7 @@ export const StyledAlarmCommentDiv = styled.div`
   color: white;
 `;
 export const StyledFont = styled.p`
-  font-size: 20px;
+  font-size: 40px;
   font-weight: bold;
   margin-bottom: 0px;
   text-align: center;
@@ -58,9 +58,7 @@ export const StyledAlarmSpo2Div = styled.div`
   color: white;
 `;
 export const UnitP = styled.p`
-  margin-top: 15px;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-top: 20%;
 `;
 export const ColorP = styled.p`
   color: white;
