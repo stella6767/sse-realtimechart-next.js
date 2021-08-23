@@ -115,20 +115,11 @@ p {
   justify-content: center;
   color: white;
 }
-.tableWrapper_inTable {
-  margin-top: 25px;
-  width: 90%;
-  border-radius: 10px;
-  height: 450px;
-}
-table {
-  width: 100%;
+table,
+tr td {
+  width: 240px;
   border-collapse: separate;
-  border-spacing: 0 10px;
-}
-th,
-td {
-  padding: 8px 16px;
+  border-spacing: 0 8px;
   text-align: center;
 }
 td {
@@ -147,15 +138,32 @@ td:last-child {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-.tableWrapper_inTable {
+
+tbody {
+  display: block;
+
+  height: 380px;
+
   overflow: auto;
-  height: 450px;
 }
 
-.tableWrapper_inTable thead th {
-  position: sticky;
-  top: 0;
-  background-color: black;
+thead,
+tbody tr {
+  display: table;
+
+  width: 100%;
+
+  table-layout: fixed; /* even columns width , fix width of table too*/
+}
+
+thead {
+  width: calc(
+    100% - 1em
+  ); /* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
+table {
+  width: 400px;
 }
 
 @keyframes fadein {

@@ -1,6 +1,5 @@
 import React from "react";
 import { SelectBox, InputBox, Button, ColorP } from "./style";
-
 const PatientManager = () => {
   return (
     <>
