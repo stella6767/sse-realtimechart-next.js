@@ -43,19 +43,13 @@ const PatientManager = () => {
             >
               <div
                 style={{
-                  width: "95%",
                   backgroundColor: "rgb(48, 48, 52)",
                   borderRadius: "10%",
                 }}
-              >
-                <div className="tableWrapper">
-                  <table
-                    width="90%"
-                    style={{
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
+              ></div>
+              <div className="tableWrapper">
+                <div className="tableWrapper_inTable">
+                  <table>
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -67,87 +61,98 @@ const PatientManager = () => {
                         <th>Weight(kg)</th>
                       </tr>
                     </thead>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
-                    <tr className="Patient_list">
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                      <td>asdfasd</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                        <td>Data</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
