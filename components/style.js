@@ -57,9 +57,7 @@ export const StyledAlarmSpo2Div = styled.div`
   height: 3rem;
   color: white;
 `;
-export const UnitP = styled.p`
-  margin-top: 20%;
-`;
+export const UnitP = styled.p``;
 export const ColorP = styled.p`
   color: white;
   margin-top: 2rem;
