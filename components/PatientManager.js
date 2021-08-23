@@ -38,7 +38,7 @@ const PatientManager = () => {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "6rem",
-                marginBottom: "5rem",
+                marginBottom: "7rem",
               }}
             >
               <div
