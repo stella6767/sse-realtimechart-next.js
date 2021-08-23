@@ -102,14 +102,23 @@ const LineChart = () => (
               TV
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <StyledFont>
-                <p style={{ color: "rgb(183, 183, 183)" }}>198</p>
-              </StyledFont>
               <p
                 style={{
                   color: "rgb(183, 183, 183)",
-                  marginTop: "20%",
+                  fontSize: "40px",
                   fontWeight: "bold",
+                  marginBottom: "0px",
+                  textAlign: "center",
+                }}
+              >
+                198
+              </p>
+
+              <p
+                style={{
+                  color: "rgb(183, 183, 183)",
+                  fontWeight: "bold",
+                  marginTop: "20%",
                 }}
               >
                 ml
@@ -126,10 +135,18 @@ const LineChart = () => (
               MV
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <StyledFont>
-                <p>21</p>
-              </StyledFont>
-              <p style={{ marginTop: "20%", fontWeight: "bold" }}>L/min</p>
+              <p
+                style={{
+                  fontSize: "40px",
+                  fontWeight: "bold",
+                  marginBottom: "0px",
+                  textAlign: "center",
+                }}
+              >
+                21
+              </p>
+
+              <p style={{ fontWeight: "bold", marginTop: "20%" }}>L/min</p>
             </div>
           </div>
           <div className="LineDiv">
@@ -142,21 +159,23 @@ const LineChart = () => (
               RR
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <StyledFont>
-                <p
-                  style={{
-                    color: "rgb(50, 197, 255)",
-                    fontWeight: "bold",
-                  }}
-                >
-                  17
-                </p>
-              </StyledFont>
               <p
                 style={{
                   color: "rgb(50, 197, 255)",
-                  marginTop: "20%",
+                  fontSize: "40px",
                   fontWeight: "bold",
+                  marginBottom: "0px",
+                  textAlign: "center",
+                }}
+              >
+                17
+              </p>
+
+              <p
+                style={{
+                  color: "rgb(50, 197, 255)",
+                  fontWeight: "bold",
+                  marginTop: "20%",
                 }}
               >
                 bpm
