@@ -1,13 +1,6 @@
 import React from "react";
 
-import {
-  StyledAlarmCommentDiv,
-  StyledFont,
-  StyledLineCss,
-  StyledAlarmSpo2Div,
-  StyledCharjsLine,
-  UnitP,
-} from "./style";
+import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 
 const data = {
   labels: ["10", "20", "30", "40", "50", "60"],
@@ -112,7 +105,7 @@ const LineChart = () => (
               <StyledFont>
                 <p style={{ color: "rgb(183, 183, 183)" }}>198</p>
               </StyledFont>
-              <UnitP
+              <p
                 style={{
                   color: "rgb(183, 183, 183)",
                   marginTop: "20%",
@@ -120,7 +113,7 @@ const LineChart = () => (
                 }}
               >
                 ml
-              </UnitP>
+              </p>
             </div>
           </div>
           <div className="LineDiv">
@@ -136,9 +129,7 @@ const LineChart = () => (
               <StyledFont>
                 <p>21</p>
               </StyledFont>
-              <UnitP style={{ marginTop: "20%", fontWeight: "bold" }}>
-                L/min
-              </UnitP>
+              <p style={{ marginTop: "20%", fontWeight: "bold" }}>L/min</p>
             </div>
           </div>
           <div className="LineDiv">
@@ -161,7 +152,7 @@ const LineChart = () => (
                   17
                 </p>
               </StyledFont>
-              <UnitP
+              <p
                 style={{
                   color: "rgb(50, 197, 255)",
                   marginTop: "20%",
@@ -169,7 +160,7 @@ const LineChart = () => (
                 }}
               >
                 bpm
-              </UnitP>
+              </p>
             </div>
           </div>
         </div>
@@ -201,7 +192,7 @@ const LineChart = () => (
             >
               98
             </p>
-            <UnitP
+            <p
               style={{
                 marginTop: "40%",
                 marginLeft: "20%",
@@ -209,7 +200,7 @@ const LineChart = () => (
               }}
             >
               %
-            </UnitP>
+            </p>
           </div>
         </div>
       </div>
