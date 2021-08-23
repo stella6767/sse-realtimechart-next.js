@@ -110,9 +110,9 @@ const LineChart = () => (
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <StyledFont>
-                <p>198</p>
+                <p style={{ color: "rgb(183, 183, 183)" }}>198</p>
               </StyledFont>
-              <UnitP>ml</UnitP>
+              <UnitP style={{ color: "white", marginTop: "20%" }}>ml</UnitP>
             </div>
           </div>
           <div className="LineDiv">
@@ -128,7 +128,7 @@ const LineChart = () => (
               <StyledFont>
                 <p>21</p>
               </StyledFont>
-              <UnitP>L/min</UnitP>
+              <UnitP style={{ marginTop: "20%" }}>L/min</UnitP>
             </div>
           </div>
           <div className="LineDiv">
@@ -151,7 +151,7 @@ const LineChart = () => (
                   17
                 </p>
               </StyledFont>
-              <UnitP>bpm</UnitP>
+              <UnitP style={{ color: "white", marginTop: "20%" }}>bpm</UnitP>
             </div>
           </div>
         </div>

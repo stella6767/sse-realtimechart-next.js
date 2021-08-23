@@ -95,7 +95,7 @@ export const SelectBox = styled.select`
 `;
 
 export const InputBox = styled.input`
-  width: 25rem;
+  width: 45rem;
   height: 3rem;
   border-radius: 10px;
   background-color: rgb(27, 27, 32);

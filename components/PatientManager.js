@@ -31,21 +31,19 @@ const PatientManager = () => {
                 <option style={{ color: "white" }}>ID</option>
               </SelectBox>
               <InputBox></InputBox>
-              <Button className="btn">New</Button>
-              <Button className="btn">Delete</Button>
-              <Button className="btn">Edit</Button>
               <Button className="btn">Assign</Button>
             </div>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "3rem",
+                marginTop: "6rem",
+                marginBottom: "5rem",
               }}
             >
               <div
                 style={{
-                  width: "85%",
+                  width: "95%",
                   backgroundColor: "rgb(48, 48, 52)",
                   borderRadius: "10%",
                 }}
