@@ -117,7 +117,7 @@ p {
 }
 table,
 tr td {
-  width: 300px;
+  width: 230px;
   border-collapse: separate;
   border-spacing: 0 8px;
   text-align: center;
@@ -150,9 +150,7 @@ tbody {
 thead,
 tbody tr {
   display: table;
-
   width: 100%;
-
   table-layout: fixed; /* even columns width , fix width of table too*/
 }
 
