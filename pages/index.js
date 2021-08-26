@@ -6,18 +6,26 @@ import FooterMenu from "./../components/Footer_Menu";
 import LineChart from "./../components/LineChart";
 import { useDispatch } from "react-redux";
 import { testRequestAction } from "../store/reducers/test";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
   const Click = () => {
     dispatch(testRequestAction());
   };
+
+  const { data } = useSelector(({ test }) => ({
+    data: test.data,
+  }));
+
   return (
     <>
       <Layout>
         <Button className="btn" onClick={Click}>
           Assign
         </Button>
+        {data && <div>{data.msg}</div>}
+
         <Content>
           <div
             style={{

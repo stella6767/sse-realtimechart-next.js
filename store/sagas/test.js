@@ -14,9 +14,11 @@ function* test(action) {
 
     console.log("result", result);
 
+    console.log(result.data);
+
     yield put({
       type: TEST_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     console.error(err);
