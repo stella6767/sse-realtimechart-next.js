@@ -61,7 +61,7 @@ const PatientManager = () => {
                     <thead>
                       <tr>
                         <th>
-                          <p style={{ marginLeft: "40px" }}>ID</p>
+                          <p style={{ marginLeft: "50px" }}>ID</p>
                         </th>
                         <th>
                           <p style={{ marginLeft: "40px" }}>Name</p>
