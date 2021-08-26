@@ -1,7 +1,5 @@
-import React from "react";
-
+import React, { useReducer } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
-
 const data = {
   labels: ["10", "20", "30", "40", "50", "60"],
   datasets: [
@@ -39,7 +37,6 @@ const options = {
     ],
   },
 };
-
 const LineChart = () => (
   <>
     <div

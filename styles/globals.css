@@ -107,7 +107,7 @@ p {
 /*테이블*/
 /* JUST COMMON TABLE STYLES... */
 .tableWrapper {
-  width: 90%;
+  width: 95%;
   height: 500px;
   background-color: black;
   border-radius: 10px;
@@ -117,7 +117,7 @@ p {
 }
 table,
 tr td {
-  width: 230px;
+  width: 20rem;
   border-collapse: separate;
   border-spacing: 0 8px;
   text-align: center;

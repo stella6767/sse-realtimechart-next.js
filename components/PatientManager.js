@@ -1,6 +1,10 @@
-import React from "react";
 import { SelectBox, InputBox, Button, ColorP } from "./style";
+import { useDispatch } from "react-redux";
 const PatientManager = () => {
+  const dispatch = useDispatch();
+  const Click = () => {
+    dispatch({ type: "SUCCESS" });
+  };
   return (
     <>
       <div className="modal__background">
@@ -30,7 +34,9 @@ const PatientManager = () => {
                 <option style={{ color: "white" }}>ID</option>
               </SelectBox>
               <InputBox></InputBox>
-              <Button className="btn">Assign</Button>
+              <Button className="btn" onClick={Click}>
+                Assign
+              </Button>
             </div>
             <div
               style={{

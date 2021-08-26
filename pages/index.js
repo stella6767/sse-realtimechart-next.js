@@ -4,6 +4,7 @@ import React, { memo, useState } from "react";
 import { Global } from "./../components/style";
 import FooterMenu from "./../components/Footer_Menu";
 import LineChart from "./../components/LineChart";
+
 export default function Home() {
   return (
     <>
