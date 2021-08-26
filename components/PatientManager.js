@@ -60,10 +60,18 @@ const PatientManager = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Last Session</th>
-                        <th>Gender</th>
+                        <th>
+                          <p style={{ marginLeft: "40px" }}>ID</p>
+                        </th>
+                        <th>
+                          <p style={{ marginLeft: "40px" }}>Name</p>
+                        </th>
+                        <th>
+                          <p style={{ marginLeft: "30px" }}>Last Session</p>
+                        </th>
+                        <th>
+                          <p>Gender</p>
+                        </th>
                         <th>Age</th>
                         <th>Height(cm)</th>
                         <th>Weight(kg)</th>

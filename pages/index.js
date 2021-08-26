@@ -10,10 +10,10 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
+  //클릭이벤트 발생 시 dispatch를 통해서 reducer 폴더안에 test.js 에 있는 testRequestAction 액션 함수 실행
   const Click = () => {
     dispatch(testRequestAction());
   };
-
   const { data } = useSelector(({ test }) => ({
     data: test.data,
   }));

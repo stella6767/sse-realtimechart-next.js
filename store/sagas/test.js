@@ -12,6 +12,7 @@ function* test() {
     const result = yield call(testAPI);
     console.log(result.data);
     //put은 dispatch와 같다 reducer로 값을 전달해줌
+    //액션 타입이 TEST_SUCCESS로 dispatch 해줌
     yield put({
       type: TEST_SUCCESS,
       data: result.data,
