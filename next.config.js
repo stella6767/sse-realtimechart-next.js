@@ -4,7 +4,7 @@ module.exports = {
     return [
       {
         source: "/:path*",
-        destination: "http://bilabcsapi.lunalabs.net/test/:path*", // Proxy to Backend
+        destination: "http://bilabcsapi.lunalabs.net/:path*", // Proxy to Backend
       },
     ];
   },

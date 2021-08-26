@@ -1,10 +1,13 @@
 import { SelectBox, InputBox, Button, ColorP } from "./style";
 import { useDispatch } from "react-redux";
+import { testRequestAction } from "../store/reducers/test";
+
 const PatientManager = () => {
   const dispatch = useDispatch();
   const Click = () => {
-    dispatch({ type: "SUCCESS" });
+    dispatch(testRequestAction());
   };
+
   return (
     <>
       <div className="modal__background">
