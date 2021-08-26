@@ -1,5 +1,4 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 import { TEST_FAILURE, TEST_REQUEST, TEST_SUCCESS } from "../reducers/test";
 import { testApiModule } from "../apiTest";
 
@@ -7,7 +6,7 @@ function testAPI() {
   return testApiModule();
 }
 
-function* test(action) {
+function* test() {
   try {
     console.log("saga Test");
     const result = yield call(testAPI);

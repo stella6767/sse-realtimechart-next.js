@@ -24,8 +24,7 @@ export default function Home() {
         <Button className="btn" onClick={Click}>
           Assign
         </Button>
-        {data && <div>{data.msg}</div>}
-
+        {data && <div style={{ color: "white" }}>{data.msg}</div>}
         <Content>
           <div
             style={{
