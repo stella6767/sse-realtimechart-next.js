@@ -15,6 +15,10 @@ const BilabFront = ({ Component }) => (
   </>
 );
 
+BilabFront.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+};
+
 export function reportWebVitals(metric) {
   console.log(metric);
 }
