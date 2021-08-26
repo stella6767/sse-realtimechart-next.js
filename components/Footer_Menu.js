@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import user from "./../imgs/user.png";
-import heartbeat from "./../imgs/heartbeat.png";
 import folder from "./../imgs/folder.png";
+import heartbeat from "./../imgs/heartbeat.png";
 import setting from "./../imgs/settings.png";
+import user from "./../imgs/user.png";
 import PatientManager from "./PatientManager";
 import Image from "next/image";
+
 const Footer_Menu = () => {
   const [PopupState, setPopupState] = useState(false);
   return (
