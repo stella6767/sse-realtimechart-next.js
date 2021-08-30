@@ -1,6 +1,7 @@
 import { HYDRATE } from "next-redux-wrapper"; //SSR를 위한 것으로 getInitialProps와 getServerSideProps에서도 Redux store에 접근이 가능하도록 하기 위한 처리
 import { combineReducers } from "redux";
 import test from "./test";
+import patient from "./patient";
 
 const rootReducer = combineReducers({
   index: (state = {}, action) => {
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     }
   },
   test, //test.js import
+  patient,
 });
 
 export default rootReducer;

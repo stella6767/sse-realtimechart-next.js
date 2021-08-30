@@ -19,8 +19,8 @@ BilabFront.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export function reportWebVitals(metric) {
-  console.log(metric);
-}
+// export function reportWebVitals(metric) {
+//   console.log(metric);
+// }
 
 export default wrapper.withRedux(withReduxSaga(BilabFront));
