@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
+import useUpdateEffect from "../store/hooks/useUpdateEffect";
 
-function Test() {
+function See() {
   const [listening, setListening] = useState(false);
   const [data, setData] = useState([]);
   const [value, setValue] = useState(null);
+
+  const [meventSource, msetEventSource] = useState(undefined);
+
   let eventSource = undefined;
 
   useEffect(() => {
+    console.log("매번 실행되는지");
+    console.log("listening", listening);
+
     if (!listening) {
-      eventSource = new EventSource("http://localhost:8080/sse"); //구독
+      eventSource = new EventSource("http://bilabcsapi.lunalabs.net/sse"); //구독
+      //eventSource = new EventSource("http://localhost:8088/sse"); //구독
+
+      //msetEventSource(new EventSource("http://localhost:8088/sse"));
+
+      msetEventSource(eventSource);
 
       //Custom listener
       // eventSource.addEventListener("Progress", (event) => {
@@ -16,6 +28,8 @@ function Test() {
       //   console.log("received:", result);
       //   setData(result)
       // });
+
+      console.log("eventSource", eventSource);
 
       eventSource.onopen = event => {
         console.log("connection opened");
@@ -44,6 +58,10 @@ function Test() {
     };
   }, []);
 
+  useUpdateEffect(() => {
+    console.log("meventSource", meventSource);
+  }, [meventSource]);
+
   const checkData = () => {
     console.log(data);
   };
@@ -53,8 +71,8 @@ function Test() {
       <button onClick={checkData}>확인</button>
       <header className="App-header">
         Received Data
-        {data.map(d => (
-          <span key={d}>{d}</span>
+        {data.map((d, index) => (
+          <span key={index}>{d}</span>
         ))}
       </header>
       <div>value: {value}</div>
@@ -62,4 +80,4 @@ function Test() {
   );
 }
 
-export default Test;
+export default See;
