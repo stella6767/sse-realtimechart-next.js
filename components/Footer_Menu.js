@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import folder from "./../imgs/folder.png";
-import heartbeat from "./../imgs/heartbeat.png";
-import setting from "./../imgs/settings.png";
-import user from "./../imgs/user.png";
+// import folder from "./../imgs/folder.png";
+// import heartbeat from "./../imgs/heartbeat.png";
+// import setting from "./../imgs/settings.png";
+// import user from "./../imgs/user.png";
 import PatientManager from "./PatientManager";
-import Image from "next/image";
+import {
+  FolderOutlined,
+  UserOutlined,
+  HeartOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+
+//import Image from "next/image";
 
 const Footer_Menu = () => {
   const [PopupState, setPopupState] = useState(false);
@@ -20,7 +27,7 @@ const Footer_Menu = () => {
       <div className="FooterMenuWrapper">
         <div className="FooterMenu">
           <div className="FooterMenuImg">
-            <Image
+            {/* <Image
               src={user}
               alt="userImage"
               width={50}
@@ -28,26 +35,35 @@ const Footer_Menu = () => {
               onClick={() => {
                 setPopupState(() => !PopupState);
               }}
-            ></Image>
+            ></Image> */}
+            <UserOutlined
+              style={{ color: "white", fontSize: "50px" }}
+              onClick={() => {
+                setPopupState(() => !PopupState);
+              }}
+            />
           </div>
           <div className="FooterMenuImg">
-            <Image
+            {/* <Image
               src={heartbeat}
               alt="userHeartBeat"
               width={50}
               height={50}
-            ></Image>
+            ></Image> */}
+            <HeartOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
           <div className="FooterMenuImg">
-            <Image src={folder} alt="folderImg" width={50} height={50}></Image>
+            {/* <Image src={folder} alt="folderImg" width={50} height={50}></Image> */}
+            <FolderOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
           <div style={{ marginRight: "3rem" }} className="FooterMenuImg">
-            <Image
+            {/* <Image
               src={setting}
               alt="settingImg"
               width={50}
               height={50}
-            ></Image>
+            ></Image> */}
+            <SettingOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
         </div>
         <div className="TimeDiv">

@@ -147,7 +147,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {patientdata.mv.value}
+                  1
                 </p>
 
                 <p style={{ fontWeight: "bold", marginTop: "20%" }}>L/min</p>

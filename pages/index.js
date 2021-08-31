@@ -10,21 +10,12 @@ import { PatientRequestAction } from "./../store/reducers/patient";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  const dispatch = useDispatch();
   //클릭이벤트 발생 시 dispatch를 통해서 reducer 폴더안에 test.js 에 있는 testRequestAction 액션 함수 실행
-  useEffect(() => {
-    dispatch(PatientRequestAction());
-  }, [dispatch]);
-  const StoreData = useSelector(state => state);
-  const PatientData = StoreData.patient.data;
-  const patientDataMap =
-    PatientData &&
-    PatientData.map((patientdata, index) => {
-      return <LineChart key={index} patientdata={patientdata}></LineChart>;
-    });
+
   return (
     <>
       <Layout>
+        <button>확인</button>
         <Content>
           <div
             style={{
@@ -35,7 +26,8 @@ export default function Home() {
               height: "95%",
             }}
           >
-            {patientDataMap}
+            <div></div>
+            <LineChart></LineChart>
           </div>
         </Content>
         <Footer>
