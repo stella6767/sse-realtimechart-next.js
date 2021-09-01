@@ -15,8 +15,8 @@ function See() {
     console.log("listening", listening);
 
     if (!listening) {
-      eventSource = new EventSource("http://bilabcsapi.lunalabs.net/sse"); //구독
-      //eventSource = new EventSource("http://localhost:8088/sse"); //구독
+      //eventSource = new EventSource("http://bilabcsapi.lunalabs.net/sse"); //구독
+      eventSource = new EventSource("http://localhost:8088/sse"); //구독
 
       //msetEventSource(new EventSource("http://localhost:8088/sse"));
 
@@ -59,8 +59,8 @@ function See() {
   }, []);
 
   useUpdateEffect(() => {
-    console.log("meventSource", meventSource);
-  }, [meventSource]);
+    console.log("data: ", data);
+  }, [data]);
 
   const checkData = () => {
     console.log(data);
@@ -70,10 +70,12 @@ function See() {
     <div className="App">
       <button onClick={checkData}>확인</button>
       <header className="App-header">
-        Received Data
-        {data.map((d, index) => (
-          <span key={index}>{d}</span>
-        ))}
+        <div style={{ backgroundColor: "white" }}>
+          Received Data
+          {data.map((d, index) => (
+            <span key={index}>{d}</span>
+          ))}
+        </div>
       </header>
       <div>value: {value}</div>
     </div>
