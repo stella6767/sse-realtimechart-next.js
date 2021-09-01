@@ -4,18 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { PatientRequestAction } from "./../store/reducers/patient";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 const LineChart = props => {
-  const { patientData, MV } = props;
+  const { patientData, MV, TV, RR, SPO2 } = props;
   console.log(patientData);
   const [mv, setMV] = useState(null);
-
-  console.log(MV);
-  useEffect(() => {}, [mv]);
-
+  const [tv, setTV] = useState(null);
+  const [rr, setRR] = useState(null);
+  const [spo2, setSPO2] = useState(null);
   useUpdateEffect(() => {
-    if (MV != null) {
+    if (MV && TV && RR && SPO2 != null) {
       setMV(MV.value);
+      setTV(TV.value);
+      setRR(RR.value);
+      setSPO2(SPO2.value);
     }
-  }, [MV]);
+  }, [MV, TV, RR, SPO2]);
 
   //json object=> javascript object
   const data = {
@@ -76,8 +78,8 @@ const LineChart = props => {
               }}
             >
               <p style={{ fontWeight: "bold" }}>bed1</p>
-              {/* <p>Age:{patientData[0].age}</p>
-            <p>ID:{patientData[0].sid}</p> */}
+              <p>Age:{patientData[0].age}</p>
+              <p>ID:{patientData[0].sid}</p>
             </div>
             <div>
               <StyledLineCss>
@@ -128,7 +130,7 @@ const LineChart = props => {
                       textAlign: "center",
                     }}
                   >
-                    {/* {tv} */}
+                    {tv}
                   </p>
 
                   <p
@@ -185,7 +187,7 @@ const LineChart = props => {
                       textAlign: "center",
                     }}
                   >
-                    {/* {rr} */}
+                    {rr}
                   </p>
 
                   <p
@@ -226,7 +228,7 @@ const LineChart = props => {
                     color: "rgb(102, 255, 255)",
                   }}
                 >
-                  {/* {spo2} */}
+                  {spo2}
                 </p>
                 <p
                   style={{

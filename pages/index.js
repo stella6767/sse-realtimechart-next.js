@@ -82,10 +82,14 @@ export default function Home() {
 
   useUpdateEffect(() => {
     setMV(data[data.length - 5]);
+    setTV(data[data.length - 1]);
+    setRR(data[data.length - 4]);
+    setSPO2(data[data.length - 2]);
   }, [data]);
 
   useUpdateEffect(() => {
     console.log("data: ", data);
+    console.log(tv);
   }, [data]);
 
   return (
@@ -102,7 +106,13 @@ export default function Home() {
                 height: "95%",
               }}
             >
-              <LineChart patientData={data} MV={mv}></LineChart>
+              <LineChart
+                patientData={data}
+                MV={mv}
+                TV={tv}
+                RR={rr}
+                SPO2={spo2}
+              ></LineChart>
             </div>
           </Content>
           <Footer>
