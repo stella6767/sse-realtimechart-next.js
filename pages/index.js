@@ -10,6 +10,7 @@ import { PatientRequestAction } from "./../store/reducers/patient";
 import { useSelector } from "react-redux";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import _ from "lodash";
+import HashMap from "hashmap";
 
 export default function Home() {
   const [listening, setListening] = useState(false);
@@ -21,8 +22,24 @@ export default function Home() {
   const [mv, setMV] = useState(null);
   const [rr, setRR] = useState(null);
   const [spo2, setSPO2] = useState(null);
+  const [rvs, setRVS] = useState(null);
+
+  const [data2, setData2] = useState([]);
 
   let eventSource = undefined;
+
+  let map = new HashMap();
+
+  const [patientData, setPatientData] = useState({
+    sid: null,
+    patientUserId: null,
+    valueUnit: null,
+    mv: null,
+    rr: null,
+    rvs: null,
+    age: null,
+  });
+
   useEffect(() => {
     console.log("listening", listening);
     console.log("event", eventSource);
@@ -34,10 +51,14 @@ export default function Home() {
       msetEventSource(eventSource);
 
       //Custom listener
-      // eventSource.addEventListener("Progress", (event) => {
+      // eventSource.addEventListener("patient10_20210826_114616", (event) => {
       //   const result = JSON.parse(event.data);
-      //   console.log("received:", result);
-      //   setData(result)
+      //   console.log("custom received:", result);
+      //   //setData(result)
+
+      //   const sid = JSON.parse(event.data)?.sid;
+      //   //hashmap에 데이터를 넣는다.
+      //   console.log("sid", sid);
       // });
 
       eventSource.onopen = (event) => {
@@ -50,6 +71,44 @@ export default function Home() {
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         handleSseData(JSON.parse(event.data));
+
+        const parseData = JSON.parse(event.data);
+        const sid = parseData?.sid;
+        //map.set(sid, addHashMap(JSON.parse(event.data)));
+
+        const patientData2 = {
+          patientUserId: parseData?.patientUserId,
+          mv: parseData?.parame,
+          rr: parseData?.parame,
+          rvs: parseData?.parame,
+          age: parseData?.age,
+        };
+
+        const obj = { ...patientData, ...parseData }; //덮어씌우기
+
+        console.log("obj", obj);
+
+        handleUpdate(obj?.patientUserId, obj);
+
+        // const modifiedArray = data2.map((item) =>
+        //   item?.patientUserId !== obj?.patientUserId
+        //     ? { ...item, ...obj2 } // id 가 일치하지 않으면, 새 객체를 만들고, 기존의 내용을 집어넣고 원하는 값 덮어쓰기
+        //     : item
+        // ); // 바꿀 필요 없는것들은 그냥 기존 값 사용
+
+        // const modifiedArray = data2.filter((item) => {
+        //   return item?.patientUserId !== obj?.patientUserId;
+        // });
+
+        // console.log("modifiedArray", modifiedArray);
+
+        const objb = { ...patientData, patientData };
+
+        //setPatientData((old) => ({ ...old, ...obj }));
+        setPatientData(obj);
+        // setData2([...data2, ...modifiedArray]);
+
+        //map.set(sid, "sss");
       };
 
       eventSource.onerror = (event) => {
@@ -70,25 +129,66 @@ export default function Home() {
     };
   }, []);
 
+  const handleUpdate = (id, data) => {
+    console.log("id: ", id);
+    console.log("daataaa: ", data);
+
+    setData2({
+      data2: data2.map(
+        (info) =>
+          id === info?.id
+            ? { ...info, ...data } // 새 객체를 만들어서 기존의 값과 전달받은 data 을 덮어씀
+            : info // 기존의 값을 그대로 유지
+      ),
+    });
+  };
+
+  useUpdateEffect(() => {
+    console.log("data2: ", data2);
+    //   console.log("patientData", patientData);
+  }, [data2]);
+
+  const checkMapData = () => {
+    console.log("map: ", map.get("patient10_20210826_114616"));
+  };
+
   const handleSseData = (sseData) => {
     let firstKey = Object.keys(sseData)[0];
     let firstValue = Object.values(sseData)[0];
 
-    let anotherFirst = Object.values(sseData)[0];
+    let parame = sseData?.parame;
 
     let first = _.findIndex(sseData, function (data) {
       return data.sid;
     });
     console.log("sessionId", firstKey);
     console.log("sessionId", firstValue);
-  };
 
-  useUpdateEffect(() => {
-    setMV(data[data.length - 5]);
-    setTV(data[data.length - 1]);
-    setRR(data[data.length - 4]);
-    setSPO2(data[data.length - 2]);
-  }, [data]);
+    switch (parame) {
+      case "mv":
+        setMV(sseData);
+        break;
+      case "tv":
+        setTV(sseData);
+        break;
+      case "rvs":
+        setRVS(sseData);
+        break;
+      case "rr":
+        setRR(sseData);
+        break;
+      case "spo2":
+        setSPO2(sseData);
+        break;
+
+      default:
+        break;
+    }
+
+    // setTV();
+    // setRR();
+    // setSPO2();
+  };
 
   useUpdateEffect(() => {
     console.log("data: ", data);
@@ -98,6 +198,7 @@ export default function Home() {
     <>
       <Layout>
         <Content>
+          <button onClick={checkMapData}>체크</button>
           <div
             style={{
               display: "flex",
