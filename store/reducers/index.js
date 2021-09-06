@@ -3,19 +3,20 @@ import { combineReducers } from "redux";
 import test from "./test";
 import patient from "./patient";
 
-const rootReducer = combineReducers({
-  index: (state = {}, action) => {
-    switch (action.type) {
-      case HYDRATE:
-        console.log("HYDRATE", action);
-        return { ...state, ...action.payload };
-      //reducer 초기화될때 한 번 실행이 되기 때문에 default를 넣어줘야 한다.
-      default:
-        return state;
+const rootReducer = (state, action) => {
+  switch (action.type) {
+    case HYDRATE:
+      console.log("HYDRATE", action);
+      return { ...state, ...action.payload };
+    //reducer 초기화될때 한 번 실행이 되기 때문에 default를 넣어줘야 한다.
+    default: {
+      const combinedReducer = combineReducers({
+        test,
+        patient,
+      });
+      return combinedReducer(state, action);
     }
-  },
-  test, //test.js import
-  patient,
-});
+  }
+};
 
 export default rootReducer;
