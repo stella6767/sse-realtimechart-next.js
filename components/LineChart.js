@@ -1,16 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { PatientRequestAction } from "./../store/reducers/patient";
+import useUpdateEffect from "../store/hooks/useUpdateEffect";
 const LineChart = props => {
-  const { patientdata } = props;
-  console.log(patientdata);
+  const { patientData, MV, TV, RR, SPO2 } = props;
 
+  useUpdateEffect(() => {
+    setMV(MV);
+    setTV(TV);
+    setRR(RR);
+    setSPO2(SPO2);
+  }, [MV, TV, RR, SPO2]);
+
+  const [mv, setMV] = useState(null);
+  const [tv, setTV] = useState(null);
+  const [rr, setRR] = useState(null);
+  const [spo2, setSPO2] = useState(null);
+
+  //json object=> javascript object
   const data = {
-    labels: ["10", "20", "30", "40", "50", "60"],
+    labels: [10, 20, 30, 40, 50, 60],
     datasets: [
       {
-        data: [60, 100, 80, 120, 100, 120],
+        data: [],
         fill: false,
         backgroundColor: "rgb(27, 27, 32)",
         borderColor: "rgb(50,197,255)",
@@ -63,8 +76,9 @@ const LineChart = props => {
             }}
           >
             <p style={{ fontWeight: "bold" }}>bed1</p>
-            <p>Age:18</p>
-            <p>ID:Patient1</p>
+
+            <p>Age:{patientData[0]?.age}</p>
+            <p>ID:{patientData[0]?.patientUserId}</p>
           </div>
           <div>
             <StyledLineCss>
@@ -103,7 +117,7 @@ const LineChart = props => {
                   color: "white",
                 }}
               >
-                TV
+                {tv?.parame}
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
@@ -115,7 +129,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  198
+                  {tv?.value}
                 </p>
 
                 <p
@@ -125,7 +139,7 @@ const LineChart = props => {
                     marginTop: "20%",
                   }}
                 >
-                  ml
+                  {mv?.parame}
                 </p>
               </div>
             </div>
@@ -136,7 +150,7 @@ const LineChart = props => {
                   color: "white",
                 }}
               >
-                MV
+                {mv?.parame}
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
@@ -147,7 +161,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {patientdata.mv.value}
+                  {mv?.value}
                 </p>
 
                 <p style={{ fontWeight: "bold", marginTop: "20%" }}>L/min</p>
@@ -160,7 +174,7 @@ const LineChart = props => {
                   color: "white",
                 }}
               >
-                RR
+                {rr?.parame}
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
@@ -172,7 +186,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  17
+                  {rr?.value}
                 </p>
 
                 <p
@@ -201,9 +215,9 @@ const LineChart = props => {
                   fontWeight: "bold",
                 }}
               >
-                SPO
+                SPO2
               </p>
-              <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span>
+              {/* <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span> */}
             </div>
             <div style={{ display: "flex", marginRight: "12%" }}>
               <p
@@ -213,7 +227,7 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                98
+                {spo2?.value}
               </p>
               <p
                 style={{
