@@ -23,4 +23,4 @@ BilabFront.propTypes = {
 //   console.log(metric);
 // }
 
-export default wrapper.withRedux(withReduxSaga(BilabFront));
+export default wrapper.withRedux(BilabFront);
