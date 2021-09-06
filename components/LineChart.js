@@ -3,23 +3,20 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { PatientRequestAction } from "./../store/reducers/patient";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
-const LineChart = (props) => {
+const LineChart = props => {
   const { patientData, MV, TV, RR, SPO2 } = props;
 
-  const [mv, setMV] = useState(null);
-  const [tv, setTV] = useState(null);
-  const [rr, setRR] = useState(null);
-  const [spo2, setSPO2] = useState(null);
   useUpdateEffect(() => {
-    // setMV(MV?.value);
-    // setTV(TV?.value);
-    // setRR(RR?.value);
-    // setSPO2(SPO2?.value);
     setMV(MV);
     setTV(TV);
     setRR(RR);
     setSPO2(SPO2);
   }, [MV, TV, RR, SPO2]);
+
+  const [mv, setMV] = useState(null);
+  const [tv, setTV] = useState(null);
+  const [rr, setRR] = useState(null);
+  const [spo2, setSPO2] = useState(null);
 
   //json object=> javascript object
   const data = {
@@ -81,7 +78,7 @@ const LineChart = (props) => {
             <p style={{ fontWeight: "bold" }}>bed1</p>
 
             <p>Age:{patientData[0]?.age}</p>
-            <p>ID:{patientData[0]?.sid}</p>
+            <p>ID:{patientData[0]?.patientUserId}</p>
           </div>
           <div>
             <StyledLineCss>
@@ -142,7 +139,7 @@ const LineChart = (props) => {
                     marginTop: "20%",
                   }}
                 >
-                  ml
+                  {mv?.parame}
                 </p>
               </div>
             </div>
@@ -218,9 +215,9 @@ const LineChart = (props) => {
                   fontWeight: "bold",
                 }}
               >
-                {spo2?.parame}
+                SPO2
               </p>
-              <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span>
+              {/* <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span> */}
             </div>
             <div style={{ display: "flex", marginRight: "12%" }}>
               <p
