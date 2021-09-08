@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
-import { patientRequestAction } from "../store/reducers/patient";
+import {
+  patientByNameOrIdRequestAction,
+  patientRequestAction,
+} from "../store/reducers/patient";
+
 import { Button, InputBox, SelectBox } from "./style";
 
 const PatientManager = () => {
@@ -12,6 +16,7 @@ const PatientManager = () => {
   const patients = useSelector((state) => state.patient.patients);
 
   const [searchWord, setSearchWord] = useState(null);
+  const [selected, setSelected] = useState("patientUserId");
 
   useEffect(() => {
     console.log("환자리스트 출력");
@@ -30,6 +35,17 @@ const PatientManager = () => {
 
   const clickAssign = () => {
     console.log("searchWord", searchWord);
+    console.log("value", selected);
+
+    // if (selected === "name") {
+    //   dispatch(patientByNameRequestAction(searchWord));
+    // }
+
+    dispatch(patientByNameOrIdRequestAction(selected, searchWord));
+  };
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
   };
 
   return (
@@ -57,9 +73,17 @@ const PatientManager = () => {
               }}
             >
               <h1 style={{ color: "white" }}>Patient Manager</h1>
-              <SelectBox>
-                <option style={{ color: "white" }} value="ID" />
-                <option style={{ color: "white" }} value="Name" />
+              <SelectBox
+                onChange={handleSelect}
+                value={selected}
+                defaultValue={selected}
+              >
+                <option style={{ color: "white" }} value="patientUserId">
+                  PatientUserId
+                </option>
+                <option style={{ color: "white" }} value="name">
+                  Name
+                </option>
               </SelectBox>
               <InputBox
                 //name="searchWord"
