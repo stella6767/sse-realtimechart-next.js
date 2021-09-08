@@ -1,14 +1,29 @@
-const initialState = [
-  {
-    data: null,
-  },
-];
-export const PATIENT_REQUEST = "PATIENT_REQUEST";
-export const PATIENT_GET = "PATIENT_GET";
-export const PATIENT_FAIL = "PATIENT_FAIL";
+export const initialState = {
+  patients: null,
+  loadPatientsLoading: false,
+  loadPatientsDone: false,
+  loadPatientsError: null,
 
-export const PatientRequestAction = () => ({
+  loadPatientsByNameOrIdLoading: false,
+  loadPatientsByNameOrIdDone: false,
+  loadPatientsByNameOrIdError: null,
+};
+
+export const PATIENT_REQUEST = "PATIENT_REQUEST";
+export const PATIENT_SUCCESS = "PATIENT_SUCCESS";
+export const PATIENT_FAILURE = "PATIENT_FAILURE";
+
+export const PATIENT_FINDBYNAMEORID_REQUEST = "PATIENT_FINDBYNAMEORID_REQUEST";
+export const PATIENT_FINDBYNAMEORID_SUCCESS = "PATIENT_FINDBYNAMEORID_SUCCESS";
+export const PATIENT_FINDBYNAMEORID_FAILURE = "PATIENT_FINDBYNAMEORID_FAILURE";
+
+export const patientRequestAction = () => ({
   type: PATIENT_REQUEST,
+});
+
+export const patientByNameOrIdRequestAction = (path, data) => ({
+  type: PATIENT_FINDBYNAMEORID_REQUEST,
+  payload: { path, data },
 });
 
 const reducer = (state = initialState, action) => {
@@ -16,17 +31,47 @@ const reducer = (state = initialState, action) => {
     case PATIENT_REQUEST:
       return {
         ...state,
+        loadPatientsLoading: true,
+        loadPatientsDone: false,
+        loadPatientsError: null,
       };
-    case PATIENT_GET:
+    case PATIENT_SUCCESS:
       return {
         ...state,
-        data: action.data,
+        patients: action.data,
+        loadPatientsLoading: false,
+        loadPatientsDone: true,
       };
-    case PATIENT_FAIL:
+    case PATIENT_FAILURE:
       return {
         ...state,
-        data: action.data,
+        loadPatientsLoading: false,
+        loadPatientsError: action.error,
       };
+    //
+    case PATIENT_FINDBYNAMEORID_REQUEST:
+      return {
+        ...state,
+
+        loadPatientsByNameOrIdLoading: true,
+        loadPatientsByNameOrIdDone: false,
+        loadPatientsByNameOrIdError: null,
+      };
+    case PATIENT_FINDBYNAMEORID_SUCCESS:
+      return {
+        ...state,
+        patients: action.data,
+        loadPatientsByNameOrIdLoading: false,
+        loadPatientsByNameOrIdDone: true,
+      };
+    case PATIENT_FINDBYNAMEORID_FAILURE:
+      return {
+        ...state,
+
+        loadPatientsByNameOrIdLoading: false,
+        loadPatientsByNameOrIdError: action.error,
+      };
+
     default:
       return state;
   }

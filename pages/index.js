@@ -1,9 +1,9 @@
-import { Button, Col, Row } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import React, { memo, useState, useEffect } from "react";
-import { Global } from "./../components/style";
+import React, { useEffect, useState } from "react";
+import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import FooterMenu from "./../components/Footer_Menu";
 import LineChart from "./../components/LineChart";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import { testRequestAction } from "../store/reducers/test";
 import { PatientRequestAction } from "./../store/reducers/patient";
@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import lodash, { set } from "lodash";
 import RealTimeLineChart from "./../components/RealTimeLineChart";
+=======
+>>>>>>> cd7700768a047e21e88d72e3a98047d0ed58fcba
 
 export default function Home() {
   const [listening, setListening] = useState(false);
@@ -132,104 +134,104 @@ export default function Home() {
       msetEventSource(eventSource);
 
       //Custom listener
-      eventSource.addEventListener("CPM0000", event => {
+      eventSource.addEventListener("CPM0000", (event) => {
         const result = JSON.parse(event.data);
         setData(result);
         console.log("data1", result);
       });
 
-      eventSource.addEventListener("CPM0001", event => {
+      eventSource.addEventListener("CPM0001", (event) => {
         const result = JSON.parse(event.data);
         setData2(result);
         console.log("data2", result);
       });
 
-      eventSource.addEventListener("CPM0002", event => {
+      eventSource.addEventListener("CPM0002", (event) => {
         const result = JSON.parse(event.data);
         setData3(result);
         console.log("data3", result);
       });
 
-      eventSource.addEventListener("CPM0003", event => {
+      eventSource.addEventListener("CPM0003", (event) => {
         const result = JSON.parse(event.data);
         setData4(result);
         console.log("data4", result);
       });
-      eventSource.addEventListener("CPM0004", event => {
+      eventSource.addEventListener("CPM0004", (event) => {
         const result = JSON.parse(event.data);
         setData5(result);
         console.log("data5", result);
       });
-      eventSource.addEventListener("CPM0005", event => {
+      eventSource.addEventListener("CPM0005", (event) => {
         const result = JSON.parse(event.data);
         setData6(result);
         console.log("data6", result);
       });
-      eventSource.addEventListener("CPM0006", event => {
+      eventSource.addEventListener("CPM0006", (event) => {
         const result = JSON.parse(event.data);
         setData7(result);
         console.log("data7", result);
       });
-      eventSource.addEventListener("CPM0007", event => {
+      eventSource.addEventListener("CPM0007", (event) => {
         const result = JSON.parse(event.data);
         setData8(result);
         console.log("data8", result);
       });
-      eventSource.addEventListener("CPM0008", event => {
+      eventSource.addEventListener("CPM0008", (event) => {
         const result = JSON.parse(event.data);
         setData9(result);
         console.log("data9", result);
       });
-      eventSource.addEventListener("CPM0009", event => {
+      eventSource.addEventListener("CPM0009", (event) => {
         const result = JSON.parse(event.data);
         setData10(result);
         console.log("data10", result);
       });
-      eventSource.addEventListener("CPM0010", event => {
+      eventSource.addEventListener("CPM0010", (event) => {
         const result = JSON.parse(event.data);
         setData11(result);
         console.log("data11", result);
       });
-      eventSource.addEventListener("CPM0011", event => {
+      eventSource.addEventListener("CPM0011", (event) => {
         const result = JSON.parse(event.data);
         setData12(result);
         console.log("data12", result);
       });
-      eventSource.addEventListener("CPM0012", event => {
+      eventSource.addEventListener("CPM0012", (event) => {
         const result = JSON.parse(event.data);
         setData13(result);
         console.log("data13", result);
       });
-      eventSource.addEventListener("CPM0013", event => {
+      eventSource.addEventListener("CPM0013", (event) => {
         const result = JSON.parse(event.data);
         setData14(result);
         console.log("data14", result);
       });
-      eventSource.addEventListener("CPM0014", event => {
+      eventSource.addEventListener("CPM0014", (event) => {
         const result = JSON.parse(event.data);
         setData15(result);
         console.log("data15", result);
       });
-      eventSource.addEventListener("CPM0015", event => {
+      eventSource.addEventListener("CPM0015", (event) => {
         const result = JSON.parse(event.data);
         setData16(result);
         console.log("data16", result);
       });
 
-      eventSource.onopen = event => {
+      eventSource.onopen = (event) => {
         console.log("connection opened");
       };
 
-      eventSource.onmessage = event => {
+      eventSource.onmessage = (event) => {
         console.log("result", event.data);
-        setData(old => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
+        setData((old) => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         const sseData = JSON.parse(event.data);
         handleSseData(sseData);
       };
 
-      eventSource.onerror = event => {
+      eventSource.onerror = (event) => {
         console.log(event.target.readyState);
         if (event.target.readyState === EventSource.CLOSED) {
           console.log("eventsource closed (" + event.target.readyState + ")");
@@ -246,7 +248,7 @@ export default function Home() {
     };
   }, []);
 
-  const handleSseData = sseData => {
+  const handleSseData = (sseData) => {
     // let firstValue = Object.values(sseData)[0];
     // console.log("sessionId", firstValue);
     const sid = sseData?.sid;

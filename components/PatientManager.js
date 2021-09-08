@@ -1,8 +1,53 @@
-import { SelectBox, InputBox, Button, ColorP } from "./style";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { testRequestAction } from "../store/reducers/test";
+import useUpdateEffect from "../store/hooks/useUpdateEffect";
+import {
+  patientByNameOrIdRequestAction,
+  patientRequestAction,
+} from "../store/reducers/patient";
+
+import { Button, InputBox, SelectBox } from "./style";
 
 const PatientManager = () => {
+  const dispatch = useDispatch();
+
+  //const patients = useSelector((state) => state.patient.patients?.data);
+  const patients = useSelector((state) => state.patient.patients);
+
+  const [searchWord, setSearchWord] = useState(null);
+  const [selected, setSelected] = useState("patientUserId");
+
+  useEffect(() => {
+    console.log("환자리스트 출력");
+    dispatch(patientRequestAction());
+  }, []);
+
+  useUpdateEffect(() => {
+    console.log("patinets", patients);
+  }, [patients]);
+
+  const handleInput = (e) => {
+    //console.log(e.target.name);
+    console.log(e.target.value);
+    setSearchWord(e.target.value);
+  };
+
+  const clickAssign = () => {
+    console.log("searchWord", searchWord);
+    console.log("value", selected);
+
+    // if (selected === "name") {
+    //   dispatch(patientByNameRequestAction(searchWord));
+    // }
+
+    dispatch(patientByNameOrIdRequestAction(selected, searchWord));
+  };
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
   return (
     <>
       <div className="modal__background">
@@ -28,11 +73,27 @@ const PatientManager = () => {
               }}
             >
               <h1 style={{ color: "white" }}>Patient Manager</h1>
-              <SelectBox>
-                <option style={{ color: "white" }}>ID</option>
+              <SelectBox
+                onChange={handleSelect}
+                value={selected}
+                defaultValue={selected}
+              >
+                <option style={{ color: "white" }} value="patientUserId">
+                  PatientUserId
+                </option>
+                <option style={{ color: "white" }} value="name">
+                  Name
+                </option>
               </SelectBox>
-              <InputBox></InputBox>
-              <Button className="btn">Assign</Button>
+              <InputBox
+                //name="searchWord"
+                type="text"
+                // value={null}
+                onChange={handleInput}
+              />
+              <Button className="btn" onClick={clickAssign}>
+                Assign
+              </Button>
             </div>
             <div
               style={{
@@ -71,96 +132,21 @@ const PatientManager = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                      </tr>
+                      {patients?.data.map((patient) => (
+                        <tr>
+                          <td>{patient?.pid}</td>
+                          <td>{patient?.firstname}</td>
+                          <td>
+                            {patient?.lastSession == null
+                              ? "Null"
+                              : patient?.lastSession}
+                          </td>
+                          <td>{patient?.gender}</td>
+                          <td>{patient?.age}</td>
+                          <td>{patient?.height}</td>
+                          <td>{patient?.weight}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
