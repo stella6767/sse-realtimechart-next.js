@@ -10,6 +10,7 @@ import { PatientRequestAction } from "./../store/reducers/patient";
 import { useSelector } from "react-redux";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import lodash, { set } from "lodash";
+import RealTimeLineChart from "./../components/RealTimeLineChart";
 
 export default function Home() {
   const [listening, setListening] = useState(false);
@@ -37,6 +38,7 @@ export default function Home() {
   const [mv, setMV] = useState(null);
   const [rr, setRR] = useState(null);
   const [spo2, setSPO2] = useState(null);
+  const [rvs, setRVS] = useState(null);
 
   const [tv2, setTV2] = useState(null);
   const [mv2, setMV2] = useState(null);
@@ -256,6 +258,7 @@ export default function Home() {
     setTV(data[data.length - 1]);
     setRR(data[data.length - 4]);
     setSPO2(data[data.length - 2]);
+    setRVS(data[data.length - 3]);
   }, [data]);
 
   useUpdateEffect(() => {
@@ -403,13 +406,21 @@ export default function Home() {
               height: "95%",
             }}
           >
-            <LineChart patientData={data} MV={mv} TV={tv} RR={rr} SPO2={spo2} />
+            <LineChart
+              patientData={data}
+              MV={mv}
+              TV={tv}
+              RR={rr}
+              SPO2={spo2}
+              RVS={rvs}
+            />
             <LineChart
               patientData={data2}
               MV={mv2}
               TV={tv2}
               RR={rr2}
               SPO2={spo22}
+              RVS={rvs}
             />
 
             <LineChart
@@ -418,6 +429,7 @@ export default function Home() {
               TV={tv3}
               RR={rr3}
               SPO2={spo23}
+              RVS={rvs}
             />
 
             <LineChart
@@ -426,6 +438,7 @@ export default function Home() {
               TV={tv4}
               RR={rr4}
               SPO2={spo24}
+              RVS={rvs}
             />
 
             <LineChart
@@ -434,6 +447,7 @@ export default function Home() {
               TV={tv5}
               RR={rr5}
               SPO2={spo25}
+              RVS={rvs}
             />
 
             <LineChart
@@ -442,6 +456,7 @@ export default function Home() {
               TV={tv6}
               RR={rr6}
               SPO2={spo26}
+              RVS={rvs}
             />
 
             <LineChart
@@ -450,6 +465,7 @@ export default function Home() {
               TV={tv7}
               RR={rr7}
               SPO2={spo27}
+              RVS={rvs}
             />
 
             <LineChart
@@ -458,6 +474,7 @@ export default function Home() {
               TV={tv8}
               RR={rr8}
               SPO2={spo28}
+              RVS={rvs}
             />
 
             <LineChart
@@ -466,6 +483,7 @@ export default function Home() {
               TV={tv9}
               RR={rr9}
               SPO2={spo29}
+              RVS={rvs}
             />
 
             <LineChart
@@ -474,6 +492,7 @@ export default function Home() {
               TV={tv10}
               RR={rr10}
               SPO2={spo210}
+              RVS={rvs}
             />
 
             <LineChart
@@ -482,6 +501,7 @@ export default function Home() {
               TV={tv11}
               RR={rr11}
               SPO2={spo211}
+              RVS={rvs}
             />
 
             <LineChart
@@ -490,6 +510,7 @@ export default function Home() {
               TV={tv12}
               RR={rr12}
               SPO2={spo212}
+              RVS={rvs}
             />
 
             <LineChart
@@ -498,6 +519,7 @@ export default function Home() {
               TV={tv13}
               RR={rr13}
               SPO2={spo213}
+              RVS={rvs}
             />
 
             <LineChart
@@ -506,6 +528,7 @@ export default function Home() {
               TV={tv14}
               RR={rr14}
               SPO2={spo214}
+              RVS={rvs}
             />
 
             <LineChart
@@ -514,6 +537,7 @@ export default function Home() {
               TV={tv15}
               RR={rr15}
               SPO2={spo215}
+              RVS={rvs}
             />
             <LineChart
               patientData={data16}
@@ -521,6 +545,7 @@ export default function Home() {
               TV={tv16}
               RR={rr16}
               SPO2={spo216}
+              RVS={rvs}
             />
 
             {/* <LineChart

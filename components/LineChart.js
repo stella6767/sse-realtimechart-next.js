@@ -3,58 +3,66 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { PatientRequestAction } from "./../store/reducers/patient";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+import RealTimeLineChart from "./RealTimeLineChart";
 const LineChart = props => {
-  const { patientData, MV, TV, RR, SPO2 } = props;
-
+  const { patientData, MV, TV, RR, SPO2, RVS } = props;
+  const data = [10, 20, 30, 40, 50, 60, 70, 80, 90];
   useUpdateEffect(() => {
     setMV(MV);
     setTV(TV);
     setRR(RR);
     setSPO2(SPO2);
-  }, [MV, TV, RR, SPO2]);
+    setRVS(RVS);
+  }, [MV, TV, RR, SPO2, RVS]);
 
   const [mv, setMV] = useState(null);
   const [tv, setTV] = useState(null);
   const [rr, setRR] = useState(null);
   const [spo2, setSPO2] = useState(null);
-  //json object=> javascript object
-  const data = {
-    labels: [10, 20, 30, 40, 50, 60],
-    datasets: [
-      {
-        data: [],
-        fill: false,
-        backgroundColor: "rgb(27, 27, 32)",
-        borderColor: "rgb(50,197,255)",
-      },
-    ],
-  };
+  const [rvs, setRVS] = useState(null);
+  const [options, setObject] = useState(null);
+  const [series, setseries] = useState(null);
 
-  const options = {
-    legend: false,
-    tooltips: {
-      callbacks: {
-        label: function (tooltipItem) {
-          return tooltipItem.yLabel;
-        },
-      },
-    },
-    scales: {
-      yAxes: [
+  const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
+  const ADDING_DATA_INTERVAL_IN_MILLISECONDS = 1000;
+  const ADDING_DATA_RATIO = 0.8;
+
+  const nameList = ["a"];
+  const defaultDataList = nameList.map(name => ({
+    name: name,
+    data: [],
+  }));
+  const [dataList, setDataList] = useState(defaultDataList);
+  React.useEffect(() => {
+    const addDataRandomly = data => {
+      if (Math.random() < 1 - ADDING_DATA_RATIO) {
+        return data;
+      }
+      return [
+        ...data,
         {
-          ticks: {
-            beginAtZero: true,
-          },
-          gridLines: {
-            // grid line 설정
-            display: false,
-            drawBorder: false,
-            color: "#3c3d40",
-          },
+          x: new Date(),
+          y: data.length * Math.random(),
         },
-      ],
-    },
-  };
+      ];
+    };
+    const interval = setInterval(() => {
+      setDataList(
+        dataList.map(val => {
+          return {
+            name: val.name,
+            data: addDataRandomly(val.data),
+          };
+        })
+      );
+    }, ADDING_DATA_INTERVAL_IN_MILLISECONDS);
+
+    return () => clearInterval(interval);
+  });
 
   return (
     <>
@@ -82,13 +90,22 @@ const LineChart = props => {
           <div>
             <StyledLineCss>
               <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
+              {defaultDataList && (
+                <RealTimeLineChart
+                  dataList={dataList}
+                  range={TIME_RANGE_IN_MILLISECONDS}
+                ></RealTimeLineChart>
+              )}
+            </StyledLineCss>
+
+            {/* <StyledLineCss>
+              <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
               <StyledCharjsLine
                 data={data}
                 options={options}
                 height={65}
               ></StyledCharjsLine>
-              {/* <Line></Line> */}
-            </StyledLineCss>
+            </StyledLineCss> */}
           </div>
         </div>
         <div className="LineData" style={{ width: "100%" }}>
