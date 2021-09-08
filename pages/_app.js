@@ -1,10 +1,7 @@
-import React from "react";
 import Head from "next/head";
-import PropTypes from "prop-types";
-import withReduxSaga from "next-redux-saga";
-import "../styles/globals.css";
-
+import React from "react";
 import wrapper from "../store/configureStore";
+import "../styles/globals.css";
 
 const BilabFront = ({ Component }) => (
   <>
@@ -14,13 +11,5 @@ const BilabFront = ({ Component }) => (
     <Component />
   </>
 );
-
-BilabFront.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-};
-
-// export function reportWebVitals(metric) {
-//   console.log(metric);
-// }
 
 export default wrapper.withRedux(BilabFront);

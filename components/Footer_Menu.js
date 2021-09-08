@@ -27,15 +27,6 @@ const Footer_Menu = () => {
       <div className="FooterMenuWrapper">
         <div className="FooterMenu">
           <div className="FooterMenuImg">
-            {/* <Image
-              src={user}
-              alt="userImage"
-              width={50}
-              height={50}
-              onClick={() => {
-                setPopupState(() => !PopupState);
-              }}
-            ></Image> */}
             <UserOutlined
               style={{ color: "white", fontSize: "50px" }}
               onClick={() => {
@@ -44,25 +35,12 @@ const Footer_Menu = () => {
             />
           </div>
           <div className="FooterMenuImg">
-            {/* <Image
-              src={heartbeat}
-              alt="userHeartBeat"
-              width={50}
-              height={50}
-            ></Image> */}
             <HeartOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
           <div className="FooterMenuImg">
-            {/* <Image src={folder} alt="folderImg" width={50} height={50}></Image> */}
             <FolderOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
           <div style={{ marginRight: "3rem" }} className="FooterMenuImg">
-            {/* <Image
-              src={setting}
-              alt="settingImg"
-              width={50}
-              height={50}
-            ></Image> */}
             <SettingOutlined style={{ color: "white", fontSize: "50px" }} />
           </div>
         </div>
