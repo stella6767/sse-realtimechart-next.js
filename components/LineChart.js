@@ -239,7 +239,7 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                {spo2?.value <= 100 ? Math.round(spo2?.value / 10) * 10 : "-"}
+                {spo2?.value <= 100 ? Math.floor(spo2?.value / 10) * 10 : "-"}
               </p>
               <p
                 style={{
