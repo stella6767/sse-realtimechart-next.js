@@ -17,7 +17,6 @@ const LineChart = props => {
   const [tv, setTV] = useState(null);
   const [rr, setRR] = useState(null);
   const [spo2, setSPO2] = useState(null);
-
   //json object=> javascript object
   const data = {
     labels: [10, 20, 30, 40, 50, 60],
@@ -111,14 +110,14 @@ const LineChart = props => {
             }}
           >
             <div className="LineDiv">
-              <p
+              <div
                 style={{
                   fontWeight: "bold",
                   color: "white",
                 }}
               >
-                {tv?.parame}
-              </p>
+                <p style={{ fontSize: "17px" }}>{tv?.parame}</p>
+              </div>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
                   style={{
@@ -126,12 +125,10 @@ const LineChart = props => {
                     fontSize: "40px",
                     fontWeight: "bold",
                     marginBottom: "0px",
-                    textAlign: "center",
                   }}
                 >
-                  {tv?.value}
+                  {tv?.value <= 1000 ? Math.round(tv?.value / 10) * 10 : "-"}
                 </p>
-
                 <p
                   style={{
                     color: "rgb(183, 183, 183)",
@@ -139,7 +136,7 @@ const LineChart = props => {
                     marginTop: "20%",
                   }}
                 >
-                  {mv?.parame}
+                  mL
                 </p>
               </div>
             </div>
@@ -150,7 +147,7 @@ const LineChart = props => {
                   color: "white",
                 }}
               >
-                {mv?.parame}
+                <p style={{ fontSize: "17px" }}>{mv?.parame}</p>
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
@@ -161,10 +158,17 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {mv?.value}
+                  {mv?.value <= 20 ? Math.round(mv?.value * 10) / 10 : "-"}
                 </p>
 
-                <p style={{ fontWeight: "bold", marginTop: "20%" }}>L/min</p>
+                <p
+                  style={{
+                    fontWeight: "bold",
+                    marginTop: "20%",
+                  }}
+                >
+                  L/min
+                </p>
               </div>
             </div>
             <div className="LineDiv">
@@ -174,7 +178,7 @@ const LineChart = props => {
                   color: "white",
                 }}
               >
-                {rr?.parame}
+                <p style={{ fontSize: "17px" }}>{rr?.parame}</p>
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
@@ -186,7 +190,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {rr?.value}
+                  {rr?.value <= 30 ? Math.round(rr?.value / 10) * 10 : "-"}
                 </p>
 
                 <p
@@ -215,9 +219,17 @@ const LineChart = props => {
                   fontWeight: "bold",
                 }}
               >
-                SPO2
+                SPO
               </p>
-              {/* <span style={{ marginTop: "1rem", fontWeight: "bold" }}>2</span> */}
+              <span
+                style={{
+                  marginTop: "1rem",
+                  fontWeight: "bold",
+                  fontSize: "17px",
+                }}
+              >
+                2
+              </span>
             </div>
             <div style={{ display: "flex", marginRight: "12%" }}>
               <p
@@ -227,12 +239,12 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                {spo2?.value}
+                {spo2?.value <= 100 ? Math.round(spo2?.value / 10) * 10 : "-"}
               </p>
               <p
                 style={{
-                  marginTop: "40%",
-                  marginLeft: "20%",
+                  marginTop: "30%",
+                  marginLeft: "10%",
                   fontWeight: "bold",
                 }}
               >
