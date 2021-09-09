@@ -21,9 +21,9 @@ export const patientRequestAction = () => ({
   type: PATIENT_REQUEST,
 });
 
-export const patientByNameOrIdRequestAction = (path, data) => ({
+export const patientByNameOrIdRequestAction = (searchType, searchWord) => ({
   type: PATIENT_FINDBYNAMEORID_REQUEST,
-  payload: { path, data },
+  payload: { searchType, searchWord },
 });
 
 const reducer = (state = initialState, action) => {
@@ -67,7 +67,6 @@ const reducer = (state = initialState, action) => {
     case PATIENT_FINDBYNAMEORID_FAILURE:
       return {
         ...state,
-
         loadPatientsByNameOrIdLoading: false,
         loadPatientsByNameOrIdError: action.error,
       };

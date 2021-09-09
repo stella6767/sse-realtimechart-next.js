@@ -35,13 +35,10 @@ const PatientManager = () => {
 
   const clickAssign = () => {
     console.log("searchWord", searchWord);
-    console.log("value", selected);
-
-    // if (selected === "name") {
-    //   dispatch(patientByNameRequestAction(searchWord));
-    // }
+    console.log("searchType", selected);
 
     dispatch(patientByNameOrIdRequestAction(selected, searchWord));
+    //searchWord에 아무것도 입력안하면 전체 출력
   };
 
   const handleSelect = (e) => {
@@ -115,36 +112,51 @@ const PatientManager = () => {
                     <thead>
                       <tr>
                         <th>
-                          <p style={{ marginLeft: "50px" }}>ID</p>
+                          <p style={{ marginLeft: "50px" }}>pid</p>
                         </th>
                         <th>
-                          <p style={{ marginLeft: "40px" }}>Name</p>
+                          <p style={{ marginLeft: "50px" }}>patientUserId</p>
                         </th>
                         <th>
-                          <p style={{ marginLeft: "30px" }}>Last Session</p>
+                          <p style={{ marginLeft: "50px" }}>firstName</p>
                         </th>
+                        <th>
+                          <p style={{ marginLeft: "50px" }}>lastName</p>
+                        </th>
+
                         <th>
                           <p>Gender</p>
                         </th>
                         <th>Age</th>
+
                         <th>Height(cm)</th>
                         <th>Weight(kg)</th>
+                        <th>
+                          <p style={{ marginLeft: "30px" }}>Last Session</p>
+                        </th>
+                        <th>
+                          <p style={{ marginLeft: "30px" }}>Comment</p>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {patients?.data.map((patient) => (
                         <tr>
                           <td>{patient?.pid}</td>
+                          <td>{patient?.patientUserId}</td>
                           <td>{patient?.firstname}</td>
+                          <td>{patient?.lastname}</td>
+
+                          <td>{patient?.gender}</td>
+                          <td>{patient?.age}</td>
+                          <td>{patient?.height}</td>
+                          <td>{patient?.weight}</td>
                           <td>
                             {patient?.lastSession == null
                               ? "Null"
                               : patient?.lastSession}
                           </td>
-                          <td>{patient?.gender}</td>
-                          <td>{patient?.age}</td>
-                          <td>{patient?.height}</td>
-                          <td>{patient?.weight}</td>
+                          <td>{patient?.comment}</td>
                         </tr>
                       ))}
                     </tbody>
