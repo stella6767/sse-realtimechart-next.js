@@ -97,15 +97,6 @@ const LineChart = props => {
                 ></RealTimeLineChart>
               )}
             </StyledLineCss>
-
-            {/* <StyledLineCss>
-              <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
-              <StyledCharjsLine
-                data={data}
-                options={options}
-                height={65}
-              ></StyledCharjsLine>
-            </StyledLineCss> */}
           </div>
         </div>
         <div className="LineData" style={{ width: "100%" }}>
@@ -144,7 +135,7 @@ const LineChart = props => {
                     marginBottom: "0px",
                   }}
                 >
-                  {tv?.value <= 1000 ? Math.round(tv?.value / 10) * 10 : "-"}
+                  {tv?.value <= 2000 ? Math.round(tv?.value) : "-"}
                 </p>
                 <p
                   style={{
@@ -175,7 +166,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {mv?.value <= 20 ? Math.round(mv?.value * 10) / 10 : "-"}
+                  {mv?.value <= 100 ? Math.round(mv?.value * 10) / 10 : "-"}
                 </p>
 
                 <p
@@ -207,7 +198,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {rr?.value <= 30 ? Math.round(rr?.value / 10) * 10 : "-"}
+                  {rr?.value <= 100 ? Math.round(rr?.value) : "-"}
                 </p>
 
                 <p
@@ -256,7 +247,7 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                {spo2?.value <= 100 ? Math.floor(spo2?.value / 10) * 10 : "-"}
+                {spo2?.value <= 100 ? Math.floor(spo2?.value) : "-"}
               </p>
               <p
                 style={{
