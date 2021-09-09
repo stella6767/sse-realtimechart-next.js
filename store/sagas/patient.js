@@ -2,7 +2,9 @@ import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import { findAll, findByPatientUserIdOrName } from "../lib/patient";
 import {
   PATIENT_FAILURE,
+  PATIENT_FINDBYNAMEORID_FAILURE,
   PATIENT_FINDBYNAMEORID_REQUEST,
+  PATIENT_FINDBYNAMEORID_SUCCESS,
   PATIENT_REQUEST,
   PATIENT_SUCCESS,
 } from "../reducers/patient";
@@ -32,16 +34,16 @@ function* loadPatientsByNameOrId(action) {
 
     console.log("result", result);
 
-    // yield put({
-    //   type: PATIENT_SUCCESS,
-    //   data: result.data,
-    // });
-  } catch {
-    console.error(err);
-    // yield put({
-    //   type: PATIENT_FAILURE,
-    //   error: err.response.data,
-    // });
+    yield put({
+      type: PATIENT_FINDBYNAMEORID_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error("error", err);
+    yield put({
+      type: PATIENT_FINDBYNAMEORID_FAILURE,
+      error: err.response.data,
+    });
   }
 }
 

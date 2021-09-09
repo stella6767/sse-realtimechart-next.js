@@ -2,10 +2,22 @@ import client from "./client";
 
 export const findAll = () => client.get("/patient");
 
-export const findByPatientUserIdOrName = ({ path, data }) => {
-  console.log("path", path, "data", data);
+export const findByPatientUserIdOrName = ({ searchType, searchWord }) => {
+  console.log("searchType", searchType, "searchWord", searchWord);
 
-  return client.get(`/patient/${path}?${path}=${data}`);
+  return client.get(
+    `/patient/search?searchType=${searchType}&searchWord=${searchWord}`,
+    {
+      headers,
+    }
+  );
 };
 
-//export const findByName = (data) => client.get("/patient");
+const headers = {
+  // get: {
+  //   "Content-Type": "application/json; charset=UTF-8",
+  // },
+  common: {
+    Accept: "*/*",
+  },
+};
