@@ -36,8 +36,8 @@ function* loadPatientsByNameOrId(action) {
     //   type: PATIENT_SUCCESS,
     //   data: result.data,
     // });
-  } catch {
-    console.error(err);
+  } catch (err) {
+    console.error("error", err);
     // yield put({
     //   type: PATIENT_FAILURE,
     //   error: err.response.data,
