@@ -21,7 +21,7 @@ export default (props) => {
     },
     tooltip: {
       x: {
-        format: "ss",
+        format: "ffffff",
       },
     },
     xaxis: {

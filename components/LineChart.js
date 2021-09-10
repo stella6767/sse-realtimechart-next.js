@@ -25,22 +25,13 @@ const LineChart = (props) => {
   useUpdateEffect(() => {
     console.log("rvsArr", rvsArr);
 
-    //  console.log("default", defaultDataList);
-    //  console.log("dataList", dataList);
-
     let copyArr = rvsArr.map((r) => {
-      return [
-        ...r,
-        {
-          x: date.getTime(),
-          y: r,
-        },
-      ];
+      return { ...r, r: { x: date.getMilliseconds(), y: r } };
     });
-
     console.log("copyArr", copyArr);
+    //dataList[0].data?.concat(copyArr);
 
-    //interval(rvsArr);
+    interval(copyArr);
     //insertChartXY(rvsArr);
   }, [rvsArr]);
 
@@ -53,6 +44,16 @@ const LineChart = (props) => {
         };
       })
     );
+  };
+
+  const insertChartXY = (xyData, rvsAr) => {
+    if (dataList[0]?.data?.length === 50) {
+      console.log("꽉 참");
+      return [...xyData.slice(1)];
+    } else {
+      console.log("여기서 추가");
+      return (xyData = xyData.concat(rvsAr));
+    }
   };
 
   // const insertChartXY = (xyData, rvsAr) => {
@@ -72,21 +73,6 @@ const LineChart = (props) => {
   //     }
   //   });
   // };
-
-  const insertChartXY = (xyData, rvsAr) => {
-    rvsAr.map((r) => {
-      console.log("여기서 추가");
-      console.log("xyData", xyData);
-
-      return [
-        ...xyData,
-        {
-          x: date.getSeconds(),
-          y: r,
-        },
-      ];
-    });
-  };
 
   const check = () => {
     console.log("체크", dataList);
