@@ -1,6 +1,6 @@
-import React from "react";
-import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+import React from 'react';
+import dynamic from 'next/dynamic';
+const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 export default (props) => {
@@ -10,7 +10,7 @@ export default (props) => {
         enabled: false,
       },
       animations: {
-        easing: "linear",
+        easing: 'linear',
         dynamicAnimation: {
           speed: 500,
         },
@@ -21,18 +21,18 @@ export default (props) => {
     },
     tooltip: {
       x: {
-        format: "f",
+        format: 'yyyy/MM/dd HH:mm:ss.f',
       },
     },
     xaxis: {
-      type: "datetime",
+      type: 'datetime',
       range: props.range,
     },
     yaxis: {
       labels: {
         formatter: (val) => val.toFixed(0),
       },
-      title: { text: "Value" },
+      title: { text: 'Value' },
     },
   };
   return (
