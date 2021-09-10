@@ -26,7 +26,7 @@ const LineChart = (props) => {
     console.log("rvsArr", rvsArr);
 
     let copyArr = rvsArr.map((r) => {
-      return { ...r, r: { x: date.getMilliseconds(), y: r } };
+      return (r = { x: date.getMilliseconds(), y: r });
     });
     console.log("copyArr", copyArr);
     //dataList[0].data?.concat(copyArr);
@@ -46,13 +46,24 @@ const LineChart = (props) => {
     );
   };
 
+  const removeItems = (arr, item) => {
+    for (let i = 0; i < item; i++) {
+      arr.shift();
+    }
+    return arr;
+  };
+
   const insertChartXY = (xyData, rvsAr) => {
-    if (dataList[0]?.data?.length === 50) {
+    if (dataList[0]?.data?.length === 15) {
       console.log("꽉 참");
-      return [...xyData.slice(1)];
+      //return [...xyData.slice(0, 5)];
+      return (xyData = xyData.filter((n, index) => {
+        return index > 4;
+      }));
     } else {
-      console.log("여기서 추가");
+      console.log("여기서 rvs 배열 인덱스만큼 추가");
       return (xyData = xyData.concat(rvsAr));
+      //return (xyData = rvsAr.concat(xyData));
     }
   };
 
