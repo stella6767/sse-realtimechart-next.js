@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
-export default props => {
+export default (props) => {
   const options = {
     chart: {
       zoom: {
@@ -21,7 +21,7 @@ export default props => {
     },
     tooltip: {
       x: {
-        format: "yyyy/MM/dd HH:mm:ss.f",
+        format: "ss",
       },
     },
     xaxis: {
@@ -30,7 +30,7 @@ export default props => {
     },
     yaxis: {
       labels: {
-        formatter: val => val.toFixed(0),
+        formatter: (val) => val.toFixed(0),
       },
       title: { text: "Value" },
     },
@@ -39,7 +39,7 @@ export default props => {
     <ReactApexChart
       type="line"
       options={options}
-      series={props.dataList}
+      series={props.chartList}
       width={480}
       height={130}
     />

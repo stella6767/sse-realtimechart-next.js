@@ -8,51 +8,32 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 import RealTimeLineChart from "./RealTimeLineChart";
-const LineChart = props => {
+const LineChart = (props) => {
   const date = new Date();
 
-  const { mv, tv, rr, spo2, rvs } = props;
-
+  const { mv, tv, rr, spo2, rvsArr } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
-  const ADDING_DATA_INTERVAL_IN_MILLISECONDS = 500;
-
-  const [splitArr, setSplitArr] = useState(null);
-  //const splitArr = RVS?.value.split("^").map(Number);
-  // const splitArr = null;
-
-  useEffect(() => {
-    setSplitArr(rvs?.split("^").map(Number));
-    // console.log("default", dataList);
-  }, []);
 
   useUpdateEffect(() => {
-    console.log("rvs", rvs);
-    setSplitArr(rvs?.split("^").map(Number));
-  }, [rvs]);
+    console.log("rvsArr", rvsArr);
 
-  //  const PatientList = [RVS?.patientUserId];
-  // const defaultDataList = PatientList.map(PatientID => ({
-  //   PatientID: PatientID,
+    //  console.log("default", defaultDataList);
+    //  console.log("dataList", dataList);
+    console.log("chartDataList", chartDataList);
+    //interval();
+    insertChartXY(rvsArr);
+  }, [rvsArr]);
+
+  // const defaultDataList = rvsArr?.map((rvs) => ({
+  //   PatientID: 1,
   //   data: [],
   // }));
 
   // const [dataList, setDataList] = useState(defaultDataList);
 
-  // useUpdateEffect(() => {
-  //   //console.log("check1", RVS);
-
-  //   //5개씩 체인지가 되겠네, 덮어씌어지겠네...
-  //   setSplitArr(RVS?.value.split("^").map(Number));
-
-  //   console.log("default", dataList);
-  //   console.log("splitArray", splitArr);
-
-  //   interval();
-  // }, [dataList, RVS]);
-
   // const interval = () => {
   //   setDataList(
-  //     dataList.map(val => {
+  //     dataList.map((val) => {
   //       return {
   //         PatientID: val.PatientID,
   //         data: insertChartXY(val.data),
@@ -61,17 +42,20 @@ const LineChart = props => {
   //   );
   // };
 
-  const insertChartXY = data => {
-    if (dataList[0]?.data.length === 50) {
-      return [...data.slice(1)];
+  const [chartDataList, setChartDataList] = useState([]);
+
+  const insertChartXY = (rvsArr) => {
+    if (chartDataList[0]?.length === 50) {
+      console.log("꽉 참");
+      return [...chartDataList.slice(1)];
     } else {
-      return [
-        ...data,
+      return setChartDataList([
+        ...chartDataList,
         {
           x: date.getSeconds(),
-          y: splitArr?.[Math.floor(Math.random() * 3)],
+          y: rvsArr?.[1],
         },
-      ];
+      ]);
     }
   };
 
@@ -99,15 +83,14 @@ const LineChart = props => {
             <p>ID:{patientData[0]?.patientUserId}</p> */}
           </div>
           <div>
-            {/* <StyledLineCss>
+            <StyledLineCss>
               <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
-              {defaultDataList && (
-                <RealTimeLineChart
-                  dataList={dataList}
-                  range={TIME_RANGE_IN_MILLISECONDS}
-                ></RealTimeLineChart>
-              )}
-            </StyledLineCss> */}
+
+              <RealTimeLineChart
+                chartList={chartDataList}
+                range={TIME_RANGE_IN_MILLISECONDS}
+              />
+            </StyledLineCss>
           </div>
         </div>
         <div className="LineData" style={{ width: "100%" }}>
@@ -258,7 +241,7 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                {spo2?.value <= 100 ? Math.floor(spo2?.value) : "-"}
+                {spo2 <= 100 ? Math.floor(spo2) : "-"}
               </p>
               <p
                 style={{

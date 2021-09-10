@@ -7,16 +7,14 @@ import LineChart from "./../components/LineChart";
 export default function Home() {
   const [listening, setListening] = useState(false);
 
-  const [measureData, setMeasureData] = useState(null);
-  const [meventSource, msetEventSource] = useState(undefined);
+  const [meventSource, msetEventSource] = useState(null);
 
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
   const [rr, setRr] = useState(null);
   const [spo2, setSpo2] = useState(null);
-  const [rvs, setRvs] = useState(null);
 
-  // conset [isEnd, setIsEnd] = useState(false);
+  const [rvsArr, setRvsArr] = useState(null);
 
   let eventSource = undefined;
 
@@ -27,26 +25,28 @@ export default function Home() {
       msetEventSource(eventSource);
 
       //Custom listener
-      eventSource.addEventListener("CPM0000", event => {
+      eventSource.addEventListener("CPM0000", (event) => {
         const result = JSON.parse(event.data);
-        setMeasureData(result);
-        //console.log("data1", result);
+
+        console.log("처음 오는 데이터", result);
+
+        clasfy(result);
       });
 
-      eventSource.onopen = event => {
+      eventSource.onopen = (event) => {
         console.log("connection opened");
       };
 
-      eventSource.onmessage = event => {
+      eventSource.onmessage = (event) => {
         console.log("result", event.data);
-        setData(old => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
+        setData((old) => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         const sseData = JSON.parse(event.data);
         handleSseData(sseData);
       };
 
-      eventSource.onerror = event => {
+      eventSource.onerror = (event) => {
         console.log(event.target.readyState);
         if (event.target.readyState === EventSource.CLOSED) {
           console.log("eventsource closed (" + event.target.readyState + ")");
@@ -63,43 +63,25 @@ export default function Home() {
     };
   }, []);
 
-  useUpdateEffect(() => {
-    // setMV(data[data.length - 5]);
-    // setTV(data[data.length - 1]);
-    // setRR(data[data.length - 4]);
-    // setSPO2(data[data.length - 2]);
-    //setRVS(data[data.length - 3]);
-
-    console.log("처음 오는 데이터배열", measureData);
-
-    const parame = measureData?.parame;
-
-    switch (parame) {
+  const clasfy = (measureData) => {
+    switch (measureData?.parame) {
       case "mv":
-        setMv(...mv, ...measureData?.value);
+        setMv(measureData?.value);
         break;
       case "rr":
-        setRr(...rr, ...measureData?.value);
+        setRr(measureData?.value);
         break;
       case "rvs":
-        setRvs(...rvs, ...measureData?.value);
+        setRvsArr(measureData?.value.split("^").map(Number));
         break;
       case "spo2":
-        setSpo2(...spo2, ...measureData?.value);
+        setSpo2(measureData?.value);
         break;
       case "tv":
-        setTv(...tv, ...measureData?.value);
+        setTv(measureData?.value);
         break;
     }
-
-    //    setIsEnd(true);
-
-    //setRVS(data?.value);
-  }, [measureData]);
-
-  useUpdateEffect(() => {
-    console.log("mv", mv);
-  }, [mv]);
+  };
 
   return (
     <>
@@ -114,7 +96,7 @@ export default function Home() {
               height: "95%",
             }}
           >
-            <LineChart mv={mv} tv={tv} rr={rr} spo2={spo2} rvs={rvs} />
+            <LineChart mv={mv} tv={tv} rr={rr} spo2={spo2} rvsArr={rvsArr} />
           </div>
         </Content>
         <Footer>
