@@ -21,7 +21,8 @@ export default (props) => {
     },
     tooltip: {
       x: {
-        format: 'yyyy/MM/dd HH:mm:ss.f',
+        //format: 'yyyy/MM/dd HH:mm:ss.f',
+        format: 's',
       },
     },
     xaxis: {

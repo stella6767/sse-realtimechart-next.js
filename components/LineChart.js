@@ -9,7 +9,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
 });
 import RealTimeLineChart from './RealTimeLineChart';
 const LineChart = (props) => {
-  const date = new Date();
+  let date = new Date();
 
   const { mv, tv, rr, spo2, rvsArr } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
@@ -23,10 +23,10 @@ const LineChart = (props) => {
   const [dataList, setDataList] = React.useState(defaultDataList);
 
   useUpdateEffect(() => {
-    console.log('rvsArr', rvsArr);
+    console.log('rvsArr', rvsArr, 'Date', date.getSeconds());
 
     let copyArr = rvsArr.map((r) => {
-      return (r = { x: new Date(), y: r });
+      return (r = { x: date, y: r });
     });
     console.log('copyArr', copyArr);
     //dataList[0].data?.concat(copyArr);
