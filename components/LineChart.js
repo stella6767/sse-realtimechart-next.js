@@ -14,49 +14,82 @@ const LineChart = (props) => {
   const { mv, tv, rr, spo2, rvsArr } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
 
+  const nameList = ["CPM0000"];
+  const defaultDataList = nameList.map((name) => ({
+    name: name,
+    data: [],
+  }));
+
+  const [dataList, setDataList] = React.useState(defaultDataList);
+
   useUpdateEffect(() => {
     console.log("rvsArr", rvsArr);
 
     //  console.log("default", defaultDataList);
     //  console.log("dataList", dataList);
-    console.log("chartDataList", chartDataList);
-    //interval();
-    insertChartXY(rvsArr);
+
+    let copyArr = rvsArr.map((r) => {
+      return [
+        ...r,
+        {
+          x: date.getTime(),
+          y: r,
+        },
+      ];
+    });
+
+    console.log("copyArr", copyArr);
+
+    //interval(rvsArr);
+    //insertChartXY(rvsArr);
   }, [rvsArr]);
 
-  // const defaultDataList = rvsArr?.map((rvs) => ({
-  //   PatientID: 1,
-  //   data: [],
-  // }));
+  const interval = (rvsArr) => {
+    setDataList(
+      dataList.map((val) => {
+        return {
+          name: val.name,
+          data: insertChartXY(val.data, rvsArr),
+        };
+      })
+    );
+  };
 
-  // const [dataList, setDataList] = useState(defaultDataList);
-
-  // const interval = () => {
-  //   setDataList(
-  //     dataList.map((val) => {
-  //       return {
-  //         PatientID: val.PatientID,
-  //         data: insertChartXY(val.data),
-  //       };
-  //     })
-  //   );
+  // const insertChartXY = (xyData, rvsAr) => {
+  //   rvsAr.map((r) => {
+  //     if (dataList[0]?.data?.length === 50) {
+  //       console.log("꽉 참");
+  //       //return [...xyData.slice(1)];
+  //     } else {
+  //       console.log("여기서 추가");
+  //       return [
+  //         ...xyData,
+  //         {
+  //           x: date.getSeconds(),
+  //           y: r,
+  //         },
+  //       ];
+  //     }
+  //   });
   // };
 
-  const [chartDataList, setChartDataList] = useState([]);
+  const insertChartXY = (xyData, rvsAr) => {
+    rvsAr.map((r) => {
+      console.log("여기서 추가");
+      console.log("xyData", xyData);
 
-  const insertChartXY = (rvsArr) => {
-    if (chartDataList[0]?.length === 50) {
-      console.log("꽉 참");
-      return [...chartDataList.slice(1)];
-    } else {
-      return setChartDataList([
-        ...chartDataList,
+      return [
+        ...xyData,
         {
           x: date.getSeconds(),
-          y: rvsArr?.[1],
+          y: r,
         },
-      ]);
-    }
+      ];
+    });
+  };
+
+  const check = () => {
+    console.log("체크", dataList);
   };
 
   return (
@@ -81,13 +114,14 @@ const LineChart = (props) => {
             {/* 
             <p>Age:{patientData[0]?.age}</p>
             <p>ID:{patientData[0]?.patientUserId}</p> */}
+            <div onClick={check}>체크</div>
           </div>
           <div>
             <StyledLineCss>
               <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
 
               <RealTimeLineChart
-                chartList={chartDataList}
+                chartList={dataList}
                 range={TIME_RANGE_IN_MILLISECONDS}
               />
             </StyledLineCss>

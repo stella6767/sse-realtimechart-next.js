@@ -1,84 +1,62 @@
-import React, { useEffect, useState } from "react";
-import useUpdateEffect from "../store/hooks/useUpdateEffect";
+import React from "react";
+import RealTimeLineChart from "../components/RealTimeLineChart";
+
+const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
+const ADDING_DATA_INTERVAL_IN_MILLISECONDS = 1000;
+const ADDING_DATA_RATIO = 0.8;
 
 function See() {
-  const [listening, setListening] = useState(false);
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState(null);
+  const nameList = ["a", "b", "c"];
+  const defaultDataList = nameList.map((name) => ({
+    name: name,
+    data: [],
+  }));
+  const [dataList, setDataList] = React.useState(defaultDataList);
 
-  const [meventSource, msetEventSource] = useState(undefined);
-
-  let eventSource = undefined;
-
-  useEffect(() => {
-    console.log("매번 실행되는지");
-    console.log("listening", listening);
-
-    if (!listening) {
-      //eventSource = new EventSource("http://bilabcsapi.lunalabs.net/sse"); //구독
-      eventSource = new EventSource("http://localhost:8088/sse"); //구독
-
-      //msetEventSource(new EventSource("http://localhost:8088/sse"));
-
-      msetEventSource(eventSource);
-
-      //Custom listener
-      // eventSource.addEventListener("Progress", (event) => {
-      //   const result = JSON.parse(event.data);
-      //   console.log("received:", result);
-      //   setData(result)
-      // });
-
-      console.log("eventSource", eventSource);
-
-      eventSource.onopen = event => {
-        console.log("connection opened");
-      };
-
-      eventSource.onmessage = event => {
-        console.log("result", event.data);
-        setData(old => [...old, event.data]);
-        setValue(event.data);
-      };
-
-      eventSource.onerror = event => {
-        console.log(event.target.readyState);
-        if (event.target.readyState === EventSource.CLOSED) {
-          console.log("eventsource closed (" + event.target.readyState + ")");
-        }
-        eventSource.close();
-      };
-
-      setListening(true);
-    }
-
-    return () => {
-      eventSource.close();
-      console.log("eventsource closed");
+  React.useEffect(() => {
+    const addDataRandomly = (data) => {
+      if (Math.random() < 1 - ADDING_DATA_RATIO) {
+        return data;
+      }
+      return [
+        ...data,
+        {
+          x: new Date(),
+          y: data.length * Math.random(),
+        },
+      ];
     };
-  }, []);
+    const interval = setInterval(() => {
+      setDataList(
+        dataList.map((val) => {
+          return {
+            name: val.name,
+            data: addDataRandomly(val.data),
+          };
+        })
+      );
+    }, ADDING_DATA_INTERVAL_IN_MILLISECONDS);
 
-  useUpdateEffect(() => {
-    console.log("data: ", data);
-  }, [data]);
+    return () => clearInterval(interval);
+  });
 
-  const checkData = () => {
-    console.log(data);
+  const check = () => {
+    console.log("체크", dataList);
   };
 
   return (
-    <div className="App">
-      <button onClick={checkData}>확인</button>
-      <header className="App-header">
-        <div style={{ backgroundColor: "white" }}>
-          Received Data
-          {data.map((d, index) => (
-            <span key={index}>{d}</span>
-          ))}
-        </div>
-      </header>
-      <div>value: {value}</div>
-    </div>
+    <>
+      <div onClick={check} style={{ background: "white" }}>
+        체크
+      </div>
+
+      <div>
+        <RealTimeLineChart
+          chartList={dataList}
+          range={TIME_RANGE_IN_MILLISECONDS}
+        />
+      </div>
+    </>
   );
 }
 
