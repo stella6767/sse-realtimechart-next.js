@@ -15,6 +15,9 @@ export default props => {
           speed: 500,
         },
       },
+      toolbar: {
+        show: false,
+      },
     },
     tooltip: {
       x: {

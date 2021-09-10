@@ -36,76 +36,91 @@ export default function Home() {
   const [mv2, setMV2] = useState(null);
   const [rr2, setRR2] = useState(null);
   const [spo22, setSPO22] = useState(null);
+  const [rvs2, setRVS2] = useState(null);
 
   const [tv3, setTV3] = useState(null);
   const [mv3, setMV3] = useState(null);
   const [rr3, setRR3] = useState(null);
   const [spo23, setSPO23] = useState(null);
+  const [rvs3, setRVS3] = useState(null);
 
   const [tv4, setTV4] = useState(null);
   const [mv4, setMV4] = useState(null);
   const [rr4, setRR4] = useState(null);
   const [spo24, setSPO24] = useState(null);
+  const [rvs4, setRVS4] = useState(null);
 
   const [tv5, setTV5] = useState(null);
   const [mv5, setMV5] = useState(null);
   const [rr5, setRR5] = useState(null);
   const [spo25, setSPO25] = useState(null);
+  const [rvs5, setRVS5] = useState(null);
 
   const [tv6, setTV6] = useState(null);
   const [mv6, setMV6] = useState(null);
   const [rr6, setRR6] = useState(null);
   const [spo26, setSPO26] = useState(null);
+  const [rvs6, setRVS6] = useState(null);
 
   const [tv7, setTV7] = useState(null);
   const [mv7, setMV7] = useState(null);
   const [rr7, setRR7] = useState(null);
   const [spo27, setSPO27] = useState(null);
+  const [rvs7, setRVS7] = useState(null);
 
   const [tv8, setTV8] = useState(null);
   const [mv8, setMV8] = useState(null);
   const [rr8, setRR8] = useState(null);
   const [spo28, setSPO28] = useState(null);
+  const [rvs8, setRVS8] = useState(null);
 
   const [tv9, setTV9] = useState(null);
   const [mv9, setMV9] = useState(null);
   const [rr9, setRR9] = useState(null);
   const [spo29, setSPO29] = useState(null);
+  const [rvs9, setRVS9] = useState(null);
 
   const [tv10, setTV10] = useState(null);
   const [mv10, setMV10] = useState(null);
   const [rr10, setRR10] = useState(null);
   const [spo210, setSPO210] = useState(null);
+  const [rvs10, setRVS10] = useState(null);
 
   const [tv11, setTV11] = useState(null);
   const [mv11, setMV11] = useState(null);
   const [rr11, setRR11] = useState(null);
   const [spo211, setSPO211] = useState(null);
+  const [rvs11, setRVS11] = useState(null);
 
   const [tv12, setTV12] = useState(null);
   const [mv12, setMV12] = useState(null);
   const [rr12, setRR12] = useState(null);
   const [spo212, setSPO212] = useState(null);
+  const [rvs12, setRVS12] = useState(null);
 
   const [tv13, setTV13] = useState(null);
   const [mv13, setMV13] = useState(null);
   const [rr13, setRR13] = useState(null);
   const [spo213, setSPO213] = useState(null);
+  const [rvs13, setRVS13] = useState(null);
 
   const [tv14, setTV14] = useState(null);
   const [mv14, setMV14] = useState(null);
   const [rr14, setRR14] = useState(null);
   const [spo214, setSPO214] = useState(null);
+  const [rvs14, setRVS14] = useState(null);
 
   const [tv15, setTV15] = useState(null);
   const [mv15, setMV15] = useState(null);
   const [rr15, setRR15] = useState(null);
   const [spo215, setSPO215] = useState(null);
+  const [rvs15, setRVS15] = useState(null);
 
   const [tv16, setTV16] = useState(null);
   const [mv16, setMV16] = useState(null);
   const [rr16, setRR16] = useState(null);
   const [spo216, setSPO216] = useState(null);
+  const [rvs16, setRVS16] = useState(null);
 
   // const [tv11, setTV11] = useState(null);
   // const [mv11, setMV11] = useState(null);
@@ -251,13 +266,20 @@ export default function Home() {
     setRR(data[data.length - 4]);
     setSPO2(data[data.length - 2]);
     setRVS(data[data.length - 3]);
+    //console.log(data);
+    //setRVS(data?.value);
   }, [data]);
+
+  useUpdateEffect(() => {
+    console.log(rvs);
+  }, [rvs]);
 
   useUpdateEffect(() => {
     setMV2(data2[data2.length - 5]);
     setTV2(data2[data2.length - 1]);
     setRR2(data2[data2.length - 4]);
     setSPO22(data2[data2.length - 2]);
+    setRVS2(data2[data2.length - 3]);
   }, [data2]);
 
   useUpdateEffect(() => {
@@ -265,6 +287,7 @@ export default function Home() {
     setTV3(data3[data3.length - 1]);
     setRR3(data3[data3.length - 4]);
     setSPO23(data3[data3.length - 2]);
+    setRVS3(data3[data3.length - 3]);
   }, [data3]);
 
   useUpdateEffect(() => {
@@ -272,6 +295,7 @@ export default function Home() {
     setTV4(data4[data4.length - 1]);
     setRR4(data4[data4.length - 4]);
     setSPO24(data4[data4.length - 2]);
+    setRVS4(data4[data4.length - 3]);
   }, [data4]);
 
   useUpdateEffect(() => {
@@ -279,6 +303,7 @@ export default function Home() {
     setTV5(data5[data5.length - 1]);
     setRR5(data5[data5.length - 4]);
     setSPO25(data5[data5.length - 2]);
+    setRVS5(data5[data5.length - 3]);
   }, [data5]);
 
   useUpdateEffect(() => {
@@ -286,6 +311,7 @@ export default function Home() {
     setTV6(data6[data6.length - 1]);
     setRR6(data6[data6.length - 4]);
     setSPO26(data6[data6.length - 2]);
+    setRVS6(data6[data6.length - 3]);
   }, [data6]);
 
   useUpdateEffect(() => {
@@ -293,6 +319,7 @@ export default function Home() {
     setTV7(data7[data7.length - 1]);
     setRR7(data7[data7.length - 4]);
     setSPO27(data7[data7.length - 2]);
+    setRVS7(data7[data7.length - 3]);
   }, [data7]);
 
   useUpdateEffect(() => {
@@ -300,6 +327,7 @@ export default function Home() {
     setTV8(data8[data8.length - 1]);
     setRR8(data8[data8.length - 4]);
     setSPO28(data8[data8.length - 2]);
+    setRVS8(data8[data8.length - 3]);
   }, [data8]);
 
   useUpdateEffect(() => {
@@ -307,6 +335,7 @@ export default function Home() {
     setTV9(data9[data9.length - 1]);
     setRR9(data9[data9.length - 4]);
     setSPO29(data9[data9.length - 2]);
+    setRVS9(data9[data9.length - 3]);
   }, [data9]);
 
   useUpdateEffect(() => {
@@ -314,6 +343,7 @@ export default function Home() {
     setTV10(data10[data10.length - 1]);
     setRR10(data10[data10.length - 4]);
     setSPO210(data10[data10.length - 2]);
+    setRVS10(data10[data10.length - 3]);
   }, [data10]);
 
   useUpdateEffect(() => {
@@ -321,6 +351,7 @@ export default function Home() {
     setTV11(data11[data11.length - 1]);
     setRR11(data11[data11.length - 4]);
     setSPO211(data11[data11.length - 2]);
+    setRVS11(data11[data11.length - 3]);
   }, [data11]);
 
   useUpdateEffect(() => {
@@ -328,6 +359,7 @@ export default function Home() {
     setTV12(data12[data12.length - 1]);
     setRR12(data12[data12.length - 4]);
     setSPO212(data12[data12.length - 2]);
+    setRVS12(data12[data12.length - 3]);
   }, [data12]);
 
   useUpdateEffect(() => {
@@ -335,6 +367,7 @@ export default function Home() {
     setTV13(data13[data13.length - 1]);
     setRR13(data13[data13.length - 4]);
     setSPO213(data13[data13.length - 2]);
+    setRVS13(data13[data13.length - 3]);
   }, [data13]);
 
   useUpdateEffect(() => {
@@ -342,6 +375,7 @@ export default function Home() {
     setTV14(data14[data14.length - 1]);
     setRR14(data14[data14.length - 4]);
     setSPO214(data14[data14.length - 2]);
+    setRVS14(data14[data14.length - 3]);
   }, [data14]);
 
   useUpdateEffect(() => {
@@ -349,6 +383,7 @@ export default function Home() {
     setTV15(data15[data15.length - 1]);
     setRR15(data15[data15.length - 4]);
     setSPO215(data15[data15.length - 2]);
+    setRVS15(data15[data15.length - 3]);
   }, [data15]);
 
   useUpdateEffect(() => {
@@ -356,6 +391,7 @@ export default function Home() {
     setTV16(data16[data16.length - 1]);
     setRR16(data16[data16.length - 4]);
     setSPO216(data16[data16.length - 2]);
+    setRVS16(data16[data16.length - 3]);
   }, [data16]);
 
   //데이터 필터링
@@ -406,13 +442,14 @@ export default function Home() {
               SPO2={spo2}
               RVS={rvs}
             />
-            <LineChart
+
+            {/* <LineChart
               patientData={data2}
               MV={mv2}
               TV={tv2}
               RR={rr2}
               SPO2={spo22}
-              RVS={rvs}
+              RVS={rvs2}
             />
 
             <LineChart
@@ -421,7 +458,7 @@ export default function Home() {
               TV={tv3}
               RR={rr3}
               SPO2={spo23}
-              RVS={rvs}
+              RVS={rvs3}
             />
 
             <LineChart
@@ -430,7 +467,7 @@ export default function Home() {
               TV={tv4}
               RR={rr4}
               SPO2={spo24}
-              RVS={rvs}
+              RVS={rvs4}
             />
 
             <LineChart
@@ -439,7 +476,7 @@ export default function Home() {
               TV={tv5}
               RR={rr5}
               SPO2={spo25}
-              RVS={rvs}
+              RVS={rvs5}
             />
 
             <LineChart
@@ -448,7 +485,7 @@ export default function Home() {
               TV={tv6}
               RR={rr6}
               SPO2={spo26}
-              RVS={rvs}
+              RVS={rvs6}
             />
 
             <LineChart
@@ -457,7 +494,7 @@ export default function Home() {
               TV={tv7}
               RR={rr7}
               SPO2={spo27}
-              RVS={rvs}
+              RVS={rvs7}
             />
 
             <LineChart
@@ -466,7 +503,7 @@ export default function Home() {
               TV={tv8}
               RR={rr8}
               SPO2={spo28}
-              RVS={rvs}
+              RVS={rvs8}
             />
 
             <LineChart
@@ -475,7 +512,7 @@ export default function Home() {
               TV={tv9}
               RR={rr9}
               SPO2={spo29}
-              RVS={rvs}
+              RVS={rvs9}
             />
 
             <LineChart
@@ -484,7 +521,7 @@ export default function Home() {
               TV={tv10}
               RR={rr10}
               SPO2={spo210}
-              RVS={rvs}
+              RVS={rvs10}
             />
 
             <LineChart
@@ -493,7 +530,7 @@ export default function Home() {
               TV={tv11}
               RR={rr11}
               SPO2={spo211}
-              RVS={rvs}
+              RVS={rvs11}
             />
 
             <LineChart
@@ -502,7 +539,7 @@ export default function Home() {
               TV={tv12}
               RR={rr12}
               SPO2={spo212}
-              RVS={rvs}
+              RVS={rvs12}
             />
 
             <LineChart
@@ -511,7 +548,7 @@ export default function Home() {
               TV={tv13}
               RR={rr13}
               SPO2={spo213}
-              RVS={rvs}
+              RVS={rvs13}
             />
 
             <LineChart
@@ -520,7 +557,7 @@ export default function Home() {
               TV={tv14}
               RR={rr14}
               SPO2={spo214}
-              RVS={rvs}
+              RVS={rvs14}
             />
 
             <LineChart
@@ -529,7 +566,7 @@ export default function Home() {
               TV={tv15}
               RR={rr15}
               SPO2={spo215}
-              RVS={rvs}
+              RVS={rvs15}
             />
             <LineChart
               patientData={data16}
@@ -537,8 +574,8 @@ export default function Home() {
               TV={tv16}
               RR={rr16}
               SPO2={spo216}
-              RVS={rvs}
-            />
+              RVS={rvs16}
+            /> */}
 
             {/* <LineChart
               patientData={data}

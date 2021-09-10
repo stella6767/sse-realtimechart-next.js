@@ -10,7 +10,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 import RealTimeLineChart from "./RealTimeLineChart";
 const LineChart = props => {
   const { patientData, MV, TV, RR, SPO2, RVS } = props;
-  const data = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
   useUpdateEffect(() => {
     setMV(MV);
     setTV(TV);
@@ -28,41 +28,78 @@ const LineChart = props => {
   const [series, setseries] = useState(null);
 
   const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
-  const ADDING_DATA_INTERVAL_IN_MILLISECONDS = 1000;
-  const ADDING_DATA_RATIO = 0.8;
+  const ADDING_DATA_INTERVAL_IN_MILLISECONDS = 500;
 
-  const nameList = ["a"];
-  const defaultDataList = nameList.map(name => ({
-    name: name,
+  const [splitArr, setSplitArr] = useState(null);
+  //const splitArr = RVS?.value.split("^").map(Number);
+  // const splitArr = null;
+
+  useEffect(() => {
+    console.log("default", dataList);
+    console.log("RVS", rvs);
+  }, []);
+
+  var date = new Date();
+
+  const PatientList = [RVS?.patientUserId];
+  const defaultDataList = PatientList.map(PatientID => ({
+    PatientID: PatientID,
     data: [],
   }));
+
   const [dataList, setDataList] = useState(defaultDataList);
+
   React.useEffect(() => {
-    const addDataRandomly = data => {
-      if (Math.random() < 1 - ADDING_DATA_RATIO) {
-        return data;
-      }
+    // const interval = setInterval(() => {
+    //   setDataList(
+    //     dataList.map(val => {
+    //       return {
+    //         PatientID: val.PatientID,
+    //         data: PatientData(val.data),
+    //       };
+    //     })
+    //   );
+    // }, ADDING_DATA_INTERVAL_IN_MILLISECONDS);
+    // interval();
+    // return () => clearInterval(interval);
+  });
+
+  useUpdateEffect(() => {
+    //console.log("check1", RVS);
+
+    //5개씩 체인지가 되겠네, 덮어씌어지겠네...
+    setSplitArr(RVS?.value.split("^").map(Number));
+
+    console.log("default", dataList);
+    console.log("splitArray", splitArr);
+
+    interval();
+  }, [dataList, RVS]);
+
+  const interval = () => {
+    setDataList(
+      dataList.map(val => {
+        return {
+          PatientID: val.PatientID,
+          data: PatientData(val.data),
+        };
+      })
+    );
+  };
+
+  const PatientData = data => {
+    if (dataList[0]?.data.length === 50) {
+      return [...data.slice(1)];
+    } else {
       return [
         ...data,
         {
-          x: new Date(),
-          y: data.length * Math.random(),
+          x: date.getSeconds(),
+          y: splitArr?.[Math.floor(Math.random() * 3)],
         },
       ];
-    };
-    const interval = setInterval(() => {
-      setDataList(
-        dataList.map(val => {
-          return {
-            name: val.name,
-            data: addDataRandomly(val.data),
-          };
-        })
-      );
-    }, ADDING_DATA_INTERVAL_IN_MILLISECONDS);
-
-    return () => clearInterval(interval);
-  });
+    }
+  };
 
   return (
     <>
