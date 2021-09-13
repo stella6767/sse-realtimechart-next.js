@@ -8,10 +8,17 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 import RealTimeLineChart from './RealTimeLineChart';
-const LineChart = (props) => {
-  let date = new Date();
 
-  const { mv, tv, rr, spo2, rvsArr } = props;
+const LineChart = (props) => {
+  const now = new Date();
+
+  const [tv, setTv] = useState(null);
+  const [mv, setMv] = useState(null);
+  const [rr, setRr] = useState(null);
+  const [spo2, setSpo2] = useState(null);
+  const [rvsArr, setRvsArr] = useState(null);
+
+  const { d, eventSource } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
 
   const nameList = ['CPM0000'];
@@ -22,17 +29,48 @@ const LineChart = (props) => {
 
   const [dataList, setDataList] = React.useState(defaultDataList);
 
+  const clasfy = (measureData) => {
+    switch (measureData?.parame) {
+      case 'mv':
+        setMv(measureData?.value);
+        break;
+      case 'rr':
+        setRr(measureData?.value);
+        break;
+      case 'rvs':
+        setRvsArr(measureData?.value.split('^').map(Number));
+        break;
+      case 'spo2':
+        setSpo2(measureData?.value);
+        break;
+      case 'tv':
+        setTv(measureData?.value);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    console.log('d: ', d);
+
+    //Custom listener
+    eventSource?.addEventListener(d, (event) => {
+      const result = JSON.parse(event.data);
+
+      console.log('처음 오는 데이터', result);
+
+      clasfy(result);
+    });
+  }, []);
+
   useUpdateEffect(() => {
-    console.log('rvsArr', rvsArr, 'Date', date.getSeconds());
+    console.log('rvsArr', rvsArr);
 
     let copyArr = rvsArr.map((r) => {
-      return (r = { x: date, y: r });
+      return (r = { x: now, y: r });
     });
     console.log('copyArr', copyArr);
-    //dataList[0].data?.concat(copyArr);
 
     interval(copyArr);
-    //insertChartXY(rvsArr);
   }, [rvsArr]);
 
   const interval = (rvsArr) => {
@@ -48,62 +86,17 @@ const LineChart = (props) => {
     });
   };
 
-  // const interval = (rvsArr) => {
-  //   setDataList(
-  //     dataList.map((val) => {
-  //       return {
-  //         name: val.name,
-  //         data: insertChartXY(val.data, rvsArr),
-  //       };
-  //     })
-  //   );
-  // };
-
   const insertChartXY = (xyData, r) => {
     if (dataList[0]?.data?.length === 50) {
       console.log('꽉 참');
-      //return [...xyData.slice(1)];
       return (xyData = xyData.filter((n, index) => {
         return index > 10;
       }));
     } else {
       console.log('여기서 추가', r);
       return [...xyData, r];
-      //return (xyData = rvsAr.concat(xyData));
     }
   };
-
-  // const insertChartXY = (xyData, rvsAr) => {
-  //   if (dataList[0]?.data?.length === 15) {
-  //     console.log("꽉 참");
-  //     //return [...xyData.slice(0, 5)];
-  //     return (xyData = xyData.filter((n, index) => {
-  //       return index > 4;
-  //     }));
-  //   } else {
-  //     console.log("여기서 rvs 배열 인덱스만큼 추가");
-  //     return (xyData = xyData.concat(rvsAr));
-  //     //return (xyData = rvsAr.concat(xyData));
-  //   }
-  // };
-
-  // const insertChartXY = (xyData, rvsAr) => {
-  //   rvsAr.map((r) => {
-  //     if (dataList[0]?.data?.length === 50) {
-  //       console.log("꽉 참");
-  //       //return [...xyData.slice(1)];
-  //     } else {
-  //       console.log("여기서 추가");
-  //       return [
-  //         ...xyData,
-  //         {
-  //           x: date.getSeconds(),
-  //           y: r,
-  //         },
-  //       ];
-  //     }
-  //   });
-  // };
 
   const check = () => {
     console.log('체크', dataList);
