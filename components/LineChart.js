@@ -191,10 +191,12 @@ const LineChart = props => {
                 style={{
                   fontWeight: "bold",
                   color: "white",
+                  fontSize: "17px",
                 }}
               >
-                <p style={{ fontSize: "17px" }}>MV</p>
+                MV
               </p>
+
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
                   style={{
@@ -222,9 +224,10 @@ const LineChart = props => {
                 style={{
                   fontWeight: "bold",
                   color: "white",
+                  fontSize: "17px",
                 }}
               >
-                <p style={{ fontSize: "17px" }}>RR</p>
+                RR
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <p
