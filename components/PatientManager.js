@@ -13,7 +13,7 @@ const PatientManager = () => {
   const dispatch = useDispatch();
 
   //const patients = useSelector((state) => state.patient.patients?.data);
-  const patients = useSelector((state) => state.patient.patients);
+  const patients = useSelector(state => state.patient.patients);
 
   const [searchWord, setSearchWord] = useState(null);
   const [selected, setSelected] = useState("patientUserId");
@@ -27,7 +27,7 @@ const PatientManager = () => {
     console.log("patinets", patients);
   }, [patients]);
 
-  const handleInput = (e) => {
+  const handleInput = e => {
     //console.log(e.target.name);
     console.log(e.target.value);
     setSearchWord(e.target.value);
@@ -41,7 +41,7 @@ const PatientManager = () => {
     //searchWord에 아무것도 입력안하면 전체 출력
   };
 
-  const handleSelect = (e) => {
+  const handleSelect = e => {
     setSelected(e.target.value);
   };
 
@@ -112,35 +112,27 @@ const PatientManager = () => {
                     <thead>
                       <tr>
                         <th>
-                          <p style={{ marginLeft: "50px" }}>pid</p>
+                          <p>pid</p>
                         </th>
                         <th>
-                          <p style={{ marginLeft: "50px" }}>patientUserId</p>
+                          <p>patientUserId</p>
                         </th>
-                        <th>
-                          <p style={{ marginLeft: "50px" }}>firstName</p>
+                        <th style={{ paddingRight: "1%" }}>firstName</th>
+                        <th style={{ paddingRight: "1%" }}>lastName</th>
+                        <th style={{ paddingRight: "2%" }}>Gender</th>
+                        <th style={{ paddingRight: "2.5%" }}>Age</th>
+                        <th style={{ paddingRight: "3%" }}>Height(cm)</th>
+                        <th style={{ paddingRight: "5%" }}>Weight(kg)</th>
+                        <th style={{ paddingRight: "3%" }}>
+                          <p>Last Session</p>
                         </th>
-                        <th>
-                          <p style={{ marginLeft: "50px" }}>lastName</p>
-                        </th>
-
-                        <th>
-                          <p>Gender</p>
-                        </th>
-                        <th>Age</th>
-
-                        <th>Height(cm)</th>
-                        <th>Weight(kg)</th>
-                        <th>
-                          <p style={{ marginLeft: "30px" }}>Last Session</p>
-                        </th>
-                        <th>
-                          <p style={{ marginLeft: "30px" }}>Comment</p>
+                        <th style={{ paddingRight: "1%" }}>
+                          <p>Comment</p>
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {patients?.data.map((patient) => (
+                    <tbody style={{ width: "100%", marginLeft: "0px" }}>
+                      {patients?.data.map(patient => (
                         <tr>
                           <td>{patient?.pid}</td>
                           <td>{patient?.patientUserId}</td>

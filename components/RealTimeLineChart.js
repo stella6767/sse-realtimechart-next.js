@@ -39,7 +39,7 @@ export default props => {
     <ReactApexChart
       type="line"
       options={options}
-      series={props.dataList}
+      series={props.chartList}
       width={480}
       height={130}
     />
