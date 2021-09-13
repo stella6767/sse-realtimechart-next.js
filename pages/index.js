@@ -1,5 +1,6 @@
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
+import { backUrl } from "../config/config";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import FooterMenu from "./../components/Footer_Menu";
 import LineChart from "./../components/LineChart";
@@ -11,24 +12,24 @@ export default function Home() {
 
   useEffect(() => {
     if (!listening) {
-      eventSource = new EventSource("http://localhost:8088/sse"); //구독
+      eventSource = new EventSource(`${backUrl}/sse`); //구독
       console.log("생성 이후: ", eventSource);
       msetEventSource(eventSource);
 
-      eventSource.onopen = event => {
+      eventSource.onopen = (event) => {
         console.log("connection opened");
       };
 
-      eventSource.onmessage = event => {
+      eventSource.onmessage = (event) => {
         console.log("result", event.data);
-        setData(old => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
+        setData((old) => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         const sseData = JSON.parse(event.data);
         //handleSseData(sseData);
       };
 
-      eventSource.onerror = event => {
+      eventSource.onerror = (event) => {
         console.log(event.target.readyState);
         if (event.target.readyState === EventSource.CLOSED) {
           console.log("eventsource closed (" + event.target.readyState + ")");
