@@ -23,7 +23,7 @@ export const patientRequestAction = () => ({
 
 export const patientByNameOrIdRequestAction = (searchType, searchWord) => ({
   type: PATIENT_FINDBYNAMEORID_REQUEST,
-  payload: { searchType, searchWord },
+  payload: { searchType, searchWord }, //payload는 액션의 실행에 필요한 임의의 데이터
 });
 
 const reducer = (state = initialState, action) => {

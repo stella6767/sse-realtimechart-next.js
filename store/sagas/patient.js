@@ -35,6 +35,7 @@ function* loadPatientsByNameOrId(action) {
     console.log("result", result);
 
     yield put({
+      //put은 액션을 디스패치 하는것과 똑같음
       type: PATIENT_FINDBYNAMEORID_SUCCESS,
       data: result.data,
     });

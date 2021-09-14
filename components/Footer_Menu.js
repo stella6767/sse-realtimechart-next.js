@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // import folder from "./../imgs/folder.png";
 // import heartbeat from "./../imgs/heartbeat.png";
 // import setting from "./../imgs/settings.png";
@@ -14,15 +14,17 @@ import {
 //import Image from "next/image";
 
 const Footer_Menu = () => {
-  const [PopupState, setPopupState] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   return (
     <>
-      {PopupState ? (
-        <div className="Popup">
+      {isOpen && (
+        <>
+          <div
+            className="modal__background"
+            onClick={() => setOpen(false)}
+          ></div>
           <PatientManager></PatientManager>
-        </div>
-      ) : (
-        <div></div>
+        </>
       )}
       <div className="FooterMenuWrapper">
         <div className="FooterMenu">
@@ -30,7 +32,7 @@ const Footer_Menu = () => {
             <UserOutlined
               style={{ color: "white", fontSize: "50px" }}
               onClick={() => {
-                setPopupState(() => !PopupState);
+                setOpen(() => !isOpen);
               }}
             />
           </div>
