@@ -103,7 +103,7 @@ p {
 /*테이블*/
 /* JUST COMMON TABLE STYLES... */
 .tableWrapper {
-  width: 95%;
+  width: 90%;
   height: 500px;
   background-color: black;
   border-radius: 10px;
@@ -114,9 +114,9 @@ p {
 table,
 thead th,
 tr td {
-  width: 20rem;
+  width: 30rem;
   border-collapse: separate;
-  border-spacing: 0 8px;
+  border-spacing: 0 10px;
   text-align: center;
 }
 td {
@@ -138,7 +138,6 @@ td:last-child {
 
 tbody {
   display: block;
-
   height: 380px;
   margin-left: 30px;
   overflow: auto;
@@ -160,7 +159,13 @@ table {
   display: flex;
   justify-content: center;
 }
-
+.Active {
+  background-color: #0077ff;
+}
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: #0077ff;
+}
 @keyframes fadein {
   from {
     opacity: 0;

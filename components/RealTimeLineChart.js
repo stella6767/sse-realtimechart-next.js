@@ -19,14 +19,12 @@ export default props => {
         show: false,
       },
     },
-    tooltip: {
-      x: {
-        format: "yyyy/MM/dd HH:mm:ss.f",
-      },
-    },
     xaxis: {
       type: "datetime",
       range: props.range,
+      labels: {
+        show: false,
+      },
     },
     yaxis: {
       labels: {
@@ -34,14 +32,16 @@ export default props => {
       },
       title: { text: "Value" },
     },
+    colors: ["#32C5FF"],
   };
+
   return (
     <ReactApexChart
       type="line"
       options={options}
       series={props.chartList}
       width={480}
-      height={130}
+      height={118}
     />
   );
 };

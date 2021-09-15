@@ -32,7 +32,6 @@ const LineChart = props => {
   }));
 
   const [dataList, setDataList] = React.useState(defaultDataList);
-
   const clasfy = measureData => {
     switch (measureData?.parame) {
       case "mv":
@@ -78,8 +77,8 @@ const LineChart = props => {
     interval(copyArr);
   }, [rvsArr]);
 
-  const interval = rvsArr => {
-    rvsArr?.map(r => {
+  const interval = copyArr => {
+    copyArr?.map(r => {
       setDataList(
         dataList?.map(val => {
           return {
@@ -103,6 +102,79 @@ const LineChart = props => {
     }
   };
 
+  // const insertChartXY = (xyData, r) => {
+  //   if (dataList[0]?.data?.length === 500) {
+  //     console.log("꽉 참");
+  //     return (xyData = xyData.filter((n, index) => {
+  //       return index > 100;
+  //     }));
+  //   } else {
+  //     console.log("r: ", r);
+  //     console.log("xyDAta", xyData);
+  //     return dataList[0]?.data?.concat(r);
+  //   }
+  // };
+
+  // const insertChartXY = (xyData, r) => {
+  //   if (dataList[0]?.data?.length === 500) {
+  //     console.log("꽉 참");
+  //     console.log("xyData", xyData);
+  //     return (xyData = xyData.filter((n, index) => {
+  //       return index > 100;
+  //     }));
+  //   } else {
+  //     console.log("잘못된 부분", r);
+  //     return xyData.map(x => {
+  //       return (xyData = xyData.concat(r));
+  //     });
+  //   }
+  // };
+
+  // const insertChartXY = (xyData, r) => {
+  //   xyData.map(x => {
+  //     if (dataList[0]?.data?.length === 500) {
+  //       console.log("꽉 참");
+  //       console.log("xyData", xyData);
+  //       return (xyData = xyData.filter((n, index) => {
+  //         return index > 100;
+  //       }));
+  //     } else {
+  //       console.log("잘못된 부분", r);
+  //       return (x = x.concat(r));
+  //     }
+  //   });
+  // };
+
+  // const interval = copyArr => {
+  //   //이거는 concat으로 5개씩 추가
+  //   setDataList(
+  //     dataList?.map(val => {
+  //       return {
+  //         name: val.name,
+  //         data: insertChartXY(val.data, copyArr),
+  //       };
+  //     })
+  //   );
+  // };
+
+  // const insertChartXY = (xyData, copyArr) => {
+  //   if (dataList[0]?.data?.length === 500) {
+  //     console.log("꽉 참");
+  //     console.log("xyData", xyData);
+  //     return (xyData = xyData.filter((n, index) => {
+  //       return index > 100;
+  //     }));
+  //   } else {
+  //     //console.log("잘못된 부분", [...xyData, r]);
+  //     //return [...xyData, r];
+  //     return (xyData = xyData.concat(copyArr));
+  //   }
+  // };
+
+  const check = () => {
+    console.log("check", dataList);
+  };
+
   return (
     <>
       <div
@@ -122,7 +194,7 @@ const LineChart = props => {
             }}
           >
             <p style={{ fontWeight: "bold" }}>bed1</p>
-
+            <div onClick={check}>체크</div>
             <p>Age:{ResultData?.age}</p>
             <p>ID:{ResultData?.patientUserId}</p>
           </div>
@@ -173,7 +245,7 @@ const LineChart = props => {
                     marginBottom: "0px",
                   }}
                 >
-                  {tv <= 2000 ? Math.round(tv) : "-"}
+                  {0 <= tv && tv <= 2000 ? Math.round(tv) : "-"}
                 </p>
                 <p
                   style={{
@@ -206,7 +278,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {mv <= 100 ? Math.round(mv * 10) / 10 : "-"}
+                  {0 <= mv && mv <= 100 ? Math.round(mv * 10) / 10 : "-"}
                 </p>
 
                 <p
@@ -239,7 +311,7 @@ const LineChart = props => {
                     textAlign: "center",
                   }}
                 >
-                  {rr <= 100 ? Math.round(rr) : "-"}
+                  {0 <= rr && rr <= 100 ? Math.round(rr) : "-"}
                 </p>
                 <p
                   style={{
@@ -261,14 +333,31 @@ const LineChart = props => {
             }}
           >
             <div style={{ display: "flex" }}>
-              <p
+              <span
                 style={{
                   fontSize: "30px",
                   fontWeight: "bold",
                 }}
               >
-                SPO
-              </p>
+                S
+              </span>
+              <span
+                style={{
+                  marginTop: "1rem",
+                  fontWeight: "bold",
+                  fontSize: "17px",
+                }}
+              >
+                p
+              </span>
+              <span
+                style={{
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                O
+              </span>
               <span
                 style={{
                   marginTop: "1rem",
@@ -287,7 +376,7 @@ const LineChart = props => {
                   color: "rgb(102, 255, 255)",
                 }}
               >
-                {spo2 <= 100 ? Math.floor(spo2) : "-"}
+                {0 <= spo2 && spo2 <= 100 ? Math.floor(spo2) : "-"}
               </p>
               <p
                 style={{

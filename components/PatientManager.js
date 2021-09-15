@@ -17,6 +17,8 @@ const PatientManager = () => {
 
   const [searchWord, setSearchWord] = useState(null);
   const [selected, setSelected] = useState("patientUserId");
+  const [Active, setActive] = useState(false);
+  const [i, setIndex] = useState(null);
 
   useEffect(() => {
     console.log("환자리스트 출력");
@@ -43,6 +45,10 @@ const PatientManager = () => {
 
   const handleSelect = e => {
     setSelected(e.target.value);
+  };
+
+  const handleToggle = () => {
+    setActive(Active => !Active);
   };
 
   return (
@@ -75,7 +81,7 @@ const PatientManager = () => {
               defaultValue={selected}
             >
               <option style={{ color: "white" }} value="patientUserId">
-                PatientUserId
+                ID
               </option>
               <option style={{ color: "white" }} value="name">
                 Name
@@ -110,44 +116,88 @@ const PatientManager = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th>
-                        <p>pid</p>
-                      </th>
-                      <th>
-                        <p>patientUserId</p>
-                      </th>
-                      <th style={{ paddingRight: "1%" }}>firstName</th>
-                      <th style={{ paddingRight: "1%" }}>lastName</th>
-                      <th style={{ paddingRight: "2%" }}>Gender</th>
-                      <th style={{ paddingRight: "2.5%" }}>Age</th>
-                      <th style={{ paddingRight: "3%" }}>Height(cm)</th>
-                      <th style={{ paddingRight: "5%" }}>Weight(kg)</th>
-                      <th style={{ paddingRight: "3%" }}>
-                        <p>Last Session</p>
-                      </th>
-                      <th style={{ paddingRight: "1%" }}>
-                        <p>Comment</p>
-                      </th>
+                      <th>ID</th>
+                      <th style={{ paddingLeft: "2%" }}>Name</th>
+                      <th style={{ paddingLeft: "3%" }}>Last Session</th>
+                      <th style={{ paddingLeft: "3%" }}>Gender</th>
+                      <th style={{ paddingLeft: "2%" }}>Age</th>
+                      <th style={{ paddingLeft: "2%" }}>Height(cm)</th>
+                      <th>Weight(kg)</th>
                     </tr>
                   </thead>
                   <tbody style={{ width: "100%", marginLeft: "0px" }}>
-                    {patients?.data.map(patient => (
+                    {patients?.data.map((patient, index) => (
                       <tr>
-                        <td>{patient?.pid}</td>
-                        <td>{patient?.patientUserId}</td>
-                        <td>{patient?.firstname}</td>
-                        <td>{patient?.lastname}</td>
-
-                        <td>{patient?.gender}</td>
-                        <td>{patient?.age}</td>
-                        <td>{patient?.height}</td>
-                        <td>{patient?.weight}</td>
-                        <td>
-                          {patient?.lastSession == null
-                            ? "Null"
-                            : patient?.lastSession}
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.patientUserId}
                         </td>
-                        <td>{patient?.comment}</td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.firstname + patient?.lastname}
+                        </td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                            console.log(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.lastSession == null
+                            ? "2021.09.14"
+                            : patient?.lastSession.substring(11, 15) +
+                              "." +
+                              patient?.lastSession.substring(15, 17) +
+                              "." +
+                              patient?.lastSession.substring(17, 19)}
+                        </td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.gender}
+                        </td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.age}
+                        </td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.height}
+                        </td>
+                        <td
+                          onClick={() => {
+                            setActive(index === i ? true : false);
+                            setIndex(index);
+                          }}
+                          className={index === i ? "Active" : ""}
+                        >
+                          {patient?.weight}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
