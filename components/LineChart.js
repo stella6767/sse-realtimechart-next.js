@@ -18,7 +18,7 @@ const LineChart = props => {
   const [rvsArr, setRvsArr] = useState(null);
 
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 300;
+  const TIME_RANGE_IN_MILLISECONDS = 1300;
 
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
@@ -90,10 +90,10 @@ const LineChart = props => {
   };
 
   const insertChartXY = (xyData, r) => {
-    if (dataList[0]?.data?.length === 50) {
+    if (dataList[0]?.data?.length === 3000) {
       console.log("꽉 참");
       return (xyData = xyData.filter((n, index) => {
-        return index > 10;
+        return index > 500;
       }));
     } else {
       console.log("여기서 추가", r);
