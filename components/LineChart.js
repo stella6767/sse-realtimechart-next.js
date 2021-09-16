@@ -18,7 +18,7 @@ const LineChart = props => {
   const [rvsArr, setRvsArr] = useState(null);
 
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 1300;
+  const TIME_RANGE_IN_MILLISECONDS = 30000;
 
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
@@ -272,39 +272,24 @@ const LineChart = props => {
             <div style={{ display: "flex" }}>
               <span
                 style={{
-                  fontSize: "30px",
                   fontWeight: "bold",
+                  color: "white",
+                  fontSize: "25px",
                 }}
               >
-                S
+                SpO
               </span>
               <span
                 style={{
-                  marginTop: "1rem",
+                  marginTop: "10px",
                   fontWeight: "bold",
-                  fontSize: "17px",
-                }}
-              >
-                p
-              </span>
-              <span
-                style={{
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                }}
-              >
-                O
-              </span>
-              <span
-                style={{
-                  marginTop: "1rem",
-                  fontWeight: "bold",
-                  fontSize: "17px",
+                  fontSize: "15px",
                 }}
               >
                 2
               </span>
             </div>
+
             <div style={{ display: "flex", marginRight: "12%" }}>
               <p
                 style={{

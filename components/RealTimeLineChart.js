@@ -14,7 +14,7 @@ const RealTimeLineChart = props => {
       animations: {
         easing: "linear",
         dynamicAnimation: {
-          speed: 500,
+          speed: 200,
         },
       },
       toolbar: {
@@ -30,9 +30,17 @@ const RealTimeLineChart = props => {
     },
     yaxis: {
       labels: {
-        formatter: val => val.toFixed(0),
+        formatter: function (val) {
+          return val;
+        },
       },
       title: { text: "Value" },
+    },
+    tooltip: {
+      enabled: false,
+    },
+    stroke: {
+      width: 2,
     },
     colors: ["#32C5FF"],
   };
