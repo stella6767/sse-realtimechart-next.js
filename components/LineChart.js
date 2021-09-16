@@ -18,7 +18,7 @@ const LineChart = props => {
   const [rvsArr, setRvsArr] = useState(null);
 
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 400;
+  const TIME_RANGE_IN_MILLISECONDS = 300;
 
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
