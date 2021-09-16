@@ -3,7 +3,9 @@ import dynamic from "next/dynamic";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
-export default props => {
+
+const RealTimeLineChart = props => {
+  const { chartList, range } = props;
   const options = {
     chart: {
       zoom: {
@@ -21,7 +23,7 @@ export default props => {
     },
     xaxis: {
       type: "datetime",
-      range: props.range,
+      range: range,
       labels: {
         show: false,
       },
@@ -39,9 +41,11 @@ export default props => {
     <ReactApexChart
       type="line"
       options={options}
-      series={props.chartList}
+      series={chartList}
       width={480}
       height={110}
     />
   );
 };
+
+export default RealTimeLineChart;
