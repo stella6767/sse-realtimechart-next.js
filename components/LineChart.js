@@ -10,7 +10,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 import RealTimeLineChart from "./RealTimeLineChart";
 
 const LineChart = props => {
-  let date = new Date();
+  let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
   const [rr, setRr] = useState(null);
@@ -18,7 +18,7 @@ const LineChart = props => {
   const [rvsArr, setRvsArr] = useState(null);
 
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 30 * 1000;
+  const TIME_RANGE_IN_MILLISECONDS = 400;
 
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
@@ -101,7 +101,7 @@ const LineChart = props => {
       return [
         ...xyData,
         {
-          x: new Date(),
+          x: timestamp,
           y: r,
         },
       ];
