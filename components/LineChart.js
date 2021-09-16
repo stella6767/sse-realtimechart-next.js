@@ -131,7 +131,7 @@ const LineChart = props => {
             }}
           >
             <p style={{ fontWeight: "bold" }}>bed1</p>
-            <div onClick={check}>체크</div>
+
             <p>Age:{ResultData?.age}</p>
             <p>ID:{ResultData?.patientUserId}</p>
           </div>
