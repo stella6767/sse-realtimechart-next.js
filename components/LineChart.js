@@ -10,8 +10,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 import RealTimeLineChart from "./RealTimeLineChart";
 
 const LineChart = props => {
-  const now = new Date();
-
+  let date = new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
   const [rr, setRr] = useState(null);
@@ -41,7 +40,9 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        setRvsArr(measureData?.value.split("^").map(Number));
+        measureData?.value.split("^").map(r => {
+          setRvsArr(Number(r));
+        });
         break;
       case "spo2":
         setSpo2(measureData?.value);
@@ -67,27 +68,25 @@ const LineChart = props => {
   }, []);
 
   useUpdateEffect(() => {
-    console.log("rvsArr", rvsArr);
+    console.log("r", rvsArr);
 
-    let copyArr = rvsArr?.map(r => {
-      return (r = { x: now, y: r });
-    });
-    console.log("copyArr", copyArr);
+    // let copyArr = rvsArr?.map((r) => {
+    //   return (r = { x: now, y: r });
+    // });
+    // console.log("copyArr", copyArr);
 
-    interval(copyArr);
+    interval(rvsArr);
   }, [rvsArr]);
 
-  const interval = copyArr => {
-    copyArr?.map(r => {
-      setDataList(
-        dataList?.map(val => {
-          return {
-            name: val.name,
-            data: insertChartXY(val.data, r),
-          };
-        })
-      );
-    });
+  const interval = r => {
+    setDataList(
+      dataList?.map(val => {
+        return {
+          name: val.name,
+          data: insertChartXY(val.data, r),
+        };
+      })
+    );
   };
 
   const insertChartXY = (xyData, r) => {
@@ -98,78 +97,16 @@ const LineChart = props => {
       }));
     } else {
       console.log("여기서 추가", r);
-      return [...xyData, r];
+      console.log("xyData", xyData);
+      return [
+        ...xyData,
+        {
+          x: new Date(),
+          y: r,
+        },
+      ];
     }
   };
-
-  // const insertChartXY = (xyData, r) => {
-  //   if (dataList[0]?.data?.length === 500) {
-  //     console.log("꽉 참");
-  //     return (xyData = xyData.filter((n, index) => {
-  //       return index > 100;
-  //     }));
-  //   } else {
-  //     console.log("r: ", r);
-  //     console.log("xyDAta", xyData);
-  //     return dataList[0]?.data?.concat(r);
-  //   }
-  // };
-
-  // const insertChartXY = (xyData, r) => {
-  //   if (dataList[0]?.data?.length === 500) {
-  //     console.log("꽉 참");
-  //     console.log("xyData", xyData);
-  //     return (xyData = xyData.filter((n, index) => {
-  //       return index > 100;
-  //     }));
-  //   } else {
-  //     console.log("잘못된 부분", r);
-  //     return xyData.map(x => {
-  //       return (xyData = xyData.concat(r));
-  //     });
-  //   }
-  // };
-
-  // const insertChartXY = (xyData, r) => {
-  //   xyData.map(x => {
-  //     if (dataList[0]?.data?.length === 500) {
-  //       console.log("꽉 참");
-  //       console.log("xyData", xyData);
-  //       return (xyData = xyData.filter((n, index) => {
-  //         return index > 100;
-  //       }));
-  //     } else {
-  //       console.log("잘못된 부분", r);
-  //       return (x = x.concat(r));
-  //     }
-  //   });
-  // };
-
-  // const interval = copyArr => {
-  //   //이거는 concat으로 5개씩 추가
-  //   setDataList(
-  //     dataList?.map(val => {
-  //       return {
-  //         name: val.name,
-  //         data: insertChartXY(val.data, copyArr),
-  //       };
-  //     })
-  //   );
-  // };
-
-  // const insertChartXY = (xyData, copyArr) => {
-  //   if (dataList[0]?.data?.length === 500) {
-  //     console.log("꽉 참");
-  //     console.log("xyData", xyData);
-  //     return (xyData = xyData.filter((n, index) => {
-  //       return index > 100;
-  //     }));
-  //   } else {
-  //     //console.log("잘못된 부분", [...xyData, r]);
-  //     //return [...xyData, r];
-  //     return (xyData = xyData.concat(copyArr));
-  //   }
-  // };
 
   const check = () => {
     console.log("check", dataList);

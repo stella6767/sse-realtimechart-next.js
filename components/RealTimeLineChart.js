@@ -41,7 +41,7 @@ export default props => {
       options={options}
       series={props.chartList}
       width={480}
-      height={118}
+      height={110}
     />
   );
 };
