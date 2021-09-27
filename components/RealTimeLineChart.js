@@ -5,7 +5,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 const RealTimeLineChart = props => {
-  const { chartList, range } = props;
+  const { chartList, range, YData } = props;
   const options = {
     chart: {
       zoom: {
@@ -29,9 +29,11 @@ const RealTimeLineChart = props => {
       },
     },
     yaxis: {
+      tickAmount: 5,
+      max: YData,
       labels: {
         formatter: function (val) {
-          return val;
+          return val.toFixed(0);
         },
       },
       title: { text: "Value" },

@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
-import { useDispatch, useSelector } from "react-redux";
-import { PatientRequestAction } from "./../store/reducers/patient";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
-import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
 import RealTimeLineChart from "./RealTimeLineChart";
 
 const LineChart = props => {
@@ -16,6 +10,8 @@ const LineChart = props => {
   const [rr, setRr] = useState(null);
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
+  const [Ymap, setYmap] = useState([]);
+  const [YmapBig, setYmapBig] = useState(null);
 
   const { d, eventSource } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30000;
@@ -23,7 +19,6 @@ const LineChart = props => {
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
   const [ResultData, setResultData] = useState(null);
-
   const nameList = [d];
   const defaultDataList = nameList.map(name => ({
     name: name,
@@ -61,21 +56,15 @@ const LineChart = props => {
 
       console.log("처음 오는 데이터", result);
       clasfy(result);
-      // setID(result.patientUserId);
-      // setAge(result.age);
       setResultData(result);
     });
   }, []);
 
   useUpdateEffect(() => {
-    console.log("r", rvsArr);
-
-    // let copyArr = rvsArr?.map((r) => {
-    //   return (r = { x: now, y: r });
-    // });
-    // console.log("copyArr", copyArr);
-
     interval(rvsArr);
+    setYmapBig(Math.max.apply(null, Ymap));
+    console.log("Ymap", Ymap);
+    console.log("BigYData", YmapBig);
   }, [rvsArr]);
 
   const interval = r => {
@@ -90,10 +79,14 @@ const LineChart = props => {
   };
 
   const insertChartXY = (xyData, r) => {
-    if (dataList[0]?.data?.length === 3000) {
-      console.log("꽉 참");
+    const YData = xyData.map(data => {
+      return data.y;
+    });
+    setYmap(YData);
+
+    if (dataList[0]?.data?.length === 500) {
       return (xyData = xyData.filter((n, index) => {
-        return index > 500;
+        return index > 100;
       }));
     } else {
       console.log("여기서 추가", r);
@@ -142,6 +135,7 @@ const LineChart = props => {
               <RealTimeLineChart
                 chartList={dataList}
                 range={TIME_RANGE_IN_MILLISECONDS}
+                YData={YmapBig}
               />
             </StyledLineCss>
           </div>
