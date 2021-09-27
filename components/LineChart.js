@@ -84,9 +84,9 @@ const LineChart = props => {
     });
     setYmap(YData);
 
-    if (dataList[0]?.data?.length === 500) {
+    if (dataList[0]?.data?.length === 1000) {
       return (xyData = xyData.filter((n, index) => {
-        return index > 100;
+        return index > 10;
       }));
     } else {
       console.log("여기서 추가", r);
