@@ -15,6 +15,7 @@ const LineChart = props => {
 
   const { d, eventSource } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30000;
+  const now = new Date();
 
   // const [ID, setID] = useState(null);
   // const [Age, setAge] = useState(null);
@@ -54,17 +55,18 @@ const LineChart = props => {
     eventSource?.addEventListener(d, event => {
       const result = JSON.parse(event.data);
 
-      console.log("처음 오는 데이터", result);
+      // console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
   }, []);
 
   useUpdateEffect(() => {
+    console.log(timestamp);
     interval(rvsArr);
-    setYmapBig(Math.max.apply(null, Ymap));
-    console.log("Ymap", Ymap);
-    console.log("BigYData", YmapBig);
+    //setYmapBig(Math.max.apply(null, Ymap));
+    // console.log("Ymap", Ymap);
+    // console.log("BigYData", YmapBig);
   }, [rvsArr]);
 
   const interval = r => {
@@ -82,14 +84,14 @@ const LineChart = props => {
     const YData = xyData.map(data => {
       return data.y;
     });
-    setYmap(YData);
+    //setYmap(YData);
 
-    if (dataList[0]?.data?.length === 1000) {
+    if (dataList[0]?.data?.length === 3000) {
       return (xyData = xyData.filter((n, index) => {
-        return index > 10;
+        return index > 500;
       }));
     } else {
-      console.log("여기서 추가", r);
+      // console.log("여기서 추가", r);
       console.log("xyData", xyData);
       return [
         ...xyData,
@@ -102,7 +104,7 @@ const LineChart = props => {
   };
 
   const check = () => {
-    console.log("check", dataList);
+    console.log("dataList: ", dataList);
   };
 
   return (
@@ -127,6 +129,7 @@ const LineChart = props => {
 
             <p>Age:{ResultData?.age}</p>
             <p>ID:{ResultData?.patientUserId}</p>
+            <p onClick={check}>체크</p>
           </div>
           <div>
             <StyledLineCss>
@@ -135,7 +138,7 @@ const LineChart = props => {
               <RealTimeLineChart
                 chartList={dataList}
                 range={TIME_RANGE_IN_MILLISECONDS}
-                YData={YmapBig}
+                //YData={YmapBig}
               />
             </StyledLineCss>
           </div>
