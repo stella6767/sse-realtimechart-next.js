@@ -26,7 +26,7 @@ const PatientManager = () => {
   }, []);
 
   useUpdateEffect(() => {
-    console.log("patinets", patients);
+    console.log("patinets", patients.data.lastSession);
   }, [patients]);
 
   const handleInput = e => {
@@ -156,11 +156,17 @@ const PatientManager = () => {
                         >
                           {patient?.lastSession == null
                             ? "2021.09.14"
-                            : patient?.lastSession.substring(11, 15) +
+                            : patient?.lastSession
+                                .split("_")[1]
+                                .substring(0, 4) +
                               "." +
-                              patient?.lastSession.substring(15, 17) +
+                              patient?.lastSession
+                                .split("_")[1]
+                                .substring(4, 6) +
                               "." +
-                              patient?.lastSession.substring(17, 19)}
+                              patient?.lastSession
+                                .split("_")[1]
+                                .substring(6, 9)}
                         </td>
                         <td
                           onClick={() => {
