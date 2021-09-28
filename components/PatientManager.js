@@ -25,17 +25,14 @@ const PatientManager = () => {
     dispatch(patientRequestAction());
   }, []);
 
-  useUpdateEffect(() => {
-    console.log("patinets", patients.data.lastSession);
-  }, [patients]);
-
   const handleInput = e => {
     //console.log(e.target.name);
     console.log(e.target.value);
     setSearchWord(e.target.value);
+    //dispatch(patientByNameOrIdRequestAction(selected, searchWord));
   };
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     console.log("searchWord", searchWord);
     console.log("searchType", selected);
     dispatch(patientByNameOrIdRequestAction(selected, searchWord));
@@ -48,16 +45,11 @@ const PatientManager = () => {
 
   const handleSelect = e => {
     setSelected(e.target.value);
+    //dispatch(patientByNameOrIdRequestAction(selected, searchWord));
   };
   return (
     <>
-      <div
-        className="modal"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div className="modal">
         <div
           style={{
             width: "100%",

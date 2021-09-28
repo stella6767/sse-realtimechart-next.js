@@ -84,6 +84,8 @@ p {
   left: 0;
   position: fixed;
   bottom: 0;
+  display: flex;
+  justify-content: center;
   animation: fadein 0.5s ease-in-out;
 }
 .modal__background {
