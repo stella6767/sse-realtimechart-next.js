@@ -47,10 +47,6 @@ const PatientManager = () => {
     setSelected(e.target.value);
   };
 
-  const handleToggle = () => {
-    setActive(Active => !Active);
-  };
-
   return (
     <>
       <div
@@ -120,8 +116,8 @@ const PatientManager = () => {
                       <th style={{ paddingLeft: "2%" }}>Name</th>
                       <th style={{ paddingLeft: "3%" }}>Last Session</th>
                       <th style={{ paddingLeft: "3%" }}>Gender</th>
-                      <th style={{ paddingLeft: "2%" }}>Age</th>
-                      <th style={{ paddingLeft: "2%" }}>Height(cm)</th>
+                      <th style={{ paddingLeft: "2.1%" }}>Age</th>
+                      <th style={{ paddingLeft: "1.5%" }}>Height(cm)</th>
                       <th>Weight(kg)</th>
                     </tr>
                   </thead>
@@ -150,7 +146,6 @@ const PatientManager = () => {
                           onClick={() => {
                             setActive(index === i ? true : false);
                             setIndex(index);
-                            console.log(index);
                           }}
                           className={index === i ? "Active" : ""}
                         >
