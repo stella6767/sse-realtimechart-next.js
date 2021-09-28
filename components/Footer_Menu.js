@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 // import setting from "./../imgs/settings.png";
 // import user from "./../imgs/user.png";
 import PatientManager from "./PatientManager";
+import moment from "moment";
 import {
   FolderOutlined,
   UserOutlined,
@@ -15,6 +16,23 @@ import {
 
 const Footer_Menu = () => {
   const [isOpen, setOpen] = useState(false);
+  const [timer, setTimer] = useState(null);
+  useEffect(() => {
+    const myInterval = () => {
+      const now = String(new Date().getTime());
+
+      // now의 마지막 3자리는 1초 이하의 milliseconds를 나타낸다.
+      const nowMilliseconds = Number(now.substring(now.length - 3));
+      const nNextSleep = 1000 - nowMilliseconds;
+
+      setTimeout(() => {
+        setTimer(moment().format("YYYY-MM-DD hh:mm:ss"));
+        myInterval(); // 재귀호출
+      }, nNextSleep);
+    };
+
+    myInterval();
+  }, []);
   return (
     <>
       {isOpen && (
@@ -54,7 +72,7 @@ const Footer_Menu = () => {
               color: "white",
             }}
           >
-            2021.08.03 14:38:22
+            {timer}
           </p>
         </div>
       </div>
