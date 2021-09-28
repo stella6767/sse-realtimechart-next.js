@@ -17,7 +17,7 @@ const PatientManager = () => {
 
   const [searchWord, setSearchWord] = useState(null);
   const [selected, setSelected] = useState("patientUserId");
-
+  const [toggle, setToggle] = useState(false);
   const [i, setIndex] = useState(null);
 
   useEffect(() => {
@@ -35,13 +35,13 @@ const PatientManager = () => {
     setSearchWord(e.target.value);
   };
 
-  const clickAssign = () => {
+  useEffect(() => {
     console.log("searchWord", searchWord);
     console.log("searchType", selected);
 
     dispatch(patientByNameOrIdRequestAction(selected, searchWord));
     //searchWord에 아무것도 입력안하면 전체 출력
-  };
+  }, [searchWord, selected]);
 
   const handleSelect = e => {
     setSelected(e.target.value);
@@ -89,9 +89,7 @@ const PatientManager = () => {
               // value={null}
               onChange={handleInput}
             />
-            <Button className="btn" onClick={clickAssign}>
-              Assign
-            </Button>
+            <Button className="btn">Assign</Button>
           </div>
           <div
             style={{

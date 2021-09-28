@@ -49,12 +49,12 @@ const LineChart = props => {
   };
 
   useEffect(() => {
-    console.log("d: ", d);
+    //console.log("d: ", d);
     //Custom listener
     eventSource?.addEventListener(d, event => {
       const result = JSON.parse(event.data);
 
-      console.log("처음 오는 데이터", result);
+      // console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
@@ -89,8 +89,8 @@ const LineChart = props => {
         return index > 1500;
       }));
     } else {
-      console.log("여기서 추가", r);
-      console.log("xyData", xyData);
+      // console.log("여기서 추가", r);
+      //console.log("xyData", xyData);
       return [
         ...xyData,
         {
