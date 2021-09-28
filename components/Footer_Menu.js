@@ -26,7 +26,7 @@ const Footer_Menu = () => {
       const nNextSleep = 1000 - nowMilliseconds;
 
       setTimeout(() => {
-        setTimer(moment().format("YYYY-MM-DD hh:mm:ss"));
+        setTimer(moment().format("YYYY-MM-DD HH:mm:ss"));
         myInterval(); // 재귀호출
       }, nNextSleep);
     };
