@@ -38,15 +38,17 @@ const PatientManager = () => {
   useEffect(() => {
     console.log("searchWord", searchWord);
     console.log("searchType", selected);
-
     dispatch(patientByNameOrIdRequestAction(selected, searchWord));
     //searchWord에 아무것도 입력안하면 전체 출력
   }, [searchWord, selected]);
 
+  useEffect(() => {
+    setToggle(true);
+  }, [i]);
+
   const handleSelect = e => {
     setSelected(e.target.value);
   };
-
   return (
     <>
       <div
@@ -125,24 +127,27 @@ const PatientManager = () => {
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.patientUserId}
                         </td>
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.firstname + patient?.lastname}
                         </td>
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.lastSession == null
                             ? "2021.09.14"
@@ -161,32 +166,36 @@ const PatientManager = () => {
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.gender}
                         </td>
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.age}
                         </td>
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.height}
                         </td>
                         <td
                           onClick={() => {
                             setIndex(index);
+                            setToggle(!toggle);
                           }}
-                          className={index === i ? "Active" : ""}
+                          className={index === i && toggle ? "Active" : ""}
                         >
                           {patient?.weight}
                         </td>
