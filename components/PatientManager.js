@@ -17,7 +17,7 @@ const PatientManager = () => {
 
   const [searchWord, setSearchWord] = useState(null);
   const [selected, setSelected] = useState("patientUserId");
-  const [Active, setActive] = useState(false);
+
   const [i, setIndex] = useState(null);
 
   useEffect(() => {
@@ -126,7 +126,6 @@ const PatientManager = () => {
                       <tr>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -135,7 +134,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -144,7 +142,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -165,7 +162,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -174,7 +170,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -183,7 +178,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
@@ -192,7 +186,6 @@ const PatientManager = () => {
                         </td>
                         <td
                           onClick={() => {
-                            setActive(index === i ? true : false);
                             setIndex(index);
                           }}
                           className={index === i ? "Active" : ""}
