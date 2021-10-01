@@ -35,6 +35,7 @@ const LineChart = (props) => {
         setRr(measureData?.value);
         break;
       case "rvs":
+        console.log("처음 오는 rvs", measureData?.value);
         measureData?.value.split("^").map((r) => {
           setRvsArr(Number(r));
         });
@@ -53,8 +54,8 @@ const LineChart = (props) => {
     //Custom listener
     eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
+      //console.log("처음 오는 데이터", result);
 
-      // console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
