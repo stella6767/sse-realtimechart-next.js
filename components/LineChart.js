@@ -3,13 +3,14 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
 
-const LineChart = (props) => {
+const LineChart = props => {
   let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
   const [rr, setRr] = useState(null);
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
+  const [Random, setRandom] = useState(null);
   // const [Ymap, setYmap] = useState([]);
   // const [YmapBig, setYmapBig] = useState(null);
 
@@ -20,13 +21,13 @@ const LineChart = (props) => {
   // const [Age, setAge] = useState(null);
   const [ResultData, setResultData] = useState(null);
   const nameList = [d];
-  const defaultDataList = nameList.map((name) => ({
+  const defaultDataList = nameList.map(name => ({
     name: name,
     data: [],
   }));
 
   const [dataList, setDataList] = React.useState(defaultDataList);
-  const clasfy = (measureData) => {
+  const clasfy = measureData => {
     switch (measureData?.parame) {
       case "mv":
         setMv(measureData?.value);
@@ -35,8 +36,9 @@ const LineChart = (props) => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        console.log("처음 오는 rvs", measureData?.value);
-        measureData?.value.split("^").map((r) => {
+        console.log("rvs", measureData?.value);
+        setRandom(Math.random());
+        measureData?.value.split("^").map(r => {
           setRvsArr(Number(r));
         });
         break;
@@ -52,10 +54,9 @@ const LineChart = (props) => {
   useEffect(() => {
     //console.log("d: ", d);
     //Custom listener
-    eventSource?.addEventListener(d, (event) => {
+    eventSource?.addEventListener(d, event => {
       const result = JSON.parse(event.data);
-      //console.log("처음 오는 데이터", result);
-
+      // console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
@@ -63,14 +64,15 @@ const LineChart = (props) => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
+    console.log(rvsArr);
     //setYmapBig(Math.max.apply(null, Ymap));
     //console.log("Ymap", Ymap);
     //console.log("BigYData", YmapBig);
-  }, [rvsArr]);
+  }, [Random]);
 
-  const interval = (r) => {
+  const interval = r => {
     setDataList(
-      dataList?.map((val) => {
+      dataList?.map(val => {
         return {
           name: val.name,
           data: insertChartXY(val.data, r),
@@ -91,7 +93,7 @@ const LineChart = (props) => {
       }));
     } else {
       // console.log("여기서 추가", r);
-      console.log("xyData", xyData);
+      //console.log("xyData", xyData);
       return [
         ...xyData,
         {

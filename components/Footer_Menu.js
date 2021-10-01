@@ -30,7 +30,6 @@ const Footer_Menu = () => {
         myInterval(); // 재귀호출
       }, nNextSleep);
     };
-
     myInterval();
   }, []);
   return (
