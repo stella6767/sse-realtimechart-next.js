@@ -37,7 +37,6 @@ const LineChart = props => {
         break;
       case "rvs":
         setbool(bool => !bool);
-        console.log("bool", bool);
         measureData?.value.split("^").map(r => {
           setRvsArr(Number(r));
         });
