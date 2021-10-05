@@ -11,8 +11,8 @@ const LineChart = props => {
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
   const [bool, setbool] = useState(true);
-  const [starttime, setstarttime] = useState(null);
-  const [endtime, setendtime] = useState(null);
+  const [starttime, setstarttime] = useState("");
+  const [endtime, setendtime] = useState("");
 
   // const [Ymap, setYmap] = useState([]);
   // const [YmapBig, setYmapBig] = useState(null);
@@ -52,14 +52,12 @@ const LineChart = props => {
         break;
     }
   };
-  const setTimefunc = () => {};
-
   useEffect(() => {
     //console.log("d: ", d);
     //Custom listener
     eventSource?.addEventListener(d, event => {
       const result = JSON.parse(event.data);
-      //console.log("처음 오는 데이터", result);
+      console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
@@ -67,15 +65,31 @@ const LineChart = props => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    //setYmapBig(Math.max.apply(null, Ymap));
-    //console.log("Ymap", Ymap);
-    //console.log("BigYData", YmapBig);
-    setstarttime(ResultData?.startTime);
-    setendtime(ResultData?.endTime);
-    console.log("dataList", dataList);
+    // const StartTime = ResultData?.startTime.split("-");
+    // console.log(new Date(20 + StartTime?.[0] + " " + StartTime?.[1]));
+
+    // const EndTime = ResultData?.endTime.split("-");
+    // console.log(new Date(20 + EndTime?.[0] + " " + EndTime?.[1]));
+    let startTimeStamp = +new Date(
+      20 +
+        ResultData?.startTime.split("-")?.[0] +
+        " " +
+        ResultData?.startTime.split("-")?.[1]
+    );
+    let endTimeStamp = +new Date(
+      20 +
+        ResultData?.endTime.split("-")?.[0] +
+        " " +
+        ResultData?.endTime.split("-")?.[1]
+    );
+    console.log(startTimeStamp);
+    console.log(endTimeStamp);
+    setstarttime(startTimeStamp);
+    setendtime(endTimeStamp);
   }, [bool]);
 
   const interval = r => {
+    console.log(dataList);
     setDataList(
       dataList?.map(val => {
         return {
@@ -95,7 +109,7 @@ const LineChart = props => {
       return [
         ...xyData,
         {
-          x: ResultData?.startTime,
+          x: starttime,
           y: r,
         },
       ];
@@ -103,7 +117,7 @@ const LineChart = props => {
       return [
         ...xyData,
         {
-          x: ResultData?.endTime,
+          x: endtime,
           y: r,
         },
       ];
