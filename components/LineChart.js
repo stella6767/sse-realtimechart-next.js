@@ -10,7 +10,7 @@ const LineChart = props => {
   const [rr, setRr] = useState(null);
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
-  const [Random, setRandom] = useState(null);
+  const [bool, setbool] = useState(true);
   // const [Ymap, setYmap] = useState([]);
   // const [YmapBig, setYmapBig] = useState(null);
 
@@ -36,8 +36,8 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        console.log("rvs", measureData?.value);
-        setRandom(Math.random());
+        setbool(bool => !bool);
+        console.log("bool", bool);
         measureData?.value.split("^").map(r => {
           setRvsArr(Number(r));
         });
@@ -64,11 +64,10 @@ const LineChart = props => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    console.log(rvsArr);
     //setYmapBig(Math.max.apply(null, Ymap));
     //console.log("Ymap", Ymap);
     //console.log("BigYData", YmapBig);
-  }, [Random]);
+  }, [bool]);
 
   const interval = r => {
     setDataList(
