@@ -3,7 +3,7 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
 
-const LineChart = props => {
+const LineChart = (props) => {
   let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
@@ -21,13 +21,13 @@ const LineChart = props => {
   // const [Age, setAge] = useState(null);
   const [ResultData, setResultData] = useState(null);
   const nameList = [d];
-  const defaultDataList = nameList.map(name => ({
+  const defaultDataList = nameList.map((name) => ({
     name: name,
     data: [],
   }));
 
   const [dataList, setDataList] = React.useState(defaultDataList);
-  const clasfy = measureData => {
+  const clasfy = (measureData) => {
     switch (measureData?.parame) {
       case "mv":
         setMv(measureData?.value);
@@ -36,8 +36,8 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        setbool(bool => !bool);
-        measureData?.value.split("^").map(r => {
+        setbool((bool) => !bool);
+        measureData?.value.split("^").map((r) => {
           setRvsArr(Number(r));
         });
         break;
@@ -53,9 +53,9 @@ const LineChart = props => {
   useEffect(() => {
     //console.log("d: ", d);
     //Custom listener
-    eventSource?.addEventListener(d, event => {
+    eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
-      // console.log("처음 오는 데이터", result);
+      console.log("처음 오는 데이터", result);
       clasfy(result);
       setResultData(result);
     });
@@ -68,9 +68,9 @@ const LineChart = props => {
     //console.log("BigYData", YmapBig);
   }, [bool]);
 
-  const interval = r => {
+  const interval = (r) => {
     setDataList(
-      dataList?.map(val => {
+      dataList?.map((val) => {
         return {
           name: val.name,
           data: insertChartXY(val.data, r),
