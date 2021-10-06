@@ -3,7 +3,7 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
 
-const LineChart = props => {
+const LineChart = (props) => {
   let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
@@ -24,13 +24,13 @@ const LineChart = props => {
   // const [Age, setAge] = useState(null);
   const [ResultData, setResultData] = useState(null);
   const nameList = [d];
-  const defaultDataList = nameList.map(name => ({
+  const defaultDataList = nameList.map((name) => ({
     name: name,
     data: [],
   }));
 
   const [dataList, setDataList] = React.useState(defaultDataList);
-  const clasfy = measureData => {
+  const clasfy = (measureData) => {
     switch (measureData?.parame) {
       case "mv":
         setMv(measureData?.value);
@@ -39,8 +39,9 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        setbool(bool => !bool);
-        measureData?.value.split("^").map(r => {
+        measureData?.value.split("^").map((r) => {
+          setbool((bool) => !bool);
+
           setRvsArr(Number(r));
         });
         break;
@@ -55,7 +56,7 @@ const LineChart = props => {
   useEffect(() => {
     //console.log("d: ", d);
     //Custom listener
-    eventSource?.addEventListener(d, event => {
+    eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
       console.log("처음 오는 데이터", result);
       clasfy(result);
@@ -64,12 +65,12 @@ const LineChart = props => {
   }, []);
 
   useUpdateEffect(() => {
-    interval(rvsArr);
     // const StartTime = ResultData?.startTime.split("-");
     // console.log(new Date(20 + StartTime?.[0] + " " + StartTime?.[1]));
 
     // const EndTime = ResultData?.endTime.split("-");
     // console.log(new Date(20 + EndTime?.[0] + " " + EndTime?.[1]));
+
     let startTimeStamp = +new Date(
       20 +
         ResultData?.startTime.split("-")?.[0] +
@@ -82,16 +83,19 @@ const LineChart = props => {
         " " +
         ResultData?.endTime.split("-")?.[1]
     );
-    console.log(startTimeStamp);
-    console.log(endTimeStamp);
-    setstarttime(startTimeStamp);
-    setendtime(endTimeStamp);
+    console.log("startTime", startTimeStamp);
+    console.log("endTime", endTimeStamp);
+
+    isNanCheck(startTimeStamp);
+    isNanCheck(endTimeStamp);
+
+    interval(rvsArr);
   }, [bool]);
 
-  const interval = r => {
-    console.log(dataList);
+  const interval = (r) => {
+    //console.log(dataList);
     setDataList(
-      dataList?.map(val => {
+      dataList?.map((val) => {
         return {
           name: val.name,
           data: insertChartXY(val.data, r),
@@ -100,12 +104,25 @@ const LineChart = props => {
     );
   };
 
+  const isNanCheck = (time) => {
+    if (isNaN(time)) {
+      console.log("isNan일 떄", time);
+      //setstarttime(timestamp);
+      //setendtime(timestamp);
+    } else {
+      console.log("isNan이 아닐떄", time);
+      setstarttime(time);
+      setendtime(time);
+    }
+  };
+
   const insertChartXY = (xyData, r) => {
     if (dataList[0]?.data?.length === 2000) {
       return (xyData = xyData.filter((n, index) => {
         return index > 1500;
       }));
     } else if (dataList[0]?.data?.length % 2 === 0) {
+      console.log("xyData", xyData);
       return [
         ...xyData,
         {
@@ -114,6 +131,7 @@ const LineChart = props => {
         },
       ];
     } else if (dataList[0]?.data?.length % 2 === 1) {
+      console.log("xyData", xyData);
       return [
         ...xyData,
         {
