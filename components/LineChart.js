@@ -10,19 +10,20 @@ const LineChart = props => {
   const [rr, setRr] = useState(null);
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
-  const [bool, setbool] = useState(true);
-  const [starttime, setstarttime] = useState("");
-  const [endtime, setendtime] = useState("");
-
-  // const [Ymap, setYmap] = useState([]);
-  // const [YmapBig, setYmapBig] = useState(null);
-
+  const [bool, setbool] = useState(false);
+  const [dataX, setDataX] = useState();
   const { d, eventSource } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30000;
-
-  // const [ID, setID] = useState(null);
-  // const [Age, setAge] = useState(null);
   const [ResultData, setResultData] = useState(null);
+  useEffect(() => {
+    //Custom listener
+    eventSource?.addEventListener(d, event => {
+      const result = JSON.parse(event.data);
+      //console.log("처음 오는 데이터", result);
+      clasfy(result);
+      setResultData(result);
+    });
+  }, []);
   const nameList = [d];
   const defaultDataList = nameList.map(name => ({
     name: name,
@@ -39,9 +40,29 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        setbool(bool => !bool);
-        measureData?.value.split("^").map(r => {
+        measureData?.value.split("^").map((r, index) => {
           setRvsArr(Number(r));
+          if (index === 0) {
+            setDataX(
+              +new Date(
+                20 +
+                  measureData?.startTime.split("-")?.[0] +
+                  " " +
+                  measureData?.startTime.split("-")?.[1]
+              )
+            );
+            setbool(bool => !bool);
+          } else if (index === 1) {
+            setDataX(
+              +new Date(
+                20 +
+                  measureData?.endTime.split("-")?.[0] +
+                  " " +
+                  measureData?.endTime.split("-")?.[1]
+              )
+            );
+            setbool(bool => !bool);
+          }
         });
         break;
       case "spo2":
@@ -52,44 +73,32 @@ const LineChart = props => {
         break;
     }
   };
-  useEffect(() => {
-    //console.log("d: ", d);
-    //Custom listener
-    eventSource?.addEventListener(d, event => {
-      const result = JSON.parse(event.data);
-      console.log("처음 오는 데이터", result);
-      clasfy(result);
-      setResultData(result);
-    });
-  }, []);
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    // const StartTime = ResultData?.startTime.split("-");
-    // console.log(new Date(20 + StartTime?.[0] + " " + StartTime?.[1]));
-
-    // const EndTime = ResultData?.endTime.split("-");
-    // console.log(new Date(20 + EndTime?.[0] + " " + EndTime?.[1]));
-    let startTimeStamp = +new Date(
-      20 +
-        ResultData?.startTime.split("-")?.[0] +
-        " " +
-        ResultData?.startTime.split("-")?.[1]
-    );
-    let endTimeStamp = +new Date(
-      20 +
-        ResultData?.endTime.split("-")?.[0] +
-        " " +
-        ResultData?.endTime.split("-")?.[1]
-    );
-    console.log(startTimeStamp);
-    console.log(endTimeStamp);
-    setstarttime(startTimeStamp);
-    setendtime(endTimeStamp);
+    // console.log(dataList);
+    // console.log(bool);
+    // console.log(
+    //   "start",
+    //   +new Date(
+    //     20 +
+    //       ResultData?.startTime.split("-")?.[0] +
+    //       " " +
+    //       ResultData?.startTime.split("-")?.[1]
+    //   )
+    // );
+    // console.log(
+    //   "end",
+    //   +new Date(
+    //     20 +
+    //       ResultData?.endTime.split("-")?.[0] +
+    //       " " +
+    //       ResultData?.endTime.split("-")?.[1]
+    //   )
+    // );
   }, [bool]);
 
   const interval = r => {
-    console.log(dataList);
     setDataList(
       dataList?.map(val => {
         return {
@@ -105,19 +114,11 @@ const LineChart = props => {
       return (xyData = xyData.filter((n, index) => {
         return index > 1500;
       }));
-    } else if (dataList[0]?.data?.length % 2 === 0) {
+    } else {
       return [
         ...xyData,
         {
-          x: starttime,
-          y: r,
-        },
-      ];
-    } else if (dataList[0]?.data?.length % 2 === 1) {
-      return [
-        ...xyData,
-        {
-          x: endtime,
+          x: dataX,
           y: r,
         },
       ];
