@@ -39,10 +39,9 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        console.log("start", measureData?.startTime);
-        console.log("end", measureData?.endTime);
-        console.log("rvs", measureData?.value);
-
+        // console.log("start", measureData?.startTime);
+        // console.log("end", measureData?.endTime);
+        // console.log("rvs", measureData?.value);
         measureData?.value.split("^").map((r, index) => {
           setRvsArr(Number(r));
           if (index === 0) {
@@ -99,7 +98,7 @@ const LineChart = props => {
         return index > 1500;
       }));
     } else {
-      console.log("dataX", xyData);
+      //console.log("dataX", xyData);
       return [
         ...xyData,
         {
