@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
-
 const LineChart = props => {
-  let timestamp = +new Date();
+  //let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
   const [rr, setRr] = useState(null);
@@ -13,7 +12,7 @@ const LineChart = props => {
   const [bool, setbool] = useState(false);
   const [dataX, setDataX] = useState();
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 30000;
+  const TIME_RANGE_IN_MILLISECONDS = 3000;
   const [ResultData, setResultData] = useState(null);
   useEffect(() => {
     //Custom listener
@@ -40,6 +39,10 @@ const LineChart = props => {
         setRr(measureData?.value);
         break;
       case "rvs":
+        console.log("start", measureData?.startTime);
+        console.log("end", measureData?.endTime);
+        console.log("rvs", measureData?.value);
+
         measureData?.value.split("^").map((r, index) => {
           setRvsArr(Number(r));
           if (index === 0) {
@@ -59,7 +62,7 @@ const LineChart = props => {
                   measureData?.endTime.split("-")?.[0] +
                   " " +
                   measureData?.endTime.split("-")?.[1]
-              )
+              ) - 2
             );
             setbool(bool => !bool);
           }
@@ -76,26 +79,7 @@ const LineChart = props => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    // console.log(dataList);
-    // console.log(bool);
-    // console.log(
-    //   "start",
-    //   +new Date(
-    //     20 +
-    //       ResultData?.startTime.split("-")?.[0] +
-    //       " " +
-    //       ResultData?.startTime.split("-")?.[1]
-    //   )
-    // );
-    // console.log(
-    //   "end",
-    //   +new Date(
-    //     20 +
-    //       ResultData?.endTime.split("-")?.[0] +
-    //       " " +
-    //       ResultData?.endTime.split("-")?.[1]
-    //   )
-    // );
+    //console.log("dataX", dataX);
   }, [bool]);
 
   const interval = r => {
@@ -115,6 +99,7 @@ const LineChart = props => {
         return index > 1500;
       }));
     } else {
+      console.log("dataX", xyData);
       return [
         ...xyData,
         {
@@ -135,14 +120,7 @@ const LineChart = props => {
         }}
       >
         <div className="LineClass">
-          <div
-            style={{
-              color: "white",
-              display: "flex",
-              justifyContent: "space-between",
-              border: "solid rgb(16, 16, 20)",
-            }}
-          >
+          <div className="patientInfoDiv">
             <p style={{ fontWeight: "bold" }}>bed1</p>
 
             <p>Age:{ResultData?.age}</p>
@@ -161,17 +139,7 @@ const LineChart = props => {
           </div>
         </div>
         <div className="LineData" style={{ width: "100%" }}>
-          <div
-            style={{
-              backgroundColor: "red",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              marginBottom: "0px",
-              textAlign: "center",
-            }}
-          >
-            Alarm Comment
-          </div>
+          <div className="AlarmCommentDiv">Alarm Comment</div>
           <div
             style={{
               display: "flex",
@@ -179,120 +147,39 @@ const LineChart = props => {
             }}
           >
             <div className="LineDiv">
-              <div
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                <p style={{ fontSize: "17px" }}>TV</p>
+              <div className="tvText">
+                <p>TV</p>
               </div>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <p
-                  style={{
-                    color: "rgb(183, 183, 183)",
-                    fontSize: "40px",
-                    fontWeight: "bold",
-                    marginBottom: "0px",
-                  }}
-                >
+              <div className="tvFlexDiv">
+                <p className="tvValue">
                   {0 <= tv && tv <= 2000 ? Math.round(tv) : "-"}
                 </p>
-                <p
-                  style={{
-                    color: "rgb(183, 183, 183)",
-                    fontWeight: "bold",
-                    marginTop: "20%",
-                  }}
-                >
-                  mL
-                </p>
+                <p className="tvTextMl">mL</p>
               </div>
             </div>
             <div className="LineDiv">
-              <p
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "17px",
-                }}
-              >
-                MV
-              </p>
-
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <p
-                  style={{
-                    fontSize: "40px",
-                    fontWeight: "bold",
-                    marginBottom: "0px",
-                    textAlign: "center",
-                  }}
-                >
+              <p className="mvText">MV</p>
+              <div className="mvFlexDiv">
+                <p className="mvValue">
                   {0 <= mv && mv <= 100 ? Math.round(mv * 10) / 10 : "-"}
                 </p>
 
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    marginTop: "20%",
-                  }}
-                >
-                  L/min
-                </p>
+                <p className="mvTextLmin">L/min</p>
               </div>
             </div>
             <div className="LineDiv">
-              <p
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "17px",
-                }}
-              >
-                RR
-              </p>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <p
-                  style={{
-                    color: "rgb(50, 197, 255)",
-                    fontSize: "40px",
-                    fontWeight: "bold",
-                    marginBottom: "0px",
-                    textAlign: "center",
-                  }}
-                >
+              <p className="rrText">RR</p>
+              <div className="rrFlexDiv">
+                <p className="rrValue">
                   {0 <= rr && rr <= 100 ? Math.round(rr) : "-"}
                 </p>
-                <p
-                  style={{
-                    color: "rgb(50, 197, 255)",
-                    fontWeight: "bold",
-                    marginTop: "20%",
-                  }}
-                >
-                  bpm
-                </p>
+                <p className="rrBpm">bpm</p>
               </div>
             </div>
           </div>
-          <div
-            className="LineBottomDiv"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "25px",
-                }}
-              >
-                SpO
-              </span>
+          <div className="LineBottomDiv">
+            <div className="Spo2Text" style={{ display: "flex" }}>
+              <span>SpO</span>
               <span
                 style={{
                   marginTop: "10px",
@@ -304,25 +191,11 @@ const LineChart = props => {
               </span>
             </div>
 
-            <div style={{ display: "flex", marginRight: "12%" }}>
-              <p
-                style={{
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                  color: "rgb(102, 255, 255)",
-                }}
-              >
+            <div className="Spo2FlexDiv">
+              <p className="Spo2Value">
                 {0 <= spo2 && spo2 <= 100 ? Math.floor(spo2) : "-"}
               </p>
-              <p
-                style={{
-                  marginTop: "30%",
-                  marginLeft: "10%",
-                  fontWeight: "bold",
-                }}
-              >
-                %
-              </p>
+              <p className="Spo2Percent">%</p>
             </div>
           </div>
         </div>
@@ -331,4 +204,4 @@ const LineChart = props => {
   );
 };
 
-export default LineChart;
+export default React.memo(LineChart);

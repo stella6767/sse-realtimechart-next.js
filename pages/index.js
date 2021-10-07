@@ -16,20 +16,20 @@ export default function Home() {
       console.log("생성 이후: ", eventSource);
       msetEventSource(eventSource);
 
-      eventSource.onopen = (event) => {
+      eventSource.onopen = event => {
         console.log("connection opened");
       };
 
-      eventSource.onmessage = (event) => {
+      eventSource.onmessage = event => {
         console.log("result", event.data);
-        setData((old) => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
+        setData(old => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         const sseData = JSON.parse(event.data);
         //handleSseData(sseData);
       };
 
-      eventSource.onerror = (event) => {
+      eventSource.onerror = event => {
         console.log(event.target.readyState);
         if (event.target.readyState === EventSource.CLOSED) {
           console.log("eventsource closed (" + event.target.readyState + ")");

@@ -50,20 +50,8 @@ const PatientManager = () => {
   return (
     <>
       <div className="modal">
-        <div
-          style={{
-            width: "100%",
-            backgroundColor: "rgb(48, 48, 52)",
-          }}
-        >
-          <div
-            className="header"
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              marginTop: "5rem",
-            }}
-          >
+        <div className="modalBackground">
+          <div className="header">
             <h1 style={{ color: "white" }}>Patient Manager</h1>
             <SelectBox
               onChange={handleSelect}
@@ -77,28 +65,10 @@ const PatientManager = () => {
                 Name
               </option>
             </SelectBox>
-            <InputBox
-              //name="searchWord"
-              type="text"
-              // value={null}
-              onChange={handleInput}
-            />
+            <InputBox type="text" onChange={handleInput} />
             <Button className="btn">Assign</Button>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "6rem",
-              marginBottom: "7rem",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "rgb(48, 48, 52)",
-                borderRadius: "10%",
-              }}
-            ></div>
+          <div className="patientManagerBackground">
             <div className="tableWrapper">
               <div className="tableWrapper_inTable">
                 <table>
