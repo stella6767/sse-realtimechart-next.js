@@ -132,7 +132,7 @@ const PatientManager = () => {
                           }}
                           className={index === i && toggle ? "Active" : ""}
                         >
-                          {patient?.gender}
+                          {patient?.gender === 0 ? "Male" : "Female"}
                         </td>
                         <td
                           onClick={() => {
