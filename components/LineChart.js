@@ -12,7 +12,7 @@ const LineChart = props => {
   const [bool, setbool] = useState(false);
   const [dataX, setDataX] = useState();
   const { d, eventSource } = props;
-  const TIME_RANGE_IN_MILLISECONDS = 3000;
+  const TIME_RANGE_IN_MILLISECONDS = 30000;
   const [ResultData, setResultData] = useState(null);
   useEffect(() => {
     //Custom listener

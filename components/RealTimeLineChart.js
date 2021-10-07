@@ -14,7 +14,7 @@ const RealTimeLineChart = props => {
       animations: {
         easing: "linear",
         dynamicAnimation: {
-          speed: 100,
+          speed: 200,
         },
       },
       toolbar: {
