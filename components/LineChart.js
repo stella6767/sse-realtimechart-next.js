@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
@@ -78,8 +78,22 @@ const LineChart = props => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    //console.log("dataX", dataX);
+    console.log("X,Y:", dataList);
   }, [bool]);
+
+  // const interval = useCallback(
+  //   r => {
+  //     setDataList(
+  //       dataList?.map(val => {
+  //         return {
+  //           name: val.name,
+  //           data: insertChartXY(val.data, r),
+  //         };
+  //       })
+  //     );
+  //   },
+  //   [dataList]
+  // );
 
   const interval = r => {
     setDataList(
