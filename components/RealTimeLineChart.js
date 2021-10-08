@@ -30,7 +30,7 @@ const RealTimeLineChart = props => {
     },
     yaxis: {
       labels: {
-        show: true,
+        show: false,
         //max:YData,
         formatter: function (val) {
           return val;
