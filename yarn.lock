@@ -2232,7 +2232,7 @@
     "ansi-styles" "^4.1.0"
     "supports-color" "^7.1.0"
 
-"chart.js@^3.1.0", "chart.js@^3.5.0":
+"chart.js@^3.1.0":
   "integrity" "sha512-J1a4EAb1Gi/KbhwDRmoovHTRuqT8qdF0kZ4XgwxpGethJHUdDrkqyPYwke0a+BuvSeUxPf8Cos6AX2AB8H8GLA=="
   "resolved" "https://registry.npmjs.org/chart.js/-/chart.js-3.5.0.tgz"
   "version" "3.5.0"
