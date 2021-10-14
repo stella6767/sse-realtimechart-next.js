@@ -1,60 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+// const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+//   ssr: false,
+// });
 
 const RealTimeLineChart = props => {
   const { chartList, range } = props;
-  const options = {
-    chart: {
-      zoom: {
-        enabled: false,
-      },
-      animations: {
-        easing: "linear",
-        dynamicAnimation: {
-          speed: 200,
+
+  const [chartOptions, setChartOptions] = useState();
+
+  useEffect(() => {
+    chartList[0]?.data?.map((Data, index) => {
+      setChartOptions({
+        chart: {
+          type: "spline",
+          width: 480,
+          height: 110,
         },
-      },
-      toolbar: {
-        show: false,
-      },
-    },
-    xaxis: {
-      type: "datetime",
-      range: range,
-      labels: {
-        show: false,
-      },
-    },
-    yaxis: {
-      labels: {
-        show: false,
-        //max:YData,
-        formatter: function (val) {
-          return val;
+        title: {
+          text: undefined,
         },
-      },
-      //title: { text: "Value" },
-    },
-    tooltip: {
-      enabled: false,
-    },
-    stroke: {
-      width: 2,
-    },
-    colors: ["#32C5FF"],
-  };
+        xAxis: {
+          type: "datetime",
+          tickPixelInterval: 100,
+          maxZoom: range,
+        },
+        yAxis: {
+          title: {
+            text: undefined,
+          },
+          minPadding: 0.2,
+          maxPadding: 0.2,
+        },
+        legend: {
+          enabled: false,
+        },
+        series: {
+          data: chartList[0]?.data,
+        },
+      });
+    });
+    console.log("chart", chartOptions);
+  }, [chartList]);
 
   return (
-    <ReactApexChart
-      type="line"
-      options={options}
-      series={chartList}
-      width={480}
-      height={110}
-    />
+    <div className="App">
+      <div>
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      </div>
+    </div>
   );
 };
 

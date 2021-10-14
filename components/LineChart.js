@@ -84,22 +84,7 @@ const LineChart = props => {
 
   useUpdateEffect(() => {
     interval(rvsArr);
-    console.log("X,Y:", dataList);
   }, [bool]);
-
-  // const interval = useCallback(
-  //   r => {
-  //     setDataList(
-  //       dataList?.map(val => {
-  //         return {
-  //           name: val.name,
-  //           data: insertChartXY(val.data, r),
-  //         };
-  //       })
-  //     );
-  //   },
-  //   [dataList]
-  // );
 
   const interval = r => {
     setDataList(
@@ -113,11 +98,13 @@ const LineChart = props => {
   };
 
   const insertChartXY = (xyData, r) => {
-    if (dataList[0]?.data?.length === 2000) {
+    if (dataList[0]?.data?.length === 61) {
       return (xyData = xyData.filter((n, index) => {
-        return index > 1500;
+        return index > 2;
       }));
     } else {
+      console.log("X,Y:", dataList);
+
       return [
         ...xyData,
         {

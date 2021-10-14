@@ -3647,6 +3647,16 @@
   "resolved" "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
 
+"highcharts-react-official@^3.0.0":
+  "integrity" "sha512-VefJgDY2hkT9gfppsQGrRF2g5u8d9dtfHGcx2/xqiP+PkZXCqalw9xOeKVCRvJKTOh0coiDFwvVjOvB7KaGl4A=="
+  "resolved" "https://registry.npmjs.org/highcharts-react-official/-/highcharts-react-official-3.0.0.tgz"
+  "version" "3.0.0"
+
+"highcharts@^9.2.2", "highcharts@>=6.0.0":
+  "integrity" "sha512-OMEdFCaG626ES1JEcKAvJTpxAOMuchy0XuAplmnOs0Yu7NMd2RMfTLFQ2fCJOxo3ubSdm/RVQwKAWC+5HYThnw=="
+  "resolved" "https://registry.npmjs.org/highcharts/-/highcharts-9.2.2.tgz"
+  "version" "9.2.2"
+
 "hmac-drbg@^1.0.1":
   "integrity" "sha1-0nRXAQJabHdabFRXk+1QL8DGSaE="
   "resolved" "https://registry.npmjs.org/hmac-drbg/-/hmac-drbg-1.0.1.tgz"
@@ -5670,7 +5680,7 @@
   "resolved" "https://registry.npmjs.org/react-side-effect/-/react-side-effect-2.1.1.tgz"
   "version" "2.1.1"
 
-"react@*", "react@^16.3.0 || ^17.0.0", "react@^16.6.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^16.9.0", "react@>= 16.8.0", "react@>= 16.9.0", "react@>=0.13", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.9.0", "react@15.x.x || 16.x.x", "react@17.0.2":
+"react@*", "react@^16.3.0 || ^17.0.0", "react@^16.6.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^16.9.0", "react@>= 16.8.0", "react@>= 16.9.0", "react@>=0.13", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.8.0", "react@>=16.9.0", "react@15.x.x || 16.x.x", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
