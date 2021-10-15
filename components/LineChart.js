@@ -98,9 +98,9 @@ const LineChart = props => {
   };
 
   const insertChartXY = (xyData, r) => {
-    if (dataList[0]?.data?.length === 61) {
+    if (dataList[0]?.data?.length === 3000) {
       return (xyData = xyData.filter((n, index) => {
-        return index > 2;
+        return index > 1500;
       }));
     } else {
       console.log("X,Y:", dataList);

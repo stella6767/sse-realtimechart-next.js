@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+
 import styled, { createGlobalStyle } from "styled-components";
 
 export const Global = createGlobalStyle`
@@ -16,10 +16,10 @@ export const Global = createGlobalStyle`
 //   display: flex;
 // `;
 
-export const StyledCharjsLine = styled(Line)`
-  display: block;
-  box-sizing: border-box;
-`;
+// export const StyledCharjsLine = styled()`
+//   display: block;
+//   box-sizing: border-box;
+// `;
 
 export const Styledflex = styled.div`
   display: flex;
