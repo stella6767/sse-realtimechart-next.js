@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=production next build",
     "start": "cross-env NODE_ENV=production next start -p 3300",
     "start2": "pm2 start ecosystem.config.js --only bilab --env production cross-env NODE_ENV=production next start -p 3300",
-    "start3": "pm2 start ecosystem.config.js --env production",
+    "start3": "cross-env NODE_ENV=production pm2 start ecosystem.config.js --env production",
+    "start4": "node ./node_modules/.bin/pm2 start app.js -i max --attach",
     "pm2-next-cluster": "next build && pm2 start ./node_modules/next/dist/bin/next-start -i max -p 3300",
     "lint": "next lint"
   },
