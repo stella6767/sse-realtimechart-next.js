@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "bilab",
       script: "node_modules/next/dist/bin/next",
-      args: "start -p 3300",
+      args: "cross-env NODE_ENV=production start -p 3300",
       exec_mode: "cluster",
       instances: 0,
       watch: true,
