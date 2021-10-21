@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
-const LineChart = props => {
+const LineChart = (props) => {
   //let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
@@ -16,7 +16,7 @@ const LineChart = props => {
   const [ResultData, setResultData] = useState(null);
   useEffect(() => {
     //Custom listener
-    eventSource?.addEventListener(d, event => {
+    eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
       //console.log("처음 오는 데이터", result);
       clasfy(result);
@@ -24,13 +24,13 @@ const LineChart = props => {
     });
   }, []);
   const nameList = [d];
-  const defaultDataList = nameList.map(name => ({
+  const defaultDataList = nameList.map((name) => ({
     name: name,
     data: [],
   }));
 
   const [dataList, setDataList] = React.useState(defaultDataList);
-  const clasfy = measureData => {
+  const clasfy = (measureData) => {
     switch (measureData?.parame) {
       case "mv":
         setMv(measureData?.value);
@@ -59,7 +59,7 @@ const LineChart = props => {
                   measureData?.startTime.split("-")?.[1]
               )
             );
-            setbool(bool => !bool);
+            setbool((bool) => !bool);
           } else if (index === 1) {
             setDataX(
               +new Date(
@@ -67,9 +67,9 @@ const LineChart = props => {
                   measureData?.endTime.split("-")?.[0] +
                   " " +
                   measureData?.endTime.split("-")?.[1]
-              ) - 2
+              )
             );
-            setbool(bool => !bool);
+            setbool((bool) => !bool);
           }
         });
         break;
@@ -86,9 +86,9 @@ const LineChart = props => {
     interval(rvsArr);
   }, [bool]);
 
-  const interval = r => {
+  const interval = (r) => {
     setDataList(
-      dataList?.map(val => {
+      dataList?.map((val) => {
         return {
           name: val.name,
           data: insertChartXY(val.data, r),
