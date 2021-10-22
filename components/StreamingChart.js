@@ -57,24 +57,28 @@ const StreamingChart = memo((props) => {
   const [chartInstance, setChartInstance] = useState(null);
 
   useEffect(() => {
-    if (chartContainer && chartContainer.current) {
-      const newChartInstance = new Chart(chartContainer.current, chartConfig);
-      setChartInstance(newChartInstance);
-    }
+    if (!chartContainer) return;
 
-    return () => {
-      newChartInstance.destroy();
-    };
+    const ctx = chartContainer.current.getContext("2d");
+
+    const newChartInstance = new Chart(ctx, chartConfig);
+    setChartInstance(newChartInstance);
+
+    // if (chartContainer && chartContainer.current) {
+    //   const newChartInstance = new Chart(chartContainer.current, chartConfig);
+    //   setChartInstance(newChartInstance);
+    // }
   }, [chartContainer]);
 
   useUpdateEffect(() => {
     //interval(rvsArr);
     onReceive(rvsArr);
-    console.log("bool", bool);
+    //console.log("bool", bool);
   }, [bool]);
 
   const onReceive = (r) => {
-    //4번    //2번
+    if (!chartInstance) return;
+
     console.log("r", r, "datax", dataX, "d", d);
 
     let index = d.substr(6, 1);
@@ -88,7 +92,7 @@ const StreamingChart = memo((props) => {
       y: r,
     });
 
-    //chartInstance.update("quiet");
+    chartInstance.update("quiet");
   };
 
   const check = () => {
