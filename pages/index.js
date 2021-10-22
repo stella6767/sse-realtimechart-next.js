@@ -46,26 +46,24 @@ export default function Home() {
     };
   }, []);
 
-  // const [deviceArr, setDeviceArr] = useState([
-  //   "CPM0000",
-  //   "CPM0001",
-  //   "CPM0002",
-  //   "CPM0003",
-  //   "CPM0004",
-  //   "CPM0005",
-  //   "CPM0006",
-  //   "CPM0007",
-  //   "CPM0008",
-  //   "CPM0009",
-  //   "CPM0010",
-  //   "CPM0011",
-  //   "CPM0012",
-  //   "CPM0013",
-  //   "CPM0014",
-  //   "CPM0015",
-  // ]);
-
-  const [deviceArr, setDeviceArr] = useState(["CPM0000"]);
+  const [deviceArr, setDeviceArr] = useState([
+    "CPM0000",
+    "CPM0001",
+    "CPM0002",
+    "CPM0003",
+    "CPM0004",
+    "CPM0005",
+    "CPM0006",
+    "CPM0007",
+    "CPM0008",
+    "CPM0009",
+    "CPM0010",
+    "CPM0011",
+    "CPM0012",
+    "CPM0013",
+    "CPM0014",
+    "CPM0015",
+  ]);
 
   return (
     <>
