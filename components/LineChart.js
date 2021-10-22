@@ -4,7 +4,7 @@ import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
 import StreamingChart from "./StreamingChart";
 import { Chart } from "chart.js";
-import "chartjs-adapter-luxon";
+//import "chartjs-adapter-luxon";
 import StreamingPlugin from "chartjs-plugin-streaming";
 import { useRef } from "react";
 Chart.register(StreamingPlugin);
@@ -114,18 +114,28 @@ const LineChart = (props) => {
         setRr(measureData?.value);
         break;
       case "rvs":
-        console.log(
-          "start:",
-          measureData?.startTime,
-          "end:",
-          measureData?.endTime,
-          "rvs:",
-          measureData?.value
-        );
+        // console.log(
+        //   "start:",
+        //   measureData?.startTime,
+        //   "end:",
+        //   measureData?.endTime,
+        //   "rvs:",
+        //   measureData?.value
+        // );
         measureData?.value.split("^").map((r, index) => {
-          setRvsArr(Number(r));
+          // setRvsArr(Number(r));
           if (index === 0) {
-            setDataX(
+            // setDataX(
+            //   +new Date(
+            //     20 +
+            //       measureData?.startTime.split("-")?.[0] +
+            //       " " +
+            //       measureData?.startTime.split("-")?.[1]
+            //   )
+            // );
+            // setbool((bool) => !bool);
+            onReceive(
+              Number(r),
               +new Date(
                 20 +
                   measureData?.startTime.split("-")?.[0] +
@@ -133,17 +143,27 @@ const LineChart = (props) => {
                   measureData?.startTime.split("-")?.[1]
               )
             );
-            setbool((bool) => !bool);
           } else if (index === 1) {
-            setDataX(
+            // setDataX(
+            //   +new Date(
+            //     20 +
+            //       measureData?.endTime.split("-")?.[0] +
+            //       " " +
+            //       measureData?.endTime.split("-")?.[1]
+            //   )
+            // );
+            // setbool((bool) => !bool);
+
+            console.log("??");
+            onReceive(
+              Number(r),
               +new Date(
                 20 +
-                  measureData?.endTime.split("-")?.[0] +
+                  measureData?.startTime.split("-")?.[0] +
                   " " +
-                  measureData?.endTime.split("-")?.[1]
+                  measureData?.startTime.split("-")?.[1]
               )
             );
-            setbool((bool) => !bool);
           }
         });
         break;
@@ -170,16 +190,16 @@ const LineChart = (props) => {
     // }
   }, [chartContainer]);
 
-  useUpdateEffect(() => {
-    //interval(rvsArr);
-    onReceive(rvsArr);
-    //console.log("bool", bool);
-  }, [bool]);
+  // useUpdateEffect(() => {
+  //   //interval(rvsArr);
+  //   onReceive(rvsArr);
+  //   //console.log("bool", bool);
+  // }, [bool]);
 
-  const onReceive = (r) => {
+  const onReceive = (r, x) => {
     if (!chartInstance) return;
 
-    console.log("r", r, "datax", dataX, "d", d);
+    console.log("r", r, "datax", x, "d", d);
 
     let index = d.substr(6, 1);
 
@@ -188,7 +208,7 @@ const LineChart = (props) => {
 
     // append the new data to the existing chart data
     chartInstance.data.datasets[0].data.push({
-      x: dataX,
+      x: x,
       y: r,
     });
 
