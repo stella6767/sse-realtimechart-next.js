@@ -3,8 +3,62 @@ import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
 import StreamingChart from "./StreamingChart";
+import { Chart } from "chart.js";
+import "chartjs-adapter-luxon";
+import StreamingPlugin from "chartjs-plugin-streaming";
+import { useRef } from "react";
+Chart.register(StreamingPlugin);
 
 const LineChart = (props) => {
+  const chartConfig = {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          //label: "Dataset 1",
+          //backgroundColor: "rgba(54, 162, 235, 0.5)",
+          borderColor: "rgb(11, 333, 235)",
+          cubicInterpolationMode: "monotone",
+          //fill: true,
+          data: [],
+        },
+        // {
+        //   //label: 'Dataset 2',
+        //   //backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        //   borderColor: "rgb(54, 162, 235)",
+        //   cubicInterpolationMode: "monotone",
+        //   //fill: true,
+        //   data: [],
+        // },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          type: "realtime",
+          realtime: {
+            duration: 2000, //작을 수록 밀리세컨드 반영
+            delay: 1000, // delay of 1000 ms, so upcoming values are known before plotting a line
+            pause: false, // chart is not paused
+            ttl: undefined, // data will be automatically deleted as it disappears off the chart
+            //frameRate: 30, // data points are drawn 30 times every second
+          },
+        },
+      },
+
+      plugins: {
+        legend: {
+          display: false,
+        },
+        streaming: {
+          frameRate: 5, // chart is drawn 5 times every second
+        },
+      },
+
+      animation: false, // disable animations
+    },
+  };
+
   //let timestamp = +new Date();
   const [tv, setTv] = useState(null);
   const [mv, setMv] = useState(null);
@@ -16,10 +70,13 @@ const LineChart = (props) => {
 
   const { d, eventSource } = props;
 
-  const [ResultData, setResultData] = useState(null);
-  useEffect(() => {
-    console.log("d", d);
+  const chartContainer = useRef(null);
+  const [chartInstance, setChartInstance] = useState(null);
 
+  const [ResultData, setResultData] = useState(null);
+
+  useEffect(() => {
+    //console.log("d", d);
     //Custom listener
     eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
@@ -80,6 +137,50 @@ const LineChart = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (!chartContainer) return;
+
+    const ctx = chartContainer.current.getContext("2d");
+
+    const newChartInstance = new Chart(ctx, chartConfig);
+    setChartInstance(newChartInstance);
+
+    // if (chartContainer && chartContainer.current) {
+    //   const newChartInstance = new Chart(chartContainer.current, chartConfig);
+    //   setChartInstance(newChartInstance);
+    // }
+  }, [chartContainer]);
+
+  useUpdateEffect(() => {
+    //interval(rvsArr);
+    onReceive(rvsArr);
+    //console.log("bool", bool);
+  }, [bool]);
+
+  const onReceive = (r) => {
+    if (!chartInstance) return;
+
+    console.log("r", r, "datax", dataX, "d", d);
+
+    let index = d.substr(6, 1);
+
+    console.log("index", index);
+    console.log("chartInstance", chartInstance);
+
+    // append the new data to the existing chart data
+    chartInstance.data.datasets[0].data.push({
+      x: dataX,
+      y: r,
+    });
+
+    // chartInstance.data.datasets[1].data.push({
+    //   x: dataX,
+    //   y: r,
+    // });
+
+    chartInstance.update("quiet");
+  };
+
   return (
     <>
       <div
@@ -99,7 +200,14 @@ const LineChart = (props) => {
           <div>
             <StyledLineCss>
               <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
-              <StreamingChart bool={bool} dataX={dataX} rvsArr={rvsArr} d={d} />
+              {/* <StreamingChart bool={bool} dataX={dataX} rvsArr={rvsArr} d={d} /> */}
+
+              <canvas
+                className={"stream" + d}
+                ref={chartContainer}
+                width={480}
+                height={100}
+              />
             </StyledLineCss>
           </div>
         </div>

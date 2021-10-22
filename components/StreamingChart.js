@@ -4,50 +4,6 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { Chart } from "react-chartjs-2";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 
-const chartConfig = {
-  type: "line",
-  data: {
-    datasets: [
-      {
-        //label: "Dataset 1",
-        //backgroundColor: "rgba(54, 162, 235, 0.5)",
-        borderColor: "rgb(11, 333, 235)",
-        cubicInterpolationMode: "monotone",
-        //fill: true,
-        data: [],
-      },
-      {
-        //label: 'Dataset 2',
-        //backgroundColor: 'rgba(54, 162, 235, 0.5)',
-        borderColor: "rgb(54, 162, 235)",
-        cubicInterpolationMode: "monotone",
-        //fill: true,
-        data: [],
-      },
-    ],
-  },
-  options: {
-    scales: {
-      x: {
-        type: "realtime",
-        realtime: {
-          duration: 6000, //작을 수록 밀리세컨드 반영
-          delay: 3000, // delay of 1000 ms, so upcoming values are known before plotting a line
-          pause: false, // chart is not paused
-          ttl: undefined, // data will be automatically deleted as it disappears off the chart
-          frameRate: 30, // data points are drawn 30 times every second
-        },
-      },
-    },
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  },
-};
-
 Chart.register(StreamingPlugin);
 
 const StreamingChart = memo((props) => {
