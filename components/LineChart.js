@@ -123,9 +123,19 @@ const LineChart = (props) => {
         //   measureData?.value
         // );
         measureData?.value.split("^").map((r, index) => {
-          // setRvsArr(Number(r));
+          setRvsArr(Number(r));
           if (index === 0) {
-            // setDataX(
+            setDataX(
+              +new Date(
+                20 +
+                  measureData?.startTime.split("-")?.[0] +
+                  " " +
+                  measureData?.startTime.split("-")?.[1]
+              )
+            );
+            setbool((bool) => !bool);
+            // onReceive(
+            //   Number(r),
             //   +new Date(
             //     20 +
             //       measureData?.startTime.split("-")?.[0] +
@@ -133,37 +143,27 @@ const LineChart = (props) => {
             //       measureData?.startTime.split("-")?.[1]
             //   )
             // );
-            // setbool((bool) => !bool);
-            onReceive(
-              Number(r),
+          } else if (index === 1) {
+            setDataX(
               +new Date(
                 20 +
-                  measureData?.startTime.split("-")?.[0] +
+                  measureData?.endTime.split("-")?.[0] +
                   " " +
-                  measureData?.startTime.split("-")?.[1]
+                  measureData?.endTime.split("-")?.[1]
               )
             );
-          } else if (index === 1) {
-            // setDataX(
+            setbool((bool) => !bool);
+
+            // console.log("??");
+            // onReceive(
+            //   Number(r),
             //   +new Date(
             //     20 +
-            //       measureData?.endTime.split("-")?.[0] +
+            //       measureData?.startTime.split("-")?.[0] +
             //       " " +
-            //       measureData?.endTime.split("-")?.[1]
+            //       measureData?.startTime.split("-")?.[1]
             //   )
             // );
-            // setbool((bool) => !bool);
-
-            console.log("??");
-            onReceive(
-              Number(r),
-              +new Date(
-                20 +
-                  measureData?.startTime.split("-")?.[0] +
-                  " " +
-                  measureData?.startTime.split("-")?.[1]
-              )
-            );
           }
         });
         break;
@@ -190,16 +190,16 @@ const LineChart = (props) => {
     // }
   }, [chartContainer]);
 
-  // useUpdateEffect(() => {
-  //   //interval(rvsArr);
-  //   onReceive(rvsArr);
-  //   //console.log("bool", bool);
-  // }, [bool]);
+  useUpdateEffect(() => {
+    //interval(rvsArr);
+    onReceive(rvsArr);
+    //console.log("bool", bool);
+  }, [bool]);
 
-  const onReceive = (r, x) => {
+  const onReceive = (r) => {
     if (!chartInstance) return;
 
-    console.log("r", r, "datax", x, "d", d);
+    //console.log("r", r, "datax", x, "d", d);
 
     let index = d.substr(6, 1);
 
@@ -208,7 +208,7 @@ const LineChart = (props) => {
 
     // append the new data to the existing chart data
     chartInstance.data.datasets[0].data.push({
-      x: x,
+      x: dataX,
       y: r,
     });
 
