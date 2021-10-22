@@ -18,6 +18,11 @@ a {
   height: 100%;
 }
 
+.streamCanvas {
+  width: 480;
+  height: 100;
+}
+
 .ant-layout-footer {
   background-color: rgb(64, 64, 64);
   padding: 0px;

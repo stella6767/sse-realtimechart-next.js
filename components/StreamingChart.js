@@ -1,28 +1,12 @@
-import React, { memo } from "react";
-import { Line, Chart } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
-import dynamic from "next/dynamic";
-import { useRef } from "react";
 import StreamingPlugin from "chartjs-plugin-streaming";
-import { useEffect } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { Chart } from "react-chartjs-2";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
-import { useState } from "react";
 
-// const StreamingPlugin = dynamic(() => import("chartjs-plugin-streaming"), {
-//   ssr: false,
-// });
-
-Chart.register(StreamingPlugin);
-
-const StreamingChart = memo((props) => {
-  const { eventSource, d } = props; //data
-
-  const chart = useRef(null);
-  const [bool, setbool] = useState(false);
-  const [rvsArr, setRvsArr] = useState(null);
-  const [dataX, setDataX] = useState();
-
-  const data = {
+const chartConfig = {
+  type: "line",
+  data: {
     datasets: [
       {
         //label: "Dataset 2",
@@ -33,14 +17,54 @@ const StreamingChart = memo((props) => {
         data: [],
       },
     ],
-  };
+  },
+  options: {
+    scales: {
+      x: {
+        type: "realtime",
+        realtime: {
+          duration: 6000, //작을 수록 밀리세컨드 반영
+          delay: 3000, // delay of 1000 ms, so upcoming values are known before plotting a line
+          pause: false, // chart is not paused
+          ttl: undefined, // data will be automatically deleted as it disappears off the chart
+          frameRate: 30, // data points are drawn 30 times every second
+        },
+      },
+    },
+
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  },
+};
+
+Chart.register(StreamingPlugin);
+
+const StreamingChart = memo((props) => {
+  const { eventSource, d } = props; //data
+
+  const chartContainer = useRef(null);
+  const [chartInstance, setChartInstance] = useState(null);
+
+  const [bool, setbool] = useState(false);
+  const [rvsArr, setRvsArr] = useState(null);
+  const [dataX, setDataX] = useState();
+
+  useEffect(() => {
+    if (chartContainer && chartContainer.current) {
+      const newChartInstance = new Chart(chartContainer.current, chartConfig);
+      setChartInstance(newChartInstance);
+    }
+  }, [chartContainer]);
 
   useEffect(() => {
     //Custom listener
     eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
       //console.log("처음 오는 데이터", result);
-      //clasfy(result);
+      clasfy(result);
       //setResultData(result);
     });
   }, []);
@@ -48,13 +72,12 @@ const StreamingChart = memo((props) => {
   const onReceive = (r) => {
     console.log("r", r, "datax", dataX);
     // append the new data to the existing chart data
-    data.datasets[0].data.push({
+    chartInstance.data.datasets[0].data.push({
       x: dataX,
       y: r,
     });
 
-    // update chart datasets keeping the current animation
-    chart.current.update("quiet");
+    chartInstance.update("quiet");
   };
 
   const clasfy = (measureData) => {
@@ -110,38 +133,23 @@ const StreamingChart = memo((props) => {
   };
 
   useUpdateEffect(() => {
-    //interval(rvsArr);
-    //onReceive(rvsArr);
+    onReceive(rvsArr);
   }, [bool]);
 
-  const options = {
-    scales: {
-      x: {
-        type: "realtime",
-        realtime: {
-          duration: 600, //작을 수록 밀리세컨드 반영
-          refresh: 1000, // onRefresh callback will be called every 1000 ms
-          delay: 3000, // delay of 1000 ms, so upcoming values are known before plotting a line
-          pause: false, // chart is not paused
-          ttl: undefined, // data will be automatically deleted as it disappears off the chart
-          frameRate: 30, // data points are drawn 30 times every second
-          onRefresh: (chart) => {
-            console.log("chart", chart.data.datasets);
-            chart.data.datasets.forEach((dataset) => {
-              dataset.data.push({
-                x: new Date().getMilliseconds(),
-                y: Math.random() * 10,
-              });
-            });
-          },
-        },
-      },
-    },
+  const check = () => {
+    console.log("check", chartInstance.data.datasets[0].data);
   };
 
   return (
     <>
-      <Line data={data} options={options} ref={chart} />
+      {/* <button onClick={check} /> */}
+      {/* <Line data={data} options={options} ref={chartContainer} /> */}
+      <canvas
+        className="streamCanvas"
+        ref={chartContainer}
+        width={480}
+        height={100}
+      />
     </>
   );
 });

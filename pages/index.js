@@ -16,20 +16,20 @@ export default function Home() {
       console.log("생성 이후: ", eventSource);
       msetEventSource(eventSource);
 
-      eventSource.onopen = event => {
+      eventSource.onopen = (event) => {
         console.log("connection opened");
       };
 
-      eventSource.onmessage = event => {
+      eventSource.onmessage = (event) => {
         console.log("result", event.data);
-        setData(old => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
+        setData((old) => [...old, JSON.parse(event.data)]); //setData는 배열에서 새로운 데이터를 하나씩 추가
         //setValue(event.data); //현재 들어온 값에 대한 데이터를 set 해줌
 
         const sseData = JSON.parse(event.data);
         //handleSseData(sseData);
       };
 
-      eventSource.onerror = event => {
+      eventSource.onerror = (event) => {
         console.log(event.target.readyState);
         if (event.target.readyState === EventSource.CLOSED) {
           console.log("eventsource closed (" + event.target.readyState + ")");
@@ -46,24 +46,26 @@ export default function Home() {
     };
   }, []);
 
-  const [deviceArr, setDeviceArr] = useState([
-    "CPM0000",
-    "CPM0001",
-    "CPM0002",
-    "CPM0003",
-    "CPM0004",
-    "CPM0005",
-    "CPM0006",
-    "CPM0007",
-    "CPM0008",
-    "CPM0009",
-    "CPM0010",
-    "CPM0011",
-    "CPM0012",
-    "CPM0013",
-    "CPM0014",
-    "CPM0015",
-  ]);
+  // const [deviceArr, setDeviceArr] = useState([
+  //   "CPM0000",
+  //   "CPM0001",
+  //   "CPM0002",
+  //   "CPM0003",
+  //   "CPM0004",
+  //   "CPM0005",
+  //   "CPM0006",
+  //   "CPM0007",
+  //   "CPM0008",
+  //   "CPM0009",
+  //   "CPM0010",
+  //   "CPM0011",
+  //   "CPM0012",
+  //   "CPM0013",
+  //   "CPM0014",
+  //   "CPM0015",
+  // ]);
+
+  const [deviceArr, setDeviceArr] = useState(["CPM0000"]);
 
   return (
     <>
