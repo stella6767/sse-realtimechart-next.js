@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyledFont, StyledLineCss, StyledCharjsLine } from "./style";
 import useUpdateEffect from "../store/hooks/useUpdateEffect";
 import RealTimeLineChart from "./RealTimeLineChart";
+import StreamingChart from "./StreamingChart";
+
 const LineChart = (props) => {
   //let timestamp = +new Date();
   const [tv, setTv] = useState(null);
@@ -16,12 +18,12 @@ const LineChart = (props) => {
   const [ResultData, setResultData] = useState(null);
   useEffect(() => {
     //Custom listener
-    eventSource?.addEventListener(d, (event) => {
-      const result = JSON.parse(event.data);
-      //console.log("처음 오는 데이터", result);
-      clasfy(result);
-      setResultData(result);
-    });
+    // eventSource?.addEventListener(d, (event) => {
+    //   const result = JSON.parse(event.data);
+    //   //console.log("처음 오는 데이터", result);
+    //   clasfy(result);
+    //   setResultData(result);
+    // });
   }, []);
   const nameList = [d];
   const defaultDataList = nameList.map((name) => ({
@@ -29,61 +31,87 @@ const LineChart = (props) => {
     data: [],
   }));
 
-  const [dataList, setDataList] = React.useState(defaultDataList);
-  const clasfy = (measureData) => {
-    switch (measureData?.parame) {
-      case "mv":
-        setMv(measureData?.value);
-        break;
-      case "rr":
-        setRr(measureData?.value);
-        break;
-      case "rvs":
-        console.log(
-          "start:",
-          measureData?.startTime,
-          "end:",
-          measureData?.endTime,
-          "rvs:",
-          measureData?.value
-        );
-        measureData?.value.split("^").map((r, index) => {
-          setRvsArr(Number(r));
-
-          if (index === 0) {
-            setDataX(
-              +new Date(
-                20 +
-                  measureData?.startTime.split("-")?.[0] +
-                  " " +
-                  measureData?.startTime.split("-")?.[1]
-              )
-            );
-            setbool((bool) => !bool);
-          } else if (index === 1) {
-            setDataX(
-              +new Date(
-                20 +
-                  measureData?.endTime.split("-")?.[0] +
-                  " " +
-                  measureData?.endTime.split("-")?.[1]
-              )
-            );
-            setbool((bool) => !bool);
-          }
-        });
-        break;
-      case "spo2":
-        setSpo2(measureData?.value);
-        break;
-      case "tv":
-        setTv(measureData?.value);
-        break;
-    }
+  const data = {
+    datasets: [
+      {
+        //label: "Dataset 2",
+        //backgroundColor: "rgba(54, 162, 235, 0.5)",
+        borderColor: "rgb(11, 333, 235)",
+        cubicInterpolationMode: "monotone",
+        //fill: true,
+        data: [],
+      },
+    ],
   };
 
+  const onReceive = (r) => {
+    console.log("r", r, "datax", dataX);
+    // append the new data to the existing chart data
+    data.datasets[0].data.push({
+      x: dataX,
+      y: r,
+    });
+
+    // update chart datasets keeping the current animation
+    chart.update("quiet");
+  };
+
+  const [dataList, setDataList] = React.useState(defaultDataList);
+  // const clasfy = (measureData) => {
+  //   switch (measureData?.parame) {
+  //     case "mv":
+  //       setMv(measureData?.value);
+  //       break;
+  //     case "rr":
+  //       setRr(measureData?.value);
+  //       break;
+  //     case "rvs":
+  //       console.log(
+  //         "start:",
+  //         measureData?.startTime,
+  //         "end:",
+  //         measureData?.endTime,
+  //         "rvs:",
+  //         measureData?.value
+  //       );
+  //       measureData?.value.split("^").map((r, index) => {
+  //         setRvsArr(Number(r));
+
+  //         if (index === 0) {
+  //           setDataX(
+  //             +new Date(
+  //               20 +
+  //                 measureData?.startTime.split("-")?.[0] +
+  //                 " " +
+  //                 measureData?.startTime.split("-")?.[1]
+  //             )
+  //           );
+  //           setbool((bool) => !bool);
+  //         } else if (index === 1) {
+  //           setDataX(
+  //             +new Date(
+  //               20 +
+  //                 measureData?.endTime.split("-")?.[0] +
+  //                 " " +
+  //                 measureData?.endTime.split("-")?.[1]
+  //             )
+  //           );
+  //           setbool((bool) => !bool);
+  //         }
+  //       });
+  //       break;
+  //     case "spo2":
+  //       setSpo2(measureData?.value);
+  //       break;
+  //     case "tv":
+  //       setTv(measureData?.value);
+  //       break;
+  //   }
+  // };
+
   useUpdateEffect(() => {
-    interval(rvsArr);
+    //interval(rvsArr);
+    onReceive(rvsArr);
   }, [bool]);
 
   const interval = (r) => {
@@ -135,11 +163,13 @@ const LineChart = (props) => {
             <StyledLineCss>
               <p style={{ fontWeight: "bold", color: "white" }}>RVS</p>
 
-              <RealTimeLineChart
+              {/* <RealTimeLineChart
                 chartList={dataList}
                 range={TIME_RANGE_IN_MILLISECONDS}
                 //YData={YmapBig}
-              />
+              /> */}
+
+              <StreamingChart data={data} eventSource={eventSource} d={d} />
             </StyledLineCss>
           </div>
         </div>
