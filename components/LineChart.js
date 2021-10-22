@@ -50,7 +50,7 @@ const LineChart = (props) => {
           realtime: {
             duration: 1000, //작을 수록 밀리세컨드 반영
             // refresh: 50, // onRefresh callback will be called every 1000 ms
-            delay: 100, // delay of 1000 ms, so upcoming values are known before plotting a line
+            delay: 1000, // delay of 1000 ms, so upcoming values are known before plotting a line
             pause: false, // chart is not paused
             ttl: undefined, // data will be automatically deleted as it disappears off the chart
             //frameRate: 10, // data points are drawn 30 times every second
@@ -199,12 +199,12 @@ const LineChart = (props) => {
   const onReceive = (r) => {
     if (!chartInstance) return;
 
-    //console.log("r", r, "datax", x, "d", d);
+    console.log("r", r, "datax", dataX, "d", d);
 
     let index = d.substr(6, 1);
 
     console.log("index", index);
-    console.log("chartInstance", chartInstance);
+    //console.log("chartInstance", chartInstance);
 
     // append the new data to the existing chart data
     chartInstance.data.datasets[0].data.push({
