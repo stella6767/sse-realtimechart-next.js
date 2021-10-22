@@ -15,18 +15,32 @@ import { useState } from "react";
 Chart.register(StreamingPlugin);
 
 const StreamingChart = memo((props) => {
-  const { data, eventSource, d } = props;
+  const { eventSource, d } = props; //data
 
-  const chart = useRef();
+  const chart = useRef(null);
   const [bool, setbool] = useState(false);
   const [rvsArr, setRvsArr] = useState(null);
+  const [dataX, setDataX] = useState();
+
+  const data = {
+    datasets: [
+      {
+        //label: "Dataset 2",
+        //backgroundColor: "rgba(54, 162, 235, 0.5)",
+        borderColor: "rgb(11, 333, 235)",
+        cubicInterpolationMode: "monotone",
+        //fill: true,
+        data: [],
+      },
+    ],
+  };
 
   useEffect(() => {
     //Custom listener
     eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
       //console.log("처음 오는 데이터", result);
-      clasfy(result);
+      //clasfy(result);
       //setResultData(result);
     });
   }, []);
@@ -97,7 +111,7 @@ const StreamingChart = memo((props) => {
 
   useUpdateEffect(() => {
     //interval(rvsArr);
-    onReceive(rvsArr);
+    //onReceive(rvsArr);
   }, [bool]);
 
   const options = {
@@ -105,21 +119,21 @@ const StreamingChart = memo((props) => {
       x: {
         type: "realtime",
         realtime: {
-          duration: 6000, //작을 수록 밀리세컨드 반영
-          //refresh: 1000, // onRefresh callback will be called every 1000 ms
+          duration: 600, //작을 수록 밀리세컨드 반영
+          refresh: 1000, // onRefresh callback will be called every 1000 ms
           delay: 3000, // delay of 1000 ms, so upcoming values are known before plotting a line
-          pause: true, // chart is not paused
+          pause: false, // chart is not paused
           ttl: undefined, // data will be automatically deleted as it disappears off the chart
           frameRate: 30, // data points are drawn 30 times every second
-          //   onRefresh: (chart) => {
-          //     console.log("chart", chart.data.datasets);
-          //     chart.data.datasets.forEach((dataset) => {
-          //       dataset.data.push({
-          //         x: new Date().getMilliseconds(),
-          //         y: Math.random(),
-          //       });
-          //     });
-          //   },
+          onRefresh: (chart) => {
+            console.log("chart", chart.data.datasets);
+            chart.data.datasets.forEach((dataset) => {
+              dataset.data.push({
+                x: new Date().getMilliseconds(),
+                y: Math.random() * 10,
+              });
+            });
+          },
         },
       },
     },

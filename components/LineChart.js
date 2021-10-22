@@ -12,7 +12,6 @@ const LineChart = (props) => {
   const [spo2, setSpo2] = useState(null);
   const [rvsArr, setRvsArr] = useState(null);
   const [bool, setbool] = useState(false);
-  const [dataX, setDataX] = useState();
   const { d, eventSource } = props;
   const TIME_RANGE_IN_MILLISECONDS = 30000;
   const [ResultData, setResultData] = useState(null);
