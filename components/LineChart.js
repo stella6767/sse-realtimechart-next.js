@@ -186,15 +186,18 @@ const LineChart = (props) => {
 
     let index = d.substr(6, 1);
 
-    console.log("index", index);
-    console.log("chartInstance", chartInstance);
+    //    console.log("index", index);
+    //console.log("chartInstance", chartInstance);
 
     chartInstance?.data.datasets[0].data.push({
-      x: +new Date(),
+      x: dataX,
       y: r,
     });
     chartInstance?.update("quiet");
 
+    console.log("d", d, "data", chartInstance.data.datasets[0]);
+
+    //+new Date()
     // append the new data to the existing chart data
     // chartInstance.data.datasets[0].data.push({
     //   x: dataX,
