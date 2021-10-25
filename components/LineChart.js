@@ -7,6 +7,7 @@ import { Chart } from "chart.js";
 //import "chartjs-adapter-luxon";
 import StreamingPlugin from "chartjs-plugin-streaming";
 import { useRef } from "react";
+
 Chart.register(StreamingPlugin);
 
 const LineChart = (props) => {
@@ -48,7 +49,7 @@ const LineChart = (props) => {
         x: {
           type: "realtime",
           realtime: {
-            duration: 2000, //작을 수록 밀리세컨드 반영
+            duration: 1000, //작을 수록 밀리세컨드 반영
             // refresh: 50, // onRefresh callback will be called every 1000 ms
             delay: 1000, // delay of 1000 ms, so upcoming values are known before plotting a line
             pause: false, // chart is not paused
@@ -62,7 +63,7 @@ const LineChart = (props) => {
           display: false,
         },
         streaming: {
-          frameRate: 10, // chart is drawn 5 times every second
+          frameRate: 20, // chart is drawn 5 times every second
         },
       },
       yAxes: [
@@ -134,15 +135,6 @@ const LineChart = (props) => {
               )
             );
             setbool((bool) => !bool);
-            // onReceive(
-            //   Number(r),
-            //   +new Date(
-            //     20 +
-            //       measureData?.startTime.split("-")?.[0] +
-            //       " " +
-            //       measureData?.startTime.split("-")?.[1]
-            //   )
-            // );
           } else if (index === 1) {
             setDataX(
               +new Date(
@@ -153,17 +145,6 @@ const LineChart = (props) => {
               )
             );
             setbool((bool) => !bool);
-
-            // console.log("??");
-            // onReceive(
-            //   Number(r),
-            //   +new Date(
-            //     20 +
-            //       measureData?.startTime.split("-")?.[0] +
-            //       " " +
-            //       measureData?.startTime.split("-")?.[1]
-            //   )
-            // );
           }
         });
         break;
@@ -197,27 +178,28 @@ const LineChart = (props) => {
   }, [bool]);
 
   const onReceive = (r) => {
+    //console.log("??", r);
+
     if (!chartInstance) return;
 
-    console.log("r", r, "datax", dataX, "d", d);
+    //console.log("r", r, "datax", dataX, "d", d);
 
     let index = d.substr(6, 1);
 
     console.log("index", index);
-    //console.log("chartInstance", chartInstance);
+    console.log("chartInstance", chartInstance);
 
-    // append the new data to the existing chart data
-    chartInstance.data.datasets[0].data.push({
-      x: dataX,
+    chartInstance?.data.datasets[0].data.push({
+      x: +new Date(),
       y: r,
     });
+    chartInstance?.update("quiet");
 
-    // chartInstance.data.datasets[1].data.push({
+    // append the new data to the existing chart data
+    // chartInstance.data.datasets[0].data.push({
     //   x: dataX,
     //   y: r,
     // });
-
-    chartInstance.update("quiet");
   };
 
   return (
