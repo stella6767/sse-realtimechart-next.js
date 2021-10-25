@@ -48,6 +48,9 @@ const LineChart = (props) => {
       scales: {
         x: {
           type: "realtime",
+          ticks: {
+            display: false,
+          },
           realtime: {
             duration: 5000, //작을 수록 밀리세컨드 반영
             // refresh: 50, // onRefresh callback will be called every 1000 ms
@@ -55,6 +58,11 @@ const LineChart = (props) => {
             pause: false, // chart is not paused
             ttl: undefined, // data will be automatically deleted as it disappears off the chart
             //frameRate: 10, // data points are drawn 30 times every second
+          },
+        },
+        y: {
+          ticks: {
+            display: false,
           },
         },
       },
@@ -101,6 +109,8 @@ const LineChart = (props) => {
     eventSource?.addEventListener(d, (event) => {
       const result = JSON.parse(event.data);
       //console.log("처음 오는 데이터", result);
+      console.log("d", d, "받은 시간", +new Date());
+
       clasfy(result);
       setResultData(result);
     });
@@ -142,7 +152,7 @@ const LineChart = (props) => {
                   measureData?.endTime.split("-")?.[0] +
                   " " +
                   measureData?.endTime.split("-")?.[1]
-              )
+              ) - 50
             );
             setbool((bool) => !bool);
           }
