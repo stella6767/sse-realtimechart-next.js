@@ -52,7 +52,7 @@ const LineChart = (props) => {
             display: false,
           },
           realtime: {
-            duration: 5000, //작을 수록 밀리세컨드 반영
+            duration: 20000, //작을 수록 밀리세컨드 반영
             // refresh: 50, // onRefresh callback will be called every 1000 ms
             delay: 1000, // delay of 1000 ms, so upcoming values are known before plotting a line
             pause: false, // chart is not paused
