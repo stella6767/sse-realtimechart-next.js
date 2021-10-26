@@ -136,24 +136,24 @@ const LineChart = (props) => {
         measureData?.value.split("^").map((r, index) => {
           setRvsArr(Number(r));
           if (index === 0) {
-            setDataX(
-              +new Date(
-                20 +
-                  measureData?.startTime.split("-")?.[0] +
-                  " " +
-                  measureData?.startTime.split("-")?.[1]
-              )
-            );
+            // setDataX(
+            //   +new Date(
+            //     20 +
+            //       measureData?.startTime.split("-")?.[0] +
+            //       " " +
+            //       measureData?.startTime.split("-")?.[1]
+            //   )
+            // );
             setbool((bool) => !bool);
           } else if (index === 1) {
-            setDataX(
-              +new Date(
-                20 +
-                  measureData?.endTime.split("-")?.[0] +
-                  " " +
-                  measureData?.endTime.split("-")?.[1]
-              ) - 50
-            );
+            // setDataX(
+            //   +new Date(
+            //     20 +
+            //       measureData?.endTime.split("-")?.[0] +
+            //       " " +
+            //       measureData?.endTime.split("-")?.[1]
+            //   ) - 50
+            // );
             setbool((bool) => !bool);
           }
         });
@@ -200,7 +200,7 @@ const LineChart = (props) => {
     //console.log("chartInstance", chartInstance);
 
     chartInstance?.data.datasets[0].data.push({
-      x: dataX,
+      x: Date.now(),
       y: r,
     });
     chartInstance?.update("quiet");
